@@ -1,30 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
 
-/* Variables */
+/* VARIABLES */
 :root {
-  --font-family: "Roboto", sans-serf;
+
+  /* Fonts */
+  --font-family: "Roboto", sans-serif;
   --normal-font: 400;
   --bold-font: 700;
   --bolder-font: 900;
+
+/* Primary background color of page */
   --bg-color: #fcfcfc;
-  --primary-color: #4756df;
-    --alt-primary-color: hsl(190, 70%, 40%);
-  --secondary-color: #ff7235;
-    --third-color: #c52996;
+  
+  /* Primary color used for links, text, borders (WCAG AA PASS) */
+  --color-primary-accent: hsl(190, 70%, 30%); 
+  
+  /* Color used for link hover states (WCAG AA PASS) */
+  --color-link-hover: #a10171;
+  
+  /* Card shadows */
   --primary-shadow: #8b8eaf;
   --secondary-shadow: #a17a69;
-  --bottom-margin: 0.5rem; /* .5 rem is equivalent to 8 pixels */
-  --bottom-margin-2: 1rem; /* 1 rem is equivalent to 16 pixels */
-  --line-height: 1.7rem;   /* 1.7 rem is equivalent to 27.2 pixels */
+
+  /* Other */
+  --line-height: 1.5rem;   /* 1.7 rem is equivalent to 27.2 pixels */
   --transition: 0.3s;
 }
-/* Variables end */
 
 html {
   scroll-behavior: smooth;
 }
 
-/* CSS Resets */
+/* CSS RESETS */
 * {
   margin: 0;
   padding: 0;
@@ -37,73 +44,92 @@ ul {
 
 a {
   text-decoration: none;
-  /* color: var(--primary-color); */
-      color: var(--alt-primary-color); 
+  color: var(--color-primary-accent); 
 }
 
 a:hover {
-  /* color: var(--secondary-color); */
-      color: var(--third-color);
+  color: var(--color-link-hover);
 }
 
 body {
   font-family: var(--font-family);
+  overflow-x: hidden;
+  background-color: var(--bg-color); /* This ensures the body background matches each of the sections background color */
 }
 
-/*
-section {
-   max-width: 1100px;
-  margin: auto; 
+/* GLOBALS */
+p {
+  line-height: var(--line-height);
 }
-*/
 
-/* CSS Resets end */
+.center {
+  text-align: center;
+}
+.mimic-h4-size {
+  font-size: 95%;
+}
 
-/* Begin Nav Section */
+/* Ensures long words break and wrap correctly. Includes fix for margin collapse. */
+.title-base {
+    overflow-wrap: break-word;
+    margin-bottom: 2rem;
+    display: inline-block; /* Prevents the margin from collapsing/disappearing */
+    width: 100%; /* Ensures the title still spans the full width */
+    text-align: center;
+}
 
+.card {
+  background-color: #fff;
+  border-radius: 11px;
+  box-shadow: 0 3px 10px var(--primary-shadow);
+  padding: 20px;
+}
+
+.section-padding {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* NAVIGATION MENU */
 nav {
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 3.5rem; /* 1.5 rem is equivalent to 24 pixels & 3.5 rem is equivalent to 56 pixels */
     background-color: var(--bg-color);
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Hides the off-screen mobile menu */
   }
 
   nav h1 {
-    /*color: var(--primary-color); */
-      color: var(--alt-primary-color);
+      color: var(--color-primary-accent);
   }
   
   nav a {
-    /* color: var(--primary-color);*/
     transition: var(--transition);
-      color: var(--alt-primary-color);
+      color: var(--color-primary-accent);
   }
   nav a:hover {
-    /* color: var(--secondary-color); 
-    border-bottom: 2px solid var(--secondary-color); */
+      color: var(--color-link-hover);
+      border-bottom: 2px solid var(--color-link-hover);
+  }
+  
+  /* Desktop Nav Menu  */
+  .main-nav {
+      display: flex; /* Makes the menu horizontal on desktop */
+      gap: 1.9rem;
+  }
 
-      color: var(--third-color);
-      border-bottom: 2px solid var(--third-color);
-  }
-  
-  nav ul {
-    display: flex;
-    gap: 1.9rem; /* 1.9 rem is equivalent to 30.4 pixels */
-  }
-  
-  nav ul li {
-    font-weight: var(--bold-font);
+  .main-nav li {
+      font-weight: var(--bold-font);
   }
 
   .burger-menu {
-    /* color: var(--primary-color); */
-    color: var(--alt-primary-color);
+    color: var(--color-primary-accent);
     font-size: 2rem; /* 2 rem is equivalent to 32 pixels */
     border: 0;
     background-color: transparent;
@@ -111,242 +137,255 @@ nav {
     display: none;
   }
 /* End Nav Section */
+
+/* CONTENT WRAPPER  */
+.content-wrapper {
+  max-width: 68.75rem; /* This sets the maximum width page content and aligns width to match content cards large max-width (1100px) for all sections */
+  margin: 0 auto; /* This centers the content on the page */
+  padding: 0 1.5rem; /* This creates the "gutters" as I like to call them on the left and right */
+}
   
-/* Begin Hero Section */
+/* HERO SECTION */
+.hero {
+  display: flex;
+  flex-direction: column; /* Force a single column layout on all screens */
+  align-items: center; /* Center the items horizontally */
+  justify-content: center;
+  gap: 2.5rem;
+}
 
-  .hero {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem; /* This is gap between pic and About Me box - also 2.5 rem is equivalent to 40 pixels */
-    max-width: 68.75rem; /* 68.75 rem is equivalent to 1100 pixels */
-    margin: auto;
-    padding: 50px; /* Added to space the nav section from the hero section above the hero img */
-  }
+.hero-img-mask {
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  padding: 0.625rem;
+  border-radius: 11px;
+  box-shadow: 0px 2px 15px 2px var(--primary-shadow);
+}
 
-  .hero img {
-    /* height: 37.5rem;*/ /* 37.5 rem is equivalent to 600 pixels */
-    /* width: 37.5rem;*/
+.hero-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  /* object-fit: contain; */
+  object-position: center;
+  border-radius: 8px;
+}
 
-    object-fit: contain;  /*keeps aspect ratio of pic */
-
-        width: 100%;  
-        max-width: 50%;
-        min-width: 200px;
-        height: auto;
-
-        /* make it look like it's on a photograph */
-        padding: 0.625rem;  /*0.625 rem is equivalent to 10 pixels */
-        border-radius: 6px;
-        box-shadow: 0px 2px 15px 2px var(--primary-shadow);
-  }
+.bio {
+    max-width: 100%; /* Match the width of the hero image */
+}
   
-  .bio {
-    width: 25rem; /* 25 rem is equivalent to 400 pixels */
-    padding: 0.625rem; /* 0.625 rem is equivalent to 10 pixels */
-    border-radius: 6px;
-    box-shadow: 0px 2px 15px 2px var(--primary-shadow);
-  }
-  
-  .bio h1 {
-    margin-bottom: var(--bottom-margin);
-  }
-  
-  .bio p {
-    line-height: var(--line-height);
-    padding: 0.3rem 0; /* 0.3 rem is equivalent to 4.8 pixels */
-  }
+.bio p {
+  line-height: var(--line-height);
+  padding: 0.3rem 0; /* 0.3 rem is equivalent to 4.8 pixels */
+}
 
 /* End Hero Section */
 
-/* Begin More About Section */
+/* RECENT EXPERIENCE / MORE ABOUT */
+.more-about {
+  background-color: var(--bg-color);
+}
 
-  .more-about {
-    background-color: var(--bg-color);
-    padding: 1rem 6rem; /* 1 rem is equivalent to 16 pixels & 6 rem is equivalent to 96 pixels */
-  }
-  
-  .more-about h2 {
-    margin-bottom: var(--bottom-margin);
-    text-align: center;
-  }
-  
-  .more-about p {
-    line-height: var(--line-height);
-    padding: 0.4rem; /* 0.4 rem is equivalent to 6.4 pixels */ 
+.more-about p {
+  line-height: var(--line-height);
+  padding: 0.4rem;
+  align-items: center;
+  justify-content: center;
+}
 
-    align-items: center;
-    justify-content: center;
-    max-width: 68.75rem; 
-    margin: auto;
-  }
 
-/* End More About Section */
+/* TECHNICAL SKILLS SECTION */  
+.skills {
+  text-align: center;
+}
 
-/* Begin Skills Section */  
+.skills-wrapper img {
+  padding: 1.25rem;
+}
 
-  .skills {
-    max-width: 68.75rem;
-    margin: auto;
-    text-align: center;
-    margin-top: 2.5rem; /* 2.5 rem is equivalent to 40 pixels */
-  }
-  
-  .skill-header {
-    margin-bottom: 1rem;
-  }
-  
-  .skills-wrapper img {
-    padding: 1.25rem; /* 1.25 rem is equivalent to 20 pixels */
-  }
-  
-  .icon {
-    width: 11.875rem; /* 11.875 rem is equivalent to 190 pixels */
-    height: 11.25rem; /* 11.25 rem is equivalent to 180 pixels */
-  }
+.icon {
+  width: 11.875rem;
+  height: 11.25rem;
+}
 
-  /* to put icons on cards */
-  .icon-card {
-    background-color: #fff;
-    border-radius: 11px;
-    box-shadow: 0 3px 10px var(--secondary-shadow);
-    padding: 20px;
-    margin: 10px;
-  }
+.icon-card {
+  margin: 10px;
+}
 
 /* End Skills Section */ 
 
-/* Begin Project Section */  
-
+/* PROJECT SECTIONS - Website Development & Client Consultation AND Independent Projects */
 .projects {
-    background-color: var(--bg-color);
-    padding: 32px 0;
-    margin-top: 2rem; /* 2 rem is equivalent to 32 pixels */
-  }
+  background-color: var(--bg-color);
+}
   
-  .project-pic {
-    width: 65%;
-    height: 60%;
-  }
-  
-  .projects-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.project-pic {
+  width: 65%;
+  height: 60%;
+  display: block;
+  margin: 0 auto;
+}
 
-  .projects-title {
-    text-align: center;
-    margin-bottom: 1rem; /* 1 rem is equivalent to 16 pixels */
-  }
-  
-  .project-container {
-    text-align: center;
-    width: 21.875rem; /* 21.875 rem is equivalent to 350 pixels */
-    padding: 1rem; /* 1 rem is equivalent to 16 pixels */
-  }
-    /* ---------- make them individual cards with more styling -------- */
-  .project-container p {
-    padding: 0.4rem;
-  }
-  
-  .project-title {
-    margin-bottom: var(--bottom-margin);
-    margin-top: 1rem;
-  }
-  
-  .project-details {
-    margin-bottom: var(--bottom-margin);
-  }
-  
-  .project-card {
-    background-color: #fff;
-    border-radius: 11px;
-    box-shadow: 0 3px 10px var(--primary-shadow);
-    padding: 20px;
-    margin: 10px;
-  }
+.projects-container {
+  display: flex;
+  align-items: stretch; /* Using this makes the container boxes all the same height to align top and bottom */
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  justify-content: space-between;
+  gap: 1.25rem; /* Handles both horizontal and vertical spacing */
+}
 
-/* End Project Section */ 
+.projects-title {
+  text-align: center;
+}
 
-/* Begin Contact Section */ 
+.project-container {
+  text-align: center;
+  /* width: 20rem; used flex-basis and grow below instead to make more responsive and match width of sections */
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0; /* Allows the item to shrink below its content's minimum size */
+  padding: 1rem;
+}
 
-.contact {
-    margin-top: 2rem;
-  }
-  
-  .contact h2 {
-    text-align: center;
-    margin-bottom: var(--bottom-margin-2);
-  }
-  
-  .contact-form-container {
-    max-width: 40.75rem;
-    margin: 0 auto;
-    padding: 0.938rem;
-    border-radius: 5px;
-    box-shadow: 0 3px 10px var(--secondary-shadow);
-  }
+/* ---------- Individual Cards -------- */
+.project-container p {
+  padding: 0;
+  margin-top: .5rem;
+  line-height: var(--line-height);
+}
 
-  /* ------ more styling  ------ */
-  .contact-form-container label {
-    line-height: 2.7em;
-    font-weight: var(--bold-font);
-    /* color: var(--primary-color); */
-          color: var(--alt-primary-color);
-  }
-  
-  .contact-form-container textarea {
-    min-height: 6.25rem;
-    font-size: 14px;
-  }
-  
-  .contact-form-container .input-field {
+.project-title {
+  margin-top: 1rem;
+}
+
+.project-details {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.project-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.project-link {
+  position: relative; /* REQUIRED: Gives the z-index context */
+  z-index: 2; /* Must be higher than the main card link's z-index (1) */
+  margin-top: 1rem; /* Adjust spacing as needed */
+}
+
+.project-card a.project-link {
+    display: flex; 
+    flex-direction: column;
+    box-sizing: border-box; 
+    height: 100%;
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
-    border: none;
-    /* border: 2px outset var(--primary-color); */
-        border: 2px solid var(--alt-primary-color);
-    font-size: 0.875rem;
-    outline: none;
-  }
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.main-card-link {
+  position: absolute; /* Takes the link out of the normal flow */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1; /* Places the link above the card content */
+  /* Optional: Make it visually invisible but still clickable */
+  opacity: 0;
+}
+
+/* Stretched Link (Covers the whole card invisibly) */
+.main-card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1; /* Sits above content */
+  opacity: 0; /* Makes it invisible */
+}
+
+/* Inner, Functional Links (Must have higher z-index to be clickable) */
+.project-inner-link {
+  position: relative; 
+  z-index: 2; /* Must be higher than main-card-link (1) */
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-card .project-inner-link:last-child {
+    margin-bottom: 1.5rem; /* To visually match the independent project cards space on bottom of card */
+}
+
+/* End Project Section */
+
+/* CONTACT SECTION */
+.contact h2 {
+  text-align: center;
+}
+
+.contact-form-container {
+  padding: 0.938rem;
+  border-radius: 11px;
+  box-shadow: 0 3px 10px var(--secondary-shadow);
+}
+
+.contact-form-container label {
+  line-height: 2.7em;
+  font-weight: var(--bold-font);
+  color: var(--color-primary-accent);
+}
+
+.contact-form-container textarea {
+  min-height: 6.25rem;
+  font-size: 14px;
+}
+
+.contact-form-container .input-field {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  border: 2px solid var(--color-primary-accent);
+  font-size: 0.875rem;
+  outline: none;
+}
   
-  /* cleaning it up a bit and adding color */
-  .input-field::placeholder {
-    padding: 0.5rem;
-    /* color: var(--primary-color); */
-        color: var(--alt-primary-color);
-  }
+.input-field::placeholder {
+  padding: 0.5rem;
+  color: var(--color-primary-accent);
+}
 
-   /* ----- submit button styling ----- */ 
-   .submit-btn {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #fff;
-    /* border: 2px solid var(--primary-color); */
-        border: 2px solid var(--alt-primary-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: var(--bold-font);
-    transition: var(--transition);
-  }
+  /* ----- Submit Button Styling ----- */ 
+  .submit-btn {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
+  border: 2px solid var(--color-primary-accent);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: var(--bold-font);
+  transition: var(--transition);
+}
 
-  .submit-btn:hover {
-    /* background-color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    cursor: pointer; */
+.submit-btn:hover {
+  background-color: var(--color-primary-accent);
+  border: 2px solid var(--color-primary-accent);
+  cursor: pointer;
+}
 
-        background-color: var(--alt-primary-color);
-        border: 2px solid var(--alt-primary-color);
-        cursor: pointer;
-  }
+/* End Contact Section */
 
-/* End Contact Section */ 
-
-/* Social (Linkedin and up arrow) Section */
+/* SOCIALS */
 .linkedinup {
     display: flex;
     flex-direction: column;
@@ -357,8 +396,6 @@ nav {
     border-radius: 10px;
     box-shadow: 0 2px 8px var(--secondary-shadow);
     padding: 3px;
-    /* margin: 10px; */
-    /* gap: 0.4rem;  The space between each icon vertically */
 }
 
 .socicon {
@@ -366,106 +403,131 @@ nav {
   height: 2rem;
 }
 
-/* END Social Section */
+/* END Socials */
 
-/* Start Scroll to top icon */
+/* SCROLL TO TOP ICON */
 .scroll-up {
-    position: fixed;
-    right: 0.5%;
-    bottom: 3%;
-    cursor: pointer;
-  }
-  
-  .up-arrow {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
+  position: fixed;
+  right: 0.5%;
+  bottom: 3%;
+  cursor: pointer;
+}
 
+.up-arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+}
 /* End Scroll to top icon */
 
-
-/* Start Footer Section */
+/* FOOTER */
   footer {
     background-color: var(--bg-color);
     padding: 1.25rem;
     text-align: center;
-    margin: 2rem 0 0;
+    margin: 1rem 0 0;
   }
-
-/* End Footer Section */
 
 /* ------------ Media Queries for responsiveness on tablet and mobile -------------------------------------------------- */ 
 
+/* MOBILE */
 @media screen and (max-width: 820px) {
-    /* --- changes reflects on screen with a width of 820px and below ------------*/
   
   nav {
     padding: 1.5rem 1rem;
   }
 
-  nav ul {
-    position: fixed;
-    background-color: var(--bg-color);
-    flex-direction: column;
-    top: 86px;
-    left: 10%;
-    width: 80%;
-    text-align: center;
-    transform: translateX(120%);
+/* STEP 1: HIDE the desktop layout properties when screen is small (prevents flash) */
+  .main-nav {
+    display: none;
+    flex-direction: column; /* Overrides the desktop flex */
+    gap: 0rem;
+    position: fixed; /* Allows mobile positioning */
+    top: 6rem;
+    left: 50%;
+    transform: translateX(200%); /* Off-screen hide */
     transition: transform 0.5s ease-in;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 1.5rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px); 
   }
 
-   nav ul li {
-    margin: 8px;
+/* STEP 2: SHOW the mobile menu when the burger is clicked (by re-applying display:flex via .show) */
+  .main-nav.show {
+    display: flex; /* Make it visible for the slide-in effect */
+    transform: translateX(-50%); /* centers the menu */
+  }
+
+  .main-nav li {
+    margin: 0; /* mobile nav items vertical spacing */
+    padding: 1rem 0; /* Add padding for a larger touch target */
+    transition: background-color 0.3s;
+  }
+
+  .main-nav li a {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: var(--bold-font);
+    text-transform: uppercase; /* Make the links uppercase */
+  }
+
+  .main-nav li:hover,
+  .main-nav li:focus-within {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .main-nav li a:hover {
+    border-bottom: none; /* Removes the underline-like border from mobile links */
   }
 
   .burger-menu {
     display: block;
   }
 
-  nav ul.show {
-    transform: translateX(0);
+  /* nav ul.show is no longer needed, replaced by .main-nav.show */
+  /* .content-wrapper and sections below remain the same */
+  .content-wrapper {
+    padding: 0 1.5rem;
   }
 
-  /* ------ Hero Section tablet & mobile responsiveness (still within Media Query brackets) ------*/
+  .card {
+    padding: 1rem;
+  }
 
+  .hero,
+  .bio,
+  .more-about,
+  .contact-form-container,
+  .skills,
+  .projects {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* ------ MOBILE HERO SECTION ------ */
   .hero {
-    margin-top: -4rem;
     flex-direction: column;
     gap: 0;
   }
 
-  .hero img {
-    /*height: 37.5rem;
-    width: 30rem;*/
-
-        object-fit: contain;  /* helps keeps aspect ratio of pic */
-
-        width: 100%;  
-        max-width: 80%;
-        height: auto;
-
-        /* make it look like it's on a photograph */
-        padding: 0.625rem;  /*0.625 rem is equivalent to 10 pixels */
-        border-radius: 6px;
-        box-shadow: 0px 2px 15px 2px var(--primary-shadow);
-        margin-top: 75px;
-      
-    }
-
-  .bio {
-    /* margin-top: -7rem; */
-    width: 25.5rem;
-    margin: 50px 40px 10px 40px; /* keeps "About Me" card from overlapping hero img */
-    padding: 25px;
-    width: 20rem;
+  .hero-img-mask {
+    width: 90%;
+    margin: 0 auto;
   }
 
-  /* ------ More About Me Section tablet & mobile responsiveness (still within Media Query brackets) ------*/
+  .bio {
+   margin-top: 3rem;
+   width: 90%;
+  }
 
+  /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */
   .more-about {
     margin-top: 2rem;
-    padding: 1rem 2rem;
+    width: 90%;
   }
 
   .more-about h2 {
@@ -473,84 +535,29 @@ nav {
   }
 
   .more-about p {
-    /* text-align: justify; changed to fix odd looking spacing errors on mobile and make it look more readable */
     text-align: left;
   }
 
-  /* ------ Skills Section tablet & mobile responsiveness (still within Media Query brackets) ------*/
-
+  /* ------ MOBILE TECHNICAL SKILLS ------ */
   .icon {
-    width: 5.875rem;
-    height: 5.25rem;
+    width: 10rem;
+    height: 10rem;
   }
 
-  /* ------ Projects Section tablet & mobile responsiveness (still within Media Query brackets) ------*/
-
+  /* ------ MOBILE PROJECT SECTIONS - Website Development & Client Consultation AND Independent Projects ------ */
   .projects-container {
+    align-items: center;
     flex-direction: column;
+    margin: 0 auto;
   }
 
   .project-container {
-    width: 20.875rem;
+    width: 90%; /* overrided the 20rem desktop rule for mobile */
   }
 
-  /* ------ Contact Form Section tablet & mobile responsiveness (still within Media Query brackets) ------*/
-
+  /* ------ MOBILE CONTACT FORM SECTION ------ */
   .contact-form-container {
-    max-width: 23.75rem;
+    width: 90%;
   }
-
 } 
-/* ------ End Media Query for 720px ----------------------------------------------------------------------- */
-
-/* ------ Begin New smaller Media Query for 420px --------------------------------------------------------- */
-
-@media screen and (max-width: 420px) {
-    .hero img {
-      /*height: 37.5rem;
-      width: 23rem;*/
-          object-fit: contain;  /*keeps aspect ratio of pic */
-
-          width: 100%;  
-          max-width: 100%;
-          height: auto;
-
-          /* make it look like it's on a photograph */
-          padding: 0.625rem;  /*0.625 rem is equivalent to 10 pixels */
-          border-radius: 6px;
-          box-shadow: 0px 2px 15px 2px var(--primary-shadow);
-          margin-top: 75px;
-    }
-  
-    .bio {
-      width: 18.3rem;
-      padding: 50px; 
-      margin: 50px; /* keeps "About Me" card from overlapping hero img */
-    }
-  
-    .projects-title {
-      font-size: 1.3rem;
-      padding: 45px;
-    }
-
-    .project-container {
-      width: 17.875rem;
-      padding: 40px;
-    }
-    
-    .contact>h2 {
-      font-size: 1.3rem;
-      padding: 45px;
-    }
-
-    .contact-form-container {
-      max-width: 17.75rem;
-      padding: 45px;
-    }
-
-    .linkedinup {
-      margin-bottom: 5px;
-      margin-right: 2px;
-      justify-content:space-between;
-    }
-  } 
+/* ------ End Mobile Media Query for 820px -------------------------------------------------------- */
