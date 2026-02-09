@@ -69,13 +69,39 @@ p {
   font-size: 95%;
 }
 
+.nav-link.external-link {
+  display: inline-flex;       /* treat text + icon as a flex row */
+  align-items: center;        /* vertically center the icon with text */
+  white-space: nowrap;        /* prevent wrapping */
+  flex-shrink: 0;             /* prevents icon from separating from text */
+}
+
+.nav-link.external-link i {
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  font-size: .85em;  /* to match icon with text sizing  */
+  display: inline-block;  
+  color: inherit; /* ensures it matches link text color */
+}
+
+/* Responsive tweak for narrower widths */
+@media screen and (max-width: 1024px) {
+  .nav-link.external-link {
+    max-width: 6.5rem; /* adjust based on your nav spacing */
+    overflow: hidden;
+    text-overflow: ellipsis; /* optional, will truncate text instead of wrapping */
+  }
+}
+
 /* Ensures long words break and wrap correctly. Includes fix for margin collapse. */
 .title-base {
-    overflow-wrap: break-word;
-    margin-bottom: 2rem;
-    display: inline-block; /* Prevents the margin from collapsing/disappearing */
-    width: 100%; /* Ensures the title still spans the full width */
-    text-align: center;
+  overflow-wrap: break-word;
+  margin-bottom: 2rem;
+  display: inline-block; /* Prevents the margin from collapsing/disappearing */
+  width: 100%; /* Ensures the title still spans the full width */
+  text-align: center;
 }
 
 .card {
@@ -105,6 +131,13 @@ nav {
     overflow: hidden; /* Hides the off-screen mobile menu */
   }
 
+  .nav-link {
+    display: inline-block; /* Allows the border to attach to the link width */
+    padding: 0.2rem 0;     /* Gives the border space so it doesn't touch the text */
+    transition: var(--transition);
+    border-bottom: 2px solid transparent; /* Works like a shim the 2px is there just invisible */
+  }
+
   nav h1 {
       color: var(--color-primary-accent);
   }
@@ -113,19 +146,39 @@ nav {
     transition: var(--transition);
       color: var(--color-primary-accent);
   }
-  nav a:hover {
+
+  nav a:hover,
+  .nav-link:hover {
       color: var(--color-link-hover);
       border-bottom: 2px solid var(--color-link-hover);
+      border-color: var(--color-link-hover); /* changes color of the shim */
   }
   
   /* Desktop Nav Menu  */
   .main-nav {
       display: flex; /* Makes the menu horizontal on desktop */
       gap: 1.9rem;
+      flex-wrap: nowrap;
+      /* justify-content: flex-end; */
+      justify-content: space-between;
+      /* overflow-x: auto; */
+      overflow: hidden;
   }
 
   .main-nav li {
       font-weight: var(--bold-font);
+      flex-shrink: 1;
+      min-width: max-content;
+  }
+
+  .main-nav li:last-child {
+    min-width: max-content; /* prevents the far-right Resume link from wrapping */
+  }
+
+  @media screen and (max-width: 1150px) {
+    .main-nav li:not(:last-child) {
+      font-size: 0.95rem; /* shrink all except the far-right Resume */
+    }
   }
 
   .burger-menu {
@@ -224,7 +277,10 @@ nav {
   
 .project-pic {
   width: 65%;
-  height: 60%;
+  /* height: 60%; */
+  height: auto;
+
+
   display: block;
   margin: 0 auto;
 }
@@ -272,12 +328,24 @@ nav {
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 1; /* Ensure project cards don't compete */
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); */
+}
+
+/* Project Cards Accessibility Focus state – Keyboard Focus (Web Projects cards) */
+.project-card:focus-within {
+  transform: translateY(-2px);
 }
 
 .project-link {
   position: relative; /* REQUIRED: Gives the z-index context */
   z-index: 2; /* Must be higher than the main card link's z-index (1) */
-  margin-top: 1rem; /* Adjust spacing as needed */
+  margin-top: 1rem;
 }
 
 .project-card a.project-link {
@@ -312,12 +380,76 @@ nav {
   opacity: 0; /* Makes it invisible */
 }
 
+/* Stretched Link Hover State */
+.main-card-link:hover {
+  background-color:black;
+  opacity: 4%;
+  border-radius: 11px;
+  transition: opacity 0.3s ease;
+}
+
+/* Stretched Link – Keyboard Focus (Web Projects) */
+.main-card-link:focus,
+.main-card-link:focus-visible {
+  background-color: black;
+  opacity: 4%;
+  border-radius: 11px;
+
+  outline: 3px solid var(--color-link-hover);
+  outline-offset: -3px;
+}
+
+/* Independent Projects Card Hover */
+
+#independent-projects .project-card {
+  position: relative; /* creates overlay context */
+  overflow: hidden;   /* clips overlay to rounded corners */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#independent-projects .project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.04); /* matches 4% black */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 11px;
+  pointer-events: none; /* does NOT block clicks */
+}
+
+#independent-projects .project-card:hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); */
+}
+
+/* Independent Projects – Keyboard Focus */
+#independent-projects .project-card:focus-within {
+  transform: translateY(-2px);
+}
+
+#independent-projects .project-card:hover::after {
+  opacity: 1;
+}
+
+#independent-projects .project-card:focus-within::after {
+  opacity: 1;
+}
+
+
+/* End - Independent Projects Card Hover */
+
 /* Inner, Functional Links (Must have higher z-index to be clickable) */
 .project-inner-link {
   position: relative; 
   z-index: 2; /* Must be higher than main-card-link (1) */
   margin-top: 0.5rem;
   margin-bottom: 0.75rem;
+  display: inline-block;    /* Allows the link to respect width constraints */
+  max-width: 100%;          /* Prevents it from being wider than its card */
+  overflow-wrap: break-word; /* Forces the URL to break onto a new line */
+  /* word-break: break-all;    extra insurance for very long URLs but also breaks regular words not just URLs so commented out */
+  word-wrap: break-word;
 }
 
 .project-card .project-inner-link:last-child {
@@ -350,8 +482,12 @@ nav {
 
 .contact-form-container .input-field {
   width: 100%;
+  max-width: 100%; /* Force it to stay inside the container */
+  box-sizing: border-box; /* Ensures padding doesn't add to the width */
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: .8em;
+  padding-right: .6em;
   border-radius: 8px;
   border: none;
   border: 2px solid var(--color-primary-accent);
@@ -381,6 +517,7 @@ nav {
   background-color: var(--color-primary-accent);
   border: 2px solid var(--color-primary-accent);
   cursor: pointer;
+  color: white;
 }
 
 /* End Contact Section */
@@ -390,12 +527,15 @@ nav {
     display: flex;
     flex-direction: column;
     position: fixed;
-    right: 0.7%;
-    bottom: 10%;
+    /* right: 0.7%; */
+    right: 8px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
+    /* bottom: 10%; */
+    bottom: 85px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 8px var(--secondary-shadow);
     padding: 3px;
+    z-index: 1000; /* Higher than nav so it's always accessible */
 }
 
 .socicon {
@@ -408,8 +548,10 @@ nav {
 /* SCROLL TO TOP ICON */
 .scroll-up {
   position: fixed;
-  right: 0.5%;
-  bottom: 3%;
+  /* right: 0.5%; */
+  right: 5px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
+  /* bottom: 3%; */
+  bottom: 20px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
   cursor: pointer;
 }
 
@@ -438,14 +580,17 @@ nav {
 
 /* STEP 1: HIDE the desktop layout properties when screen is small (prevents flash) */
   .main-nav {
-    display: none;
+    display: flex;
+    visibility: hidden;
     flex-direction: column; /* Overrides the desktop flex */
     gap: 0rem;
     position: fixed; /* Allows mobile positioning */
     top: 6rem;
     left: 50%;
-    transform: translateX(200%); /* Off-screen hide */
-    transition: transform 0.5s ease-in;
+    transform: translateX(200%); /* Off-screen hide to the right */
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s ease-in-out, opacity 0.3 ease-in-out;
     width: 80%;
     max-width: 300px;
     text-align: center;
@@ -453,13 +598,17 @@ nav {
     padding: 1.5rem 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(5px);
+    z-index: 1010; /* kept higher z index than .linkedinup which is 1000 */
   }
 
 /* STEP 2: SHOW the mobile menu when the burger is clicked (by re-applying display:flex via .show) */
   .main-nav.show {
+    visibility: visible;
     display: flex; /* Make it visible for the slide-in effect */
-    transform: translateX(-50%); /* centers the menu */
+    transform: translateX(-50%); /* Slide menu to center when .show is added */
+    opacity: 1;
+    visibility: visible;
   }
 
   .main-nav li {
@@ -473,6 +622,8 @@ nav {
     font-size: 1.2rem;
     font-weight: var(--bold-font);
     text-transform: uppercase; /* Make the links uppercase */
+    border-bottom: none; /* Removes the 2px border space entirely for mobile (the shim) */
+    padding: 0; /* Resets the padding if the 0.2rem from desktop looks odd */
   }
 
   .main-nav li:hover,
@@ -482,6 +633,7 @@ nav {
 
   .main-nav li a:hover {
     border-bottom: none; /* Removes the underline-like border from mobile links */
+    border-bottom-color: transparent; /* Ensures no border color is applied on mobile hover */
   }
 
   .burger-menu {
@@ -553,6 +705,13 @@ nav {
 
   .project-container {
     width: 90%; /* overrided the 20rem desktop rule for mobile */
+    height: auto; /* Force it to expand with content */
+    flex-basis: auto; /* Prevents flex-basis: 0 from squishing the card */
+  }
+
+  .project-card a.project-link {
+    height: auto; /* Let the content dictate the height */
+    display: block; /* Simpler than flex for stacked mobile content */
   }
 
   /* ------ MOBILE CONTACT FORM SECTION ------ */
