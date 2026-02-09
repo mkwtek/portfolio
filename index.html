@@ -15,6 +15,10 @@
   <link rel="preload" as="font" crossorigin 
     href="https://fonts.gstatic.com/s/roboto/v49/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLmbXuAj-k3Yi128m0g.woff2">
 
+  <!-- Bootstrap for Icons -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+
   <!--CSS Styles -->
   <link rel="stylesheet" href="assets/css/styles.css" />
 
@@ -35,10 +39,11 @@
     <ul class="main-nav">
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#skills" class="nav-link">Skills</a></li>
-      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#projects-websites" class="nav-link">Web Projects</a></li>
+      <li><a href="#independent-projects" class="nav-link">Fun Projects</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
       <!-- <li><a href="./assets/images/Matt_Whitcomb_Resume_2023.pdf" target="_blank" class="nav-link">Resume</a></li> -->
-      <li><a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link">Resume</a></li>
+      <li><a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link external-link">Resume<i class="bi bi-box-arrow-up-right"></i></a></li>
     </ul>
     <button class="burger-menu" id="burger-menu">
       <ion-icon class="bars" name="menu-outline"></ion-icon>
@@ -187,7 +192,7 @@
           <img src="assets/images/openadopt.png" alt="Open Adoption Website" loading="lazy" class="project-pic" />
           <h3 class="project-title">Open Adoption & Family Services</h3>
 
-          <a href="https://openadopt.org/" target="_blank" class="main-card-link">Click to visit</a>
+          <a href="https://openadopt.org/" target="_blank" class="main-card-link" aria-label="Visit Open Adoption & Family Services website"></a>
 
           <p class="project-details">
             Hand-coded a custom website for Open Adoption & Family Services, bringing a third-party designer&#39;s vision
@@ -206,7 +211,7 @@
           <img src="assets/images/lcfrb.png" alt="Lower Columbia Fish Recovery Board" loading="lazy" class="project-pic" />
           <h3 class="project-title">Lower Columbia Fish Recovery Board</h3>
 
-          <a href="https://lcfrb.org/" target="_blank" class="main-card-link">Click to visit</a>
+          <a href="https://lcfrb.org/" target="_blank" class="main-card-link" aria-label="Visit Lower Columbia Fish Recovery Board website"></a>
 
           <p class="project-details">
             Delivered consulting and web development for the Lower Columbia Fish Recovery Board, transforming a teammate’s
@@ -224,7 +229,7 @@
           <img src="assets/images/atozstaffing.png" alt="quiz app" loading="lazy" class="project-pic" />
           <h3 class="project-title">AtoZ Staffing</h3>
 
-          <a href="https://atoz-staffing.com/" target="_blank" class="main-card-link">Click to visit</a>
+          <a href="https://atoz-staffing.com/" target="_blank" class="main-card-link" aria-label="Visit A to Z Staffing website"></a>
 
           <p class="project-details">
             Provided consulting and web development for AtoZ Staffing and its sister site, Nonprofit Professionals Now
@@ -242,27 +247,28 @@
     </section>
 
 
-    <!-- Independent Projects section -->
+    <!-- Independent Fun Projects Section -->
     <section class="projects section-padding" id="independent-projects">
       <h2 class="projects-title title-base">Independent Projects</h2>
       <div class="projects-container">
 
         <!-- Card 1 -->
         <div class="project-container project-card card">
-          <a href="./assets/Portfolio_Projects/Game_Project/index.html" target="_blank" class="project-link">
+          <a href="./assets/Portfolio_Projects/Game_Project/index.html" target="_blank" class="project-link" aria-label="Visit project game link to external tab">
             <img src="assets/images/pixel-t-rex.png" alt="Dino-Game" loading="lazy" class="project-pic" />
             <h3 class="project-title">Dino Game</h3>
-           <p class="project-details">
+
+            <p class="project-details">
             Made a simple game using HTML, CSS, and JavaScript. This is similar to Google's dino game 
             (<q>chrome://dino</q>). Click anywhere on this card to play! To play, just press any key 
-            to jump over incoming objects.
-          </p>
+            to jump over incoming objects.<br><br><strong>Click anywhere on this card to play the Dino Game in a new tab!</strong><br>Note: Close browser tab to exit game.
+            </p>
           </a>
         </div><!-- ./project-container project-card card -->
 
         <!-- Card 2 -->
         <div class="project-container project-card card">
-          <a href="./assets/Portfolio_Projects/Libertis_Auto_Bootstrap/index.html" target="_blank" class="project-link">
+          <a href="./assets/Portfolio_Projects/Libertis_Auto_Bootstrap/index.html" target="_blank" class="project-link" aria-label="Visit Liberti's Auto Electric website in an external tab">
             <img src="assets/images/libertis_website.png" alt="Liberti's Auto Electric" loading="lazy" class="project-pic" />
             <h3 class="project-title">Liberti's Auto Electric</h3>
             <p class="project-details">
@@ -270,14 +276,14 @@
               that I actually used to work for. Working with feedback from the shop owner my goal was to make the website
               user friendly with some design flair while still being easy to navigate and allow customers to get to where
               they need to quickly and efficiently. As you explore the website, you will mostly be seing my photography and
-              may also even spot a picture of me working! Click anywhere on this card to visit the website.
+              may also even spot a picture of me working!<br><br><strong>Click anywhere on this card to visit the website in a new tab!</strong><br>Note: Close browser tab to exit website.
             </p>
           </a>
         </div><!-- ./project-container project-card card -->
 
         <!-- Card 3 -->
         <div class="project-container project-card card">
-          <a href="./assets/Portfolio_Projects/Quiz_App_Master/index.html" target="_blank" class="project-link">
+          <a href="./assets/Portfolio_Projects/Quiz_App_Master/index.html" target="_blank" class="project-link" aria-label="Visit project quiz game in an external tab">
             <img src="assets/images/quickQuiz.png" alt="quiz app" loading="lazy" class="project-pic" />
             <h3 class="project-title">Quiz App</h3>
             <p class="project-details">
@@ -286,7 +292,7 @@
               The user can save their score and try to beat it the next time around. This was created from a tutorial and
               will be replaced with another project
               that I will create myself in the future but was fun to code and follow along while gaining more hands-on
-              experience. Click anywhere on this card to start the quiz!
+              experience.<br><br><strong>Click anywhere on this card to start the quiz in a new tab!</strong><br>Note: Close browser tab to exit game.
             </p>
           </a>
         </div><!-- ./project-container project-card card -->
@@ -330,7 +336,7 @@
     <a href="https://www.linkedin.com/in/mattkwhitcomb/" target="_blank"><img
         src="assets/icons/icons8-linkedin-circled.gif" alt="Linkedin" loading="lazy" class="socicon" /></a>
 
-    <a href="https://mkwtek.github.io/portfolio/" target="_blank"><img src="assets/icons/icons8-github.gif" alt="Github"
+    <a href="https://github.com/mkwtek/portfolio" target="_blank"><img src="assets/icons/icons8-github.gif" alt="Github"
         class="socicon" /></a>
 
     <a href="https://tek8367.wixsite.com/matts-portfolio" target="_blank"><img
@@ -344,7 +350,7 @@
 
   <!-- Footer section -->
   <footer>
-    <p class="copy">&copy; Copyright 2023</p>
+    <p class="copy">&copy; Copyright 2023 - <span id="current-year"></span></p>
     <p class="copy">
       Built with &#x2661; by <br>
       <a href="https://www.linkedin.com/in/mattkwhitcomb/" target="_blank">Matt Whitcomb</a>
