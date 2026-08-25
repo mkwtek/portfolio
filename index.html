@@ -28,32 +28,42 @@
 
   <!-- Animate CSS CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <title>Matt Whitcomb | Web Developer</title>
+
+  <!-- Google reCAPTCHA (Custom key, used by the contact form's spam protection) -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <title>Matt Whitcomb - Web Dev</title>
 </head>
 
 <body>
 
   <!-- Navbar -->
   <nav>
-    <h1><a href="#">MATT WHITCOMB</a></h1>
-    <ul class="main-nav">
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#skills" class="nav-link">Skills</a></li>
-      <li><a href="#projects-websites" class="nav-link">Web Projects</a></li>
-      <li><a href="#independent-projects" class="nav-link">Fun Projects</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
-      <!-- <li><a href="./assets/images/Matt_Whitcomb_Resume_2023.pdf" target="_blank" class="nav-link">Resume</a></li> -->
-      <li><a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link external-link">Resume<i class="bi bi-box-arrow-up-right"></i></a></li>
-    </ul>
-    <button class="burger-menu" id="burger-menu">
-      <ion-icon class="bars" name="menu-outline"></ion-icon>
-    </button>
+    <div class="nav-inner">
+      <div class="nav-title">
+        <h1><a href="#">MATT WHITCOMB</a></h1>
+        <p class="nav-tagline">Web Developer</p>
+      </div><!-- ./nav-title -->
+      <ul class="main-nav">
+        <li><a href="#about" class="nav-link"><span class="nav-link-text">About</span></a></li>
+        <li><a href="#skills" class="nav-link"><span class="nav-link-text">Skills</span></a></li>
+        <li><a href="#projects-websites" class="nav-link"><span class="nav-link-text">Web Projects</span></a></li>
+        <li><a href="#independent-projects" class="nav-link"><span class="nav-link-text">Fun Projects</span></a></li>
+        <li><a href="#contact" class="nav-link"><span class="nav-link-text">Contact</span></a></li>
+        <li><a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link external-link"><span class="nav-link-text">Resume</span><i class="bi bi-box-arrow-up-right"></i></a></li>
+      </ul>
+      <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div><!-- ./nav-inner -->
   </nav>
 
   <div class="content-wrapper">
 
     <!-- Hero Section and About Me -->
-    <section class="hero animate__animated animate__shakeX section-padding" id="about">
+    <section class="hero section-padding" id="about">
 
       <div class="hero-img-mask">
         <img src="assets/images/matt.jpeg" alt="matt" loading="lazy" class="hero-img" />
@@ -65,11 +75,21 @@
           <!-- 
               Results-driven and detail-oriented professional with experience leading Agile web development teams along with a background in web design, front-end development, and project management. Skilled in Agile and Scrum Frameworks, team leadership, and leveraging technical expertise to drive successful outcomes. Strong facilitation, communication, and leadership skills. Committed to fostering collaboration and continuous improvement within cross-functional teams. Seeking career opportunities as a Scrum Master, Product Owner, Web Designer, or Front-end Developer to create engaging user experiences and innovative web solutions. 
               -->
-          Web developer and technology consultant with expertise in front-end
+          Web developer and digital consultant with expertise in front-end
           development, project management, and technology solutions for
-          businesses and non-profits. Skilled at translating complex problems into
+          businesses and nonprofits. Skilled at translating complex problems into
           actionable solutions, optimizing team workflows, and delivering
           engaging user experiences through innovative web solutions.
+        </p>
+        <p class="bio-text center">
+          Experienced in building websites from the ground up using custom HTML
+          and CSS, along with CMS platforms including ExpressionEngine, Wix
+          Editor X, Webflow, and Shopify, and additional experience with Joomla
+          and WordPress. Focused on creating accessible, responsive websites and
+          finding practical solutions to technical and workflow challenges.
+          Experience founding and operating an independent e-commerce venture has
+          also provided firsthand insight into the practical needs and challenges
+          of running a small business.
         </p>
       </div><!-- ./bio card -->
 
@@ -81,75 +101,88 @@
 
         <h2 class="title-base">Recent Experience</h2>
 
-        <div class="center mimic-h4-size">
-          <p>
-            &#40;Please see <a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link">Resume</a> website
-            for more details&#41;
-          </p>
-        </div><!-- ./center mimic-h4-size -->
-
         <div class="role-1">
           <p>
-            <strong>Most Recent Role: </strong><br><br>Web Developer and Consultant at <a href="https://www.netraising.com"
-              target="_blank" title="Open NetRaising.com in new tab">
-              NetRaising</a> | March 2024 - June 30th 2025 | &#40;Remote&#41;
+            <strong>Founder &amp; Web Developer, Independent E-Commerce Venture | June 2025 - Present | &#40;Remote&#41;</strong>
           </p>
           </br>
           <p>
-            • Built and launched responsive websites in Expression Engine for nonprofit clients, combining CMS templating
-            (tags, conditional logic, unique fields) with custom built front-end development (HTML, CSS, JavaScript) and
-            MachForm integration to deliver client-requested features.
+            • Built and customized a Shopify storefront using Liquid, custom filtering and taxonomy architecture, and metafield-driven product data structures.
           </p>
           </br>
           <p>
-            • Solved complex design and technical challenges by implementing custom features while prioritizing web
-            accessibility (WCAG standards), SEO, and performance optimization, consistently achieving high scores using
-            Lighthouse, color contrast testing, and other key metrics.
+            • Led performance and accessibility optimization work, including Lighthouse auditing, image compression workflows, color-contrast testing, and WCAG-compliant mobile tap-target sizing via custom Liquid edits.
           </p>
           </br>
           <p>
-            • Collaborated with designers and stakeholders to produce mobile, tablet, and desktop-ready websites, as well as
-            provided one-on-one client training and support to ensure a smooth handoff and ongoing site management.
+            • Manage multi-channel sales operations, including platform-specific pricing strategy, cross-listing workflows, shipping and fulfillment integration, and domain/DNS management.
+          </p>
+          </br>
+          <p>
+            • Manage inventory and product photography, using AI-assisted workflows and graphics editing programs to help shape final product designs, alongside creative direction for brand identity and marketing materials.
+          </p>
+          </br>
+          <p>
+            • Established and manage core business operations independently, including registered agent and privacy protection, licensing, tax compliance, and business banking, informing hands-on website audits that go beyond automated "SEO report" bots.
           </p>
         </div><!-- ./role-1 -->
 
         <br><br>
-        
+
         <div class="role-2">
           <p>
-            <strong>Other Roles: </strong><br><br>Web & Tech Manager at
-            <a href="https://www.seasidesustainability.org/" target="_blank"
-              title="Open Seaside Sustainability website in new tab">
-              Seaside Sustainability</a> | Jan 2023 - July 2023 | &#40;Remote from Seattle, WA to Gloucester, MA&#41;
+            <strong>Web Developer and Consultant at <a href="https://www.netraising.com" target="_blank" title="Open NetRaising.com in new tab">NetRaising</a> | March 2024 - June 2025 | &#40;Remote&#41;</strong>
           </p>
           </br>
           <p>
-            • Overhauled and restructured the Web & Tech department, implementing Agile and Scrum frameworks along with
-            kanban to establish an efficient team and workflow.
+            • Built and launched responsive websites in ExpressionEngine for nonprofit clients, combining CMS templating (tags, conditional logic, custom fields) with custom built front-end development (HTML, CSS, JavaScript) and MachForm integration to deliver client-requested features.
           </p>
           </br>
           <p>
-            • Served as a Department Manager, Scrum Master, Product Owner, Front-end Web Developer, Project Manager, and a
-            liaison between different departments in order to facilitate and support the needs of a diverse, globally remote
-            team for a large non-profit organization.
+            • Solved complex design and technical challenges by implementing custom features while prioritizing web accessibility (WCAG standards), SEO, and performance optimization, consistently achieving high scores using Lighthouse, color contrast testing, and other key metrics.
           </p>
           </br>
           <p>
-            • Rapidly and efficiently acquired proficiency in using a diverse range of software and tools, such as Trello,
-            Wix Editor X, Zapier, Google Workspaces, Miro, Figma, Canva, MailerLite, Little Green Light, and Airtable, among
-            other applications.
-          </p>
-          </br>
-          <p>
-            • Guided and mentored interns in implementing responsive web design best practices and effectively utilizing
-            tools to accomplish tasks.
-          </p>
-          </br>
-          <p>
-            • Collaborated with stakeholders to perform heuristic evaluations, effectively identifying user needs and pain
-            points, then analyzed the feedback to implement targeted improvements and innovative design solutions.
+            • Collaborated with designers and stakeholders to produce mobile, tablet, and desktop-ready websites, as well as provided one-on-one client training and support to ensure a smooth handoff and ongoing site management.
           </p>
         </div><!-- ./role-2 -->
+
+        <br><br>
+
+        <div class="role-3">
+          <p>
+            <strong>Website & Technology Manager at <a href="https://www.seasidesustainability.org/" target="_blank" title="Open Seaside Sustainability website in new tab">Seaside Sustainability</a> | Jan 2023 - July 2023 | &#40;Remote from Seattle, WA to Gloucester, MA&#41;</strong>
+          </p>
+          </br>
+          <p>
+            • Led a Web & Tech team of 5-8, overhauling and restructuring the department following approximately six months without dedicated leadership, implementing Agile and Scrum frameworks along with kanban to establish organized workflows and a consistent delivery cadence.
+          </p>
+          </br>
+          <p>
+            • Served as a Department Manager, Scrum Master, Product Owner, Front-end Web Developer, Project Manager, and a liaison between different departments in order to facilitate and support the needs of a diverse, globally remote team for a large non-profit organization.
+          </p>
+          </br>
+          <p>
+            • Rapidly and efficiently acquired proficiency in using a diverse range of software and tools, such as Trello, Wix Editor X, Zapier, Google Workspaces, Miro, Figma, Canva, MailerLite, Little Green Light, and Airtable, among other applications.
+          </p>
+          </br>
+          <p>
+            • Guided and mentored interns in implementing responsive web design best practices and effectively utilizing tools to accomplish tasks.
+          </p>
+          </br>
+          <p>
+            • Collaborated with stakeholders to perform heuristic evaluations, effectively identifying user needs and pain points, then analyzed the feedback to implement targeted improvements and innovative design solutions.
+          </p>
+        </div><!-- ./role-3 -->
+
+        <br><br>
+
+        <div class="center mimic-h4-size">
+          <p>
+            For additional roles and detailed responsibilities, visit my
+            <a href="https://mkwtek.github.io/resume/" target="_blank">Resume website</a>.
+          </p>
+        </div><!-- ./center mimic-h4-size -->
       
       </div><!-- ./card -->
     </section>
@@ -158,28 +191,154 @@
     <section class="skills section-padding" id="skills">
       <h2 class="skill-header title-base">Technical Skills</h2>
 
-      <div class="skills-wrapper">
+      <div class="skills-grid">
 
-        <div class="first-set animate__animated animate__pulse">
-          <img src="assets/icons/icons8-html-5.svg" alt="" loading="lazy" class="icon icon-card card" />
-          <img src="assets/icons/icons8-css3.svg" alt="" loading="lazy" class="icon icon-card card" />
-          <img src="assets/icons/icons8-javascript.svg" alt="" loading="lazy" class="icon icon-card card" />
-        </div><!-- first-set animate__animated animate__pulse -->
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-code-slash" aria-hidden="true"></i>
+            <h3>Web Development &amp; Platforms</h3>
+          </div>
+          <ul class="skill-list">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>ExpressionEngine</li>
+            <li>Joomla!</li>
+            <li>WordPress</li>
+            <li>Wix Editor X</li>
+            <li>Webflow</li>
+            <li>Shopify (Liquid)</li>
+            <li>YAML CSS Framework</li>
+            <li>Bootstrap</li>
+          </ul>
+        </div>
 
-        <div class="second-set animate__animated animate__pulse">
-          <img src="assets/icons/icons8-bootstrap.svg" alt="" loading="lazy" class="icon icon-card card" />
-          <!-- 
-            <img
-              src="assets/icons/icons8-react-native.svg"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            -->
-          <img src="assets/icons/icons8-git.svg" alt="" loading="lazy" class="icon icon-card card" />
-        </div><!-- second-set animate__animated animate__pulse -->
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-hdd-network" aria-hidden="true"></i>
+            <h3>Hosting, Domains &amp; SEO</h3>
+          </div>
+          <ul class="skill-list">
+            <li>Domain &amp; DNS Management</li>
+            <li>Namecheap</li>
+            <li>cPanel</li>
+            <li>SEO</li>
+            <li>Google Analytics</li>
+            <li>GitHub Pages</li>
+            <li>SSL/HTTPS Configuration</li>
+          </ul>
+        </div>
 
-      </div><!-- ./skills-wrapper -->
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-database" aria-hidden="true"></i>
+            <h3>Development &amp; Databases</h3>
+          </div>
+          <ul class="skill-list">
+            <li>JavaScript</li>
+            <li>jQuery</li>
+            <li>PHP</li>
+            <li>SQL</li>
+            <li>MySQL/RDBMS</li>
+            <li>API Integrations</li>
+          </ul>
+        </div>
+
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-universal-access" aria-hidden="true"></i>
+            <h3>Accessibility</h3>
+          </div>
+          <ul class="skill-list">
+            <li>WCAG and web accessibility standards</li>
+            <li>Lighthouse auditing</li>
+            <li>Color-contrast testing</li>
+            <li>Mobile tap-target compliance</li>
+          </ul>
+        </div>
+
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-stars" aria-hidden="true"></i>
+            <h3>AI-Assisted Workflows</h3>
+          </div>
+          <ul class="skill-list">
+            <li>Claude, ChatGPT, Gemini, and GitHub Copilot</li>
+            <li>Strategic planning and organization</li>
+            <li>Content and asset creation</li>
+            <li>Code refinement and testing</li>
+            <li>Multi-model cross-verification prior to manual review</li>
+          </ul>
+        </div>
+
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-palette" aria-hidden="true"></i>
+            <h3>Design &amp; Creative</h3>
+          </div>
+          <ul class="skill-list">
+            <li>Affinity</li>
+            <li>Adobe Photoshop</li>
+            <li>Illustrator</li>
+            <li>InDesign</li>
+            <li>Canva</li>
+            <li>Figma</li>
+          </ul>
+        </div>
+
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
+            <h3>Business &amp; Entrepreneurship</h3>
+          </div>
+          <ul class="skill-list">
+            <li>LLC formation and operations</li>
+            <li>E-commerce platform management</li>
+            <li>Multi-channel sales strategy</li>
+            <li>Tax compliance</li>
+            <li>Business Banking</li>
+            <li>Licensing &amp; Registration</li>
+            <li>Washington State Tax Registration</li>
+          </ul>
+        </div>
+
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-kanban" aria-hidden="true"></i>
+            <h3>Agile &amp; Project Management</h3>
+          </div>
+          <ul class="skill-list">
+            <li>Jira</li>
+            <li>Trello</li>
+            <li>Kanban</li>
+            <li>Miro</li>
+            <li>Zoom</li>
+            <li>Google Workspace</li>
+            <li>Airtable</li>
+            <li>Scrum Framework</li>
+            <li>Backlog Management</li>
+          </ul>
+        </div>
+
+        <div class="skill-category card">
+          <div class="skill-heading">
+            <i class="bi bi-tools" aria-hidden="true"></i>
+            <h3>Additional Tools</h3>
+          </div>
+          <ul class="skill-list">
+            <li>AWS / Cloud Computing</li>
+            <li>Visual Studio Code</li>
+            <li>Sublime Text</li>
+            <li>Notepad++</li>
+            <li>Premiere Pro</li>
+            <li>Final Cut Pro</li>
+            <li>Little Green Light</li>
+            <li>Zapier</li>
+            <li>MachForm</li>
+            <li>Microsoft Word, Excel, Access, PowerPoint, and Teams</li>
+          </ul>
+        </div>
+
+      </div><!-- ./skills-grid -->
     </section>
 
     <!-- Projects Section - Website Examples (NetRaising) -->
@@ -192,8 +351,6 @@
           <img src="assets/images/openadopt.png" alt="Open Adoption Website" loading="lazy" class="project-pic" />
           <h3 class="project-title">Open Adoption & Family Services</h3>
 
-          <a href="https://openadopt.org/" target="_blank" class="main-card-link" aria-label="Visit Open Adoption & Family Services website"></a>
-
           <p class="project-details">
             Hand-coded a custom website for Open Adoption & Family Services, bringing a third-party designer&#39;s vision
             to life. The project included developing unique site features, ensuring web accessibility, and training staff
@@ -201,8 +358,12 @@
             organization&#39;s mission of connecting children with loving families through open adoption.
           </p>
 
-          <a href="https://openadopt.org/" target="_blank" class="project-inner-link">Visit Client Website at <br>https://openadopt.org/</a>
-          <a href="https://netraising.com/portfolio/projects-2024-25/open-adoption/497/" target="_blank" class="project-inner-link">View Project Details at NetRaising.com</a>
+          <p class="project-stat">Achieves a perfect 100 Lighthouse Accessibility score and 100 SEO score.</p>
+
+          <div class="project-btn-group">
+            <a href="https://openadopt.org/" target="_blank" class="project-btn" aria-label="Visit Open Adoption & Family Services website in a new tab">Visit Client Website</a>
+            <a href="https://netraising.com/portfolio/projects-2024-25/open-adoption/497/" target="_blank" class="project-btn" aria-label="View Open Adoption project details on NetRaising.com in a new tab">View Project Details</a>
+          </div>
 
         </div><!-- project-container project-card card -->
 
@@ -211,8 +372,6 @@
           <img src="assets/images/lcfrb.png" alt="Lower Columbia Fish Recovery Board" loading="lazy" class="project-pic" />
           <h3 class="project-title">Lower Columbia Fish Recovery Board</h3>
 
-          <a href="https://lcfrb.org/" target="_blank" class="main-card-link" aria-label="Visit Lower Columbia Fish Recovery Board website"></a>
-
           <p class="project-details">
             Delivered consulting and web development for the Lower Columbia Fish Recovery Board, transforming a teammate’s
             design into a responsive, accessible website. The new site enhances outreach by informing the public and
@@ -220,16 +379,18 @@
             protect clean water, and strengthen the long-term health of southwest Washington’s forests and communities.
           </p>
 
-          <a href="https://lcfrb.org/" target="_blank" class="project-inner-link">Visit Client Website at <br>https://lcfrb.org/</a>
-          <a href="https://netraising.com/portfolio/projects-2024-25/the-lower-columbia-fish-recovery-board/498/" target="_blank" class="project-inner-link">View Project Details at NetRaising.com</a>
+          <p class="project-stat">Scores 98 Accessibility and a perfect 100 in both SEO and Best Practices.</p>
+
+          <div class="project-btn-group">
+            <a href="https://lcfrb.org/" target="_blank" class="project-btn" aria-label="Visit Lower Columbia Fish Recovery Board website in a new tab">Visit Client Website</a>
+            <a href="https://netraising.com/portfolio/projects-2024-25/the-lower-columbia-fish-recovery-board/498/" target="_blank" class="project-btn" aria-label="View Lower Columbia Fish Recovery Board project details on NetRaising.com in a new tab">View Project Details</a>
+          </div>
         </div><!-- ./project-container project-card card project-card-lcfrb -->
 
         <!-- Card 3 atoz-staffing -->
         <div class="project-container project-card card">
           <img src="assets/images/atozstaffing.png" alt="quiz app" loading="lazy" class="project-pic" />
           <h3 class="project-title">AtoZ Staffing</h3>
-
-          <a href="https://atoz-staffing.com/" target="_blank" class="main-card-link" aria-label="Visit A to Z Staffing website"></a>
 
           <p class="project-details">
             Provided consulting and web development for AtoZ Staffing and its sister site, Nonprofit Professionals Now
@@ -239,8 +400,12 @@
             tailored to the needs of mission-driven employers and professionals.
           </p>
 
-          <a href="https://atoz-staffing.com/" target="_blank" class="project-inner-link">Visit Client Website at <br>https://atoz-staffing.com/</a>
-          <a href="https://netraising.com/portfolio/projects-2024-25/atoz-staffing/494/" target="_blank" class="project-inner-link">View Project Details at NetRaising.com</a>
+          <p class="project-stat">Scores 92 Accessibility and a perfect 100 SEO, balanced against the client's specific design and functionality requirements.</p>
+
+          <div class="project-btn-group">
+            <a href="https://atoz-staffing.com/" target="_blank" class="project-btn" aria-label="Visit AtoZ Staffing website in a new tab">Visit Client Website</a>
+            <a href="https://netraising.com/portfolio/projects-2024-25/atoz-staffing/494/" target="_blank" class="project-btn" aria-label="View AtoZ Staffing project details on NetRaising.com in a new tab">View Project Details</a>
+          </div>
         </div><!-- ./project-container project-card card -->
 
       </div><!-- ./projects-container with an "s" -->
@@ -254,47 +419,53 @@
 
         <!-- Card 1 -->
         <div class="project-container project-card card">
-          <a href="./assets/Portfolio_Projects/Game_Project/index.html" target="_blank" class="project-link" aria-label="Visit project game link to external tab">
-            <img src="assets/images/pixel-t-rex.png" alt="Dino-Game" loading="lazy" class="project-pic" />
-            <h3 class="project-title">Dino Game</h3>
+          <img src="assets/images/pixel-t-rex.png" alt="Dino-Game" loading="lazy" class="project-pic" />
+          <h3 class="project-title">Dino Game</h3>
 
-            <p class="project-details">
-            Made a simple game using HTML, CSS, and JavaScript. This is similar to Google's dino game 
-            (<q>chrome://dino</q>). Click anywhere on this card to play! To play, just press any key 
-            to jump over incoming objects.<br><br><strong>Click anywhere on this card to play the Dino Game in a new tab!</strong><br>Note: Close browser tab to exit game.
-            </p>
-          </a>
+          <p class="project-details">
+          Made a simple game using HTML, CSS, and JavaScript. This is similar to Google's dino game
+          (<q>chrome://dino</q>). To play, just press any key to jump over incoming objects.
+          </p>
+
+          <div class="project-btn-group">
+            <a href="./assets/Portfolio_Projects/Game_Project/index.html" target="_blank" class="project-btn" aria-label="Play the Dino Game in a new tab">Play Dino Game</a>
+          </div>
         </div><!-- ./project-container project-card card -->
 
         <!-- Card 2 -->
         <div class="project-container project-card card">
-          <a href="./assets/Portfolio_Projects/Libertis_Auto_Bootstrap/index.html" target="_blank" class="project-link" aria-label="Visit Liberti's Auto Electric website in an external tab">
-            <img src="assets/images/libertis_website.png" alt="Liberti's Auto Electric" loading="lazy" class="project-pic" />
-            <h3 class="project-title">Liberti's Auto Electric</h3>
-            <p class="project-details">
-              For this project I utilized Bootstrap v5.3 to craft a dynamic, responsive new website for an automotive shop
-              that I actually used to work for. Working with feedback from the shop owner my goal was to make the website
-              user friendly with some design flair while still being easy to navigate and allow customers to get to where
-              they need to quickly and efficiently. As you explore the website, you will mostly be seing my photography and
-              may also even spot a picture of me working!<br><br><strong>Click anywhere on this card to visit the website in a new tab!</strong><br>Note: Close browser tab to exit website.
-            </p>
-          </a>
+          <img src="assets/images/libertis_website.png" alt="Liberti's Auto Electric" loading="lazy" class="project-pic" />
+          <h3 class="project-title">Liberti's Auto Electric</h3>
+          <p class="project-details">
+            For this project I utilized Bootstrap v5.3 to craft a dynamic, responsive new website for an automotive shop
+            that I actually used to work for. Working with feedback from the shop owner my goal was to make the website
+            user friendly with some design flair while still being easy to navigate and allow customers to get to where
+            they need to quickly and efficiently. As you explore the website, you will mostly be seing my photography and
+            may also even spot a picture of me working!
+          </p>
+
+          <div class="project-btn-group">
+            <a href="./assets/Portfolio_Projects/Libertis_Auto_Bootstrap/index.html" target="_blank" class="project-btn" aria-label="View the portfolio build of Liberti's Auto Electric website in a new tab">View Portfolio Build</a>
+            <a href="https://www.libertisauto.com/" target="_blank" class="project-btn" aria-label="Visit the live Liberti's Auto Electric website in a new tab">Visit Live Site</a>
+          </div>
         </div><!-- ./project-container project-card card -->
 
         <!-- Card 3 -->
         <div class="project-container project-card card">
-          <a href="./assets/Portfolio_Projects/Quiz_App_Master/index.html" target="_blank" class="project-link" aria-label="Visit project quiz game in an external tab">
-            <img src="assets/images/quickQuiz.png" alt="quiz app" loading="lazy" class="project-pic" />
-            <h3 class="project-title">Quiz App</h3>
-            <p class="project-details">
-              This is a quick quiz app using HTML CSS and JavaScript with randomly generated questions populated from Open
-              Trivia Database (https://opentdb.com/).
-              The user can save their score and try to beat it the next time around. This was created from a tutorial and
-              will be replaced with another project
-              that I will create myself in the future but was fun to code and follow along while gaining more hands-on
-              experience.<br><br><strong>Click anywhere on this card to start the quiz in a new tab!</strong><br>Note: Close browser tab to exit game.
-            </p>
-          </a>
+          <img src="assets/images/quickQuiz.png" alt="quiz app" loading="lazy" class="project-pic" />
+          <h3 class="project-title">Quiz App</h3>
+          <p class="project-details">
+            This is a quick quiz app using HTML CSS and JavaScript with randomly generated questions populated from Open
+            Trivia Database (https://opentdb.com/).
+            The user can save their score and try to beat it the next time around. This was created from a tutorial and
+            will be replaced with another project
+            that I will create myself in the future but was fun to code and follow along while gaining more hands-on
+            experience.
+          </p>
+
+          <div class="project-btn-group">
+            <a href="./assets/Portfolio_Projects/Quiz_App_Master/index.html" target="_blank" class="project-btn" aria-label="Start the quiz in a new tab">Start Quiz</a>
+          </div>
         </div><!-- ./project-container project-card card -->
 
       </div><!-- ./projects-container with an "s"-->
@@ -305,7 +476,7 @@
       <h2 class="title-base">Get In Touch With Me</h2>
       <div class="contact-form-container">
         <div class="contact-form">
-          <form action="https://formspree.io/f/mnqywwzo" method="POST"> <!-- Linked to my formspree.io acct -->
+          <form action="https://formspree.io/f/mnqywwzo" method="POST" id="contact-form"> <!-- Linked to my formspree.io acct -->
             <div class="form-control">
               <label for="name">Name</label>
               <input type="text" id="name" name="sender-name" placeholder="Enter Your Name" class="input-field"
@@ -321,8 +492,21 @@
               <textarea id="message" cols="60" rows="10" placeholder="Enter Your Message" name="message"
                 class="input-field" required></textarea>
             </div><!-- ./form-control -->
+            <div class="g-recaptcha" data-sitekey="6LfD6JYtAAAAACVDMz9LVFdBKl3HriHPaYloBMIY"></div>
+            <div id="recaptcha-error" class="recaptcha-error" hidden>Please check the box above to verify you're not a robot.</div>
             <input type="submit" value="Submit" id="submit-btn" class="submit-btn" />
           </form>
+
+          <div id="form-success" class="form-message form-success" hidden>
+            <h3>Thanks!</h3>
+            <p>Your message was sent successfully. I'll get back to you soon.</p>
+          </div>
+
+          <div id="form-error" class="form-message form-error" hidden>
+            <h3>Something went wrong</h3>
+            <p>Your message wasn't sent. Please try again, or email me directly at
+              <a href="mailto:mattkwhitcomb@gmail.com">mattkwhitcomb@gmail.com</a>.</p>
+          </div>
         </div><!-- ./contact-form -->
       </div><!-- ./contact-form-container -->
     </section>
