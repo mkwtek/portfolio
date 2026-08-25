@@ -68,34 +68,7 @@ p {
 .mimic-h4-size {
   font-size: 95%;
 }
-
-.nav-link.external-link {
-  display: inline-flex;       /* treat text + icon as a flex row */
-  align-items: center;        /* vertically center the icon with text */
-  white-space: nowrap;        /* prevent wrapping */
-  flex-shrink: 0;             /* prevents icon from separating from text */
-}
-
-.nav-link.external-link i {
-  margin-left: 0.25rem;
-  vertical-align: middle;
-  position: relative;
-  top: -2px;
-  font-size: .85em;  /* to match icon with text sizing  */
-  display: inline-block;  
-  color: inherit; /* ensures it matches link text color */
-}
-
-/* Responsive tweak for narrower widths */
-@media screen and (max-width: 1024px) {
-  .nav-link.external-link {
-    max-width: 6.5rem; /* adjust based on your nav spacing */
-    overflow: hidden;
-    text-overflow: ellipsis; /* optional, will truncate text instead of wrapping */
-  }
-}
-
-/* Ensures long words break and wrap correctly. Includes fix for margin collapse. */
+/* Ensures long words break and wrap correctly. */
 .title-base {
   overflow-wrap: break-word;
   margin-bottom: 2rem;
@@ -118,77 +91,261 @@ p {
 
 /* NAVIGATION MENU */
 nav {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 3.5rem; /* 1.5 rem is equivalent to 24 pixels & 3.5 rem is equivalent to 56 pixels */
-    background-color: var(--bg-color);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Hides the off-screen mobile menu */
-  }
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: var(--bg-color);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
-  .nav-link {
-    display: inline-block; /* Allows the border to attach to the link width */
-    padding: 0.2rem 0;     /* Gives the border space so it doesn't touch the text */
-    transition: var(--transition);
-    border-bottom: 2px solid transparent; /* Works like a shim the 2px is there just invisible */
-  }
+.nav-inner {
+  max-width: 68.75rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem;
+}
 
-  nav h1 {
-      color: var(--color-primary-accent);
-  }
-  
-  nav a {
-    transition: var(--transition);
-      color: var(--color-primary-accent);
-  }
+.nav-link {
+  display: inline-block;
+  padding: 0.2rem 0;
+  transition: var(--transition);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom; /* keeps ellipsis-truncated text aligned with untruncated siblings */
+}
 
-  nav a:hover,
-  .nav-link:hover {
-      color: var(--color-link-hover);
-      border-bottom: 2px solid var(--color-link-hover);
-      border-color: var(--color-link-hover); /* changes color of the shim */
-  }
-  
-  /* Desktop Nav Menu  */
-  .main-nav {
-      display: flex; /* Makes the menu horizontal on desktop */
-      gap: 1.9rem;
-      flex-wrap: nowrap;
-      /* justify-content: flex-end; */
-      justify-content: space-between;
-      /* overflow-x: auto; */
-      overflow: hidden;
-  }
+/* Underline now lives on the inner .nav-link-text span, not the outer .nav-link itself. */
+/* This keeps the underline sized to just the visible text, regardless of how wide the  */
+/* outer link's tappable area is (full row on mobile, natural width on desktop).        */
+.nav-link-text {
+  position: relative;
+  display: inline-block;
+}
 
-  .main-nav li {
-      font-weight: var(--bold-font);
-      flex-shrink: 1;
-      min-width: max-content;
-  }
+/* Underline Hover Effect: Left-to-Right (inactive) */
+/*
+.nav-link-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-link-hover);
+  transition: width 0.3s ease;
+}
+*/
+/* ./Left-to-Right */
 
-  .main-nav li:last-child {
-    min-width: max-content; /* prevents the far-right Resume link from wrapping */
-  }
+/* Underline Hover Effect: Center-Outward (active) */
+.nav-link-text::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-link-hover);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+/* ./Center-Outward */
 
-  @media screen and (max-width: 1150px) {
-    .main-nav li:not(:last-child) {
-      font-size: 0.95rem; /* shrink all except the far-right Resume */
-    }
-  }
-
-  .burger-menu {
+nav h1 {
     color: var(--color-primary-accent);
-    font-size: 2rem; /* 2 rem is equivalent to 32 pixels */
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    display: none;
+}
+
+nav a {
+  transition: var(--transition);
+    color: var(--color-primary-accent);
+}
+
+nav a:hover,
+.nav-link:hover {
+  color: var(--color-link-hover);
+}
+
+.nav-link:hover .nav-link-text::after {
+  width: 100%;
+}
+
+.nav-link.external-link {
+  display: inline-flex;       /* treat text + icon as a flex row */
+  align-items: center;        /* vertically center the icon with text */
+  white-space: nowrap;        /* prevent wrapping */
+  flex-shrink: 0;             /* prevents icon from separating from text */
+}
+
+.nav-link.external-link i {
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  font-size: .85em;  /* to match icon with text sizing  */
+  display: inline-block;  
+  color: inherit; /* ensures it matches link text color */
+}
+
+/* Desktop Nav Menu  */
+.main-nav {
+    display: flex; /* Makes the menu horizontal on desktop */
+    gap: 1.9rem;
+    flex-wrap: nowrap;
+    /* justify-content: flex-end; */
+    justify-content: space-between;
+    /* overflow-x: auto; */
+    overflow: hidden;
+}
+
+.main-nav li {
+    font-weight: var(--bold-font);
+    flex-shrink: 1;
+    min-width: 0; /* overrides flexbox's default min-width:auto floor so items can genuinely shrink below their text width */
+    overflow: hidden;
+}
+.burger-menu {
+  position: relative;
+  width: 2rem;
+  height: 1.4rem;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+}
+
+.burger-menu .bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-primary-accent);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.burger-menu .bar:nth-child(1) {
+  top: 0;
+}
+
+.burger-menu .bar:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.burger-menu .bar:nth-child(3) {
+  bottom: 0;
+}
+
+/* Active/open state: morphs the three bars into an X */
+.burger-menu.active .bar:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.burger-menu.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active .bar:nth-child(3) {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.nav-tagline {
+  font-size: 1rem;
+  font-weight: var(--normal-font);
+  color: var(--color-primary-accent);
+  margin-top: 0.15rem;
+}
+
+/* ---------- Nav Load-In Animations ---------- */
+/* Name: quick fade + slight upward slide into place, no bounce */
+@keyframes navNameFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tagline: same fade/slide, paired with a letter-spacing "settle" for a subtle reveal feel */
+@keyframes navTaglineFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    letter-spacing: 0.15em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: normal;
+  }
+}
+
+/* Nav links: gentle staggered fade + slide down into place, no overshoot */
+@keyframes navLinkFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-title h1 {
+  opacity: 0;
+  animation: navNameFadeIn 0.4s ease-out 0.1s forwards;
+}
+
+.nav-tagline {
+  opacity: 0;
+  animation: navTaglineFadeIn 0.4s ease-out 0.25s forwards;
+}
+
+.main-nav li {
+  opacity: 0;
+  animation: navLinkFadeIn 0.4s ease-out forwards;
+}
+
+/* Staggered by ~80ms each so links land one after another instead of all at once */
+.main-nav li:nth-child(1) { animation-delay: 0.45s; }
+.main-nav li:nth-child(2) { animation-delay: 0.53s; }
+.main-nav li:nth-child(3) { animation-delay: 0.61s; }
+.main-nav li:nth-child(4) { animation-delay: 0.69s; }
+.main-nav li:nth-child(5) { animation-delay: 0.77s; }
+.main-nav li:nth-child(6) { animation-delay: 0.85s; }
+
+/* Respect the OS-level reduced motion preference: show everything instantly, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .nav-title h1,
+  .nav-tagline,
+  .main-nav li {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+/* End Nav Load-In Animations */
+
 /* End Nav Section */
 
 /* CONTENT WRAPPER  */
@@ -197,7 +354,6 @@ nav {
   margin: 0 auto; /* This centers the content on the page */
   padding: 0 1.5rem; /* This creates the "gutters" as I like to call them on the left and right */
 }
-  
 /* HERO SECTION */
 .hero {
   display: flex;
@@ -235,37 +391,145 @@ nav {
   padding: 0.3rem 0; /* 0.3 rem is equivalent to 4.8 pixels */
 }
 
-/* End Hero Section */
+/* ---------- Hero Load-In Animation ---------- */
+/* Photo zooms gently into focus while fading in */
+@keyframes heroZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
+/* Bio card: fades in and rises up from below, like it's coming up to meet the photo */
+@keyframes bioCardRiseIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bio heading/paragraphs: plain fade, no movement, revealed one after another at reading pace */
+@keyframes bioFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hero-img-mask {
+  opacity: 0;
+  animation: heroZoomIn 0.6s ease-out 0.1s forwards;
+}
+
+.bio {
+  opacity: 0;
+  animation: bioCardRiseIn 0.6s ease-out 0.1s forwards;
+}
+
+.bio-title {
+  opacity: 0;
+  animation: bioFadeIn 0.4s ease-out 0.2s forwards;
+}
+
+.bio-text:nth-of-type(1) {
+  opacity: 0;
+  animation: bioFadeIn 0.4s ease-out 0.35s forwards;
+}
+
+.bio-text:nth-of-type(2) {
+  opacity: 0;
+  animation: bioFadeIn 0.4s ease-out 0.55s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-img-mask,
+  .bio,
+  .bio-title,
+  .bio-text {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+/* End Hero Load-In Animation */
+
+/* End Hero Section */
 /* RECENT EXPERIENCE / MORE ABOUT */
 .more-about {
   background-color: var(--bg-color);
 }
 
+.more-about .card {
+  padding-bottom: calc(20px + 1em); /* extra room below the last bullet/Resume line; */
+                                    /* scoped here so other .card uses elsewhere are  */
+                                    /* unaffected                                     */
+}
+
 .more-about p {
   line-height: var(--line-height);
-  padding: 0.4rem;
+  padding: 0.15rem 0.4rem; /* reduced top/bottom from 0.4rem, kept left/right the same. */
+                           /* The HTML structure (separate <p> + manual <br> per bullet) */
+                           /* stays exactly as-is; this just tightens the rendered space */
+                           /* around each one instead of restructuring the markup.       */
   align-items: center;
   justify-content: center;
 }
 
-
-/* TECHNICAL SKILLS SECTION */  
+/* TECHNICAL SKILLS SECTION */
 .skills {
   text-align: center;
 }
 
-.skills-wrapper img {
-  padding: 1.25rem;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-.icon {
-  width: 11.875rem;
-  height: 11.25rem;
+.skill-category {
+  text-align: left;
 }
 
-.icon-card {
-  margin: 10px;
+.skill-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.skill-heading i {
+  font-size: 1.4rem;
+  color: var(--color-primary-accent);
+}
+
+.skill-heading h3 {
+  font-size: 1.1rem;
+}
+
+.skill-list {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  font-size: 0.85em;
+}
+
+.skill-list li {
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+.skill-list li:last-child {
+  margin-bottom: 0;
 }
 
 /* End Skills Section */ 
@@ -323,141 +587,54 @@ nav {
   margin-bottom: 1rem;
 }
 
+.project-stat {
+  font-weight: var(--bold-font);
+  color: var(--color-primary-accent);
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+}
+
 .project-card {
   margin: 0;
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
   z-index: 1; /* Ensure project cards don't compete */
 }
 
-.project-card:hover {
-  transform: translateY(-2px);
-  /* box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); */
+/* Button Group (holds one or two project-btn links at the bottom of a card) */
+.project-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
-/* Project Cards Accessibility Focus state – Keyboard Focus (Web Projects cards) */
-.project-card:focus-within {
-  transform: translateY(-2px);
+/* Project Buttons (replaces whole-card-click and plain text links) */
+.project-btn {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--color-primary-accent);
+  border-radius: 8px;
+  color: var(--color-primary-accent);
+  font-weight: var(--bold-font);
+  text-decoration: none;
+  transition: var(--transition);
+  white-space: nowrap;
 }
 
-.project-link {
-  position: relative; /* REQUIRED: Gives the z-index context */
-  z-index: 2; /* Must be higher than the main card link's z-index (1) */
-  margin-top: 1rem;
-}
-
-.project-card a.project-link {
-    display: flex; 
-    flex-direction: column;
-    box-sizing: border-box; 
-    height: 100%;
-    width: 100%;
-    text-decoration: none; 
-    color: inherit; 
-}
-
-.main-card-link {
-  position: absolute; /* Takes the link out of the normal flow */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1; /* Places the link above the card content */
-  /* Optional: Make it visually invisible but still clickable */
-  opacity: 0;
-}
-
-/* Stretched Link (Covers the whole card invisibly) */
-.main-card-link {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1; /* Sits above content */
-  opacity: 0; /* Makes it invisible */
-}
-
-/* Stretched Link Hover State */
-.main-card-link:hover {
-  background-color:black;
-  opacity: 4%;
-  border-radius: 11px;
-  transition: opacity 0.3s ease;
-}
-
-/* Stretched Link – Keyboard Focus (Web Projects) */
-.main-card-link:focus,
-.main-card-link:focus-visible {
-  background-color: black;
-  opacity: 4%;
-  border-radius: 11px;
-
-  outline: 3px solid var(--color-link-hover);
-  outline-offset: -3px;
-}
-
-/* Independent Projects Card Hover */
-
-#independent-projects .project-card {
-  position: relative; /* creates overlay context */
-  overflow: hidden;   /* clips overlay to rounded corners */
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-#independent-projects .project-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.04); /* matches 4% black */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 11px;
-  pointer-events: none; /* does NOT block clicks */
-}
-
-#independent-projects .project-card:hover {
-  transform: translateY(-2px);
-  /* box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); */
-}
-
-/* Independent Projects – Keyboard Focus */
-#independent-projects .project-card:focus-within {
-  transform: translateY(-2px);
-}
-
-#independent-projects .project-card:hover::after {
-  opacity: 1;
-}
-
-#independent-projects .project-card:focus-within::after {
-  opacity: 1;
-}
-
-
-/* End - Independent Projects Card Hover */
-
-/* Inner, Functional Links (Must have higher z-index to be clickable) */
-.project-inner-link {
-  position: relative; 
-  z-index: 2; /* Must be higher than main-card-link (1) */
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem;
-  display: inline-block;    /* Allows the link to respect width constraints */
-  max-width: 100%;          /* Prevents it from being wider than its card */
-  overflow-wrap: break-word; /* Forces the URL to break onto a new line */
-  /* word-break: break-all;    extra insurance for very long URLs but also breaks regular words not just URLs so commented out */
-  word-wrap: break-word;
-}
-
-.project-card .project-inner-link:last-child {
-    margin-bottom: 1.5rem; /* To visually match the independent project cards space on bottom of card */
+.project-btn:hover,
+.project-btn:focus,
+.project-btn:focus-visible {
+  background-color: var(--color-primary-accent);
+  color: #fff;
+  outline: none;
 }
 
 /* End Project Section */
-
 /* CONTACT SECTION */
 .contact h2 {
   text-align: center;
@@ -508,6 +685,7 @@ nav {
   background-color: #fff;
   border: 2px solid var(--color-primary-accent);
   border-radius: 8px;
+  color: var(--color-primary-accent);
   font-size: 1rem;
   font-weight: var(--bold-font);
   transition: var(--transition);
@@ -520,8 +698,45 @@ nav {
   color: white;
 }
 
-/* End Contact Section */
+/* Inline Success / Error Messages (replaces Formspree's own redirect page) */
+.form-message {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
 
+.form-message h3 {
+  color: var(--color-primary-accent);
+  margin-bottom: 0.5rem;
+}
+
+.form-message p {
+  margin: 0;
+}
+
+.form-success h3::before {
+  content: "✓ ";
+}
+
+.form-error a {
+  color: var(--color-primary-accent);
+  font-weight: var(--bold-font);
+}
+
+/* reCAPTCHA widget spacing and inline validation error */
+.g-recaptcha {
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.recaptcha-error {
+  color: var(--color-link-hover);
+  font-size: 0.85rem;
+  margin: -0.5rem 0 1rem;
+  text-align: center;
+}
+
+/* End Contact Section */
 /* SOCIALS */
 .linkedinup {
     display: flex;
@@ -543,8 +758,37 @@ nav {
   height: 2rem;
 }
 
-/* END Socials */
+/* On mobile, .content-wrapper only has 1.5rem of side padding, so centered heading */
+/* text can extend close enough to the screen edge to land under this fixed widget. */
+/* Shrinking it here creates real clearance. Calculated, not yet visually confirmed, */
+/* worth testing directly against the actual overlapping headings. */
+@media screen and (max-width: 820px) {
+  .socicon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 
+  .linkedinup {
+    right: 4px;
+    padding: 2px;
+    bottom: 70px; /* tightened from the base 85px, mobile-only this time (see comment on */
+                  /* the base rule above: this was previously edited by mistake there,   */
+                  /* affecting desktop too and causing a near-overlap there)             */
+  }
+
+  /* .up-arrow was never resized here, so it stayed at its original 2.5rem while       */
+  /* .linkedinup shrank above, and the two ended up with different centers even though */
+  /* they're meant to look stacked/aligned. Sized and positioned here to share the      */
+  /* same horizontal center as .linkedinup: (4px right + 17px half-width = 21px from    */
+  /* edge), matched here as (3px right + 18px half-width = 21px from edge).             */
+  .up-arrow {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+}
+
+/* END Socials */
 /* SCROLL TO TOP ICON */
 .scroll-up {
   position: fixed;
@@ -559,8 +803,24 @@ nav {
   width: 2.5rem;
   height: 2.5rem;
 }
-/* End Scroll to top icon */
 
+/* This override previously sat earlier in the file than the base .scroll-up rule above, */
+/* so it was silently losing the cascade tie every time (later source order wins when     */
+/* specificity is equal), regardless of what value was set here. Moved to actually win.   */
+@media screen and (max-width: 820px) {
+  .scroll-up {
+    right: 3px; /* matches .linkedinup's center (4px right + 17px half-width = 21px from */
+                /* edge), calculated as 3px right + 18px half-width = 21px from edge.     */
+                /* This is the same math from before; it just never actually applied     */
+                /* until the cascade order bug above was fixed.                          */
+  }
+
+  .up-arrow {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+/* End Scroll to top icon */
 /* FOOTER */
   footer {
     background-color: var(--bg-color);
@@ -569,13 +829,79 @@ nav {
     margin: 1rem 0 0;
   }
 
-/* ------------ Media Queries for responsiveness on tablet and mobile -------------------------------------------------- */ 
 
-/* MOBILE */
-@media screen and (max-width: 820px) {
-  
+/* ============================================================ */
+/* RESPONSIVE / MEDIA QUERIES                                    */
+/* Organized by breakpoint (widest to narrowest). Within each    */
+/* breakpoint, rules follow the same page/section order as the   */
+/* base CSS above.                                                */
+/*                                                                 */
+/* NOTE: The Nav switches to its mobile/hamburger layout at        */
+/* 1150px, wider than the rest of the page (820px). This was a    */
+/* deliberate fix, not an accident: the horizontal desktop nav     */
+/* (5 links + name/tagline) ran out of room well before 820px,     */
+/* and several earlier attempts to patch that with font shrinking, */
+/* gap tightening, and icon hiding were all removed here in favor  */
+/* of simply switching to the already-working mobile nav sooner.   */
+/* ============================================================ */
+
+/* --- 1150px: Skills grid drops to 2 columns --- */
+@media screen and (max-width: 1150px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- 1150px: Nav switches to mobile/hamburger layout --- */
+@media screen and (max-width: 1150px) {
+
   nav {
-    padding: 1.5rem 1rem;
+    /* padding: 1.5rem 1rem; padding moved to .nav-inner */
+  }
+
+  .nav-inner {
+    /* width: 83%; */
+    width: calc(90% - 2.7rem);
+    margin: 0 auto;
+    padding: 1rem 0;
+    position: relative;
+    min-height: 6rem; /* 5rem was too little, 7rem was too much; splitting the difference */
+  }
+
+  .nav-title {
+    position: absolute;
+    top: 1rem; /* explicit, matching nav-inner's own padding-top, rather than relying on */
+               /* the browser's default top:auto static-position guess, which wasn't    */
+               /* giving a predictable/balanced result */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    max-width: calc(100% - 7rem);
+  }
+
+  /* "WHITCOMB" is a surname and must never be broken mid-word to fit a box. Font-size  */
+  /* is the only acceptable lever here. clamp() scales it with actual viewport width    */
+  /* instead of using one fixed guessed number that works on one screen and fails on    */
+  /* another: minimum 1.1rem (stays legible), scales at 5.5vw in between, capped at     */
+  /* 1.75rem on wider mobile/tablet widths where there's already plenty of room.        */
+  .nav-title h1 {
+    font-size: clamp(1.4rem, 6vw, 2rem); /* bumped up; calculated against the 7rem burger */
+                                          /* buffer, WHITCOMB has real room to spare here  */
+    /* No white-space or overflow-wrap override needed here: default CSS behavior already */
+    /* wraps at the space between MATT and WHITCOMB (which is fine), while never breaking */
+    /* inside a single word like WHITCOMB (which is what we actually want to prevent).    */
+  }
+
+  /* Clearly smaller than the name (which is also bold, adding further visual weight),  */
+  /* so the hierarchy reads correctly. Same clamp approach for consistency: scales with  */
+  /* actual screen width instead of a single guessed fixed size.                        */
+  .nav-tagline {
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem); /* bumped up; "Web Developer" still has real */
+                                              /* margin before it would need to wrap       */
+  }
+
+  .burger-menu {
+    margin-left: auto;
   }
 
 /* STEP 1: HIDE the desktop layout properties when screen is small (prevents flash) */
@@ -585,18 +911,20 @@ nav {
     flex-direction: column; /* Overrides the desktop flex */
     gap: 0rem;
     position: fixed; /* Allows mobile positioning */
-    top: 6rem;
+    top: calc(6rem + 2px); /* small nudge down per direct feedback */
     left: 50%;
     transform: translateX(200%); /* Off-screen hide to the right */
     opacity: 0;
     visibility: hidden;
     transition: transform 0.5s ease-in-out, opacity 0.3 ease-in-out;
-    width: 80%;
+    width: 75%; /* was 80%: at ~360px wide, 80% (288px) put the dropdown's right edge past */
+                /* the social widget's left edge by about 2px, causing the corner overlap. */
+                /* 75% (270px) creates real clearance at that width.                       */
     max-width: 300px;
     text-align: center;
     border-radius: 8px;
     padding: 1.5rem 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px var(--primary-shadow); /* matched to .card's shadow so it's visually consistent now that the dropdown is a similar width to the page's content boxes */
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(5px);
     z-index: 1010; /* kept higher z index than .linkedinup which is 1000 */
@@ -613,17 +941,30 @@ nav {
 
   .main-nav li {
     margin: 0; /* mobile nav items vertical spacing */
-    padding: 1rem 0; /* Add padding for a larger touch target */
     transition: background-color 0.3s;
   }
 
+  /* Padding moved here from .main-nav li: the gray hover background is painted on the  */
+  /* <li>, but the actual clickable/tappable element is the <a> inside it. If only the  */
+  /* <li> had padding, the visible gray box would be taller than the real tap target,   */
+  /* and taps near the top/bottom edge of that box would silently miss the link.        */
   .main-nav li a {
     display: block;
+    padding: 1rem 0; /* the real touch target now matches the visible gray box exactly */
     font-size: 1.2rem;
     font-weight: var(--bold-font);
     text-transform: uppercase; /* Make the links uppercase */
     border-bottom: none; /* Removes the 2px border space entirely for mobile (the shim) */
-    padding: 0; /* Resets the padding if the 0.2rem from desktop looks odd */
+  }
+
+  /* Resume uses display: inline-flex on desktop (to lay out icon + text), which would  */
+  /* otherwise override the display: block above and leave it with a smaller tap zone   */
+  /* than the other four links. This makes its tappable area match the full-width gray  */
+  /* hover box on mobile, same as everything else, while still centering its icon.      */
+  .main-nav li a.external-link {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* text-align:center has no effect on flex children; this replaces it */
   }
 
   .main-nav li:hover,
@@ -639,11 +980,51 @@ nav {
   .burger-menu {
     display: block;
   }
+}
 
-  /* nav ul.show is no longer needed, replaced by .main-nav.show */
-  /* .content-wrapper and sections below remain the same */
+/* --- 641px: Name wraps to two lines here, nav needs more vertical room --- */
+/* Below ~641px, "MATT WHITCOMB" reliably wraps to two lines (MATT / WHITCOMB) as designed */
+/* (see comment on .nav-title h1 above), but .nav-inner's 6rem min-height was only tuned   */
+/* for the one-line case. Since .nav-title is absolutely positioned, it doesn't push       */
+/* .nav-inner taller on its own, and nav's own overflow: hidden was silently clipping the  */
+/* tagline once the wrapped name + tagline stack taller than 6rem, cutting "Web Developer" */
+/* off entirely. Giving more room here, specifically for the range where wrapping happens, */
+/* fixes it without touching the wider, already-tuned 1150px layout above.                */
+@media screen and (max-width: 641px) {
+  .nav-inner {
+    min-height: 8rem;
+  }
+
+  /* The mobile dropdown's top offset is anchored to the nav's height (see the 1150px      */
+  /* block's calc(6rem + 2px)); since the nav is now 8rem tall at this width, the dropdown */
+  /* needs to shift down to match, or it would start too high and overlap the taller nav.  */
+  .main-nav {
+    top: calc(8rem + 2px);
+  }
+}
+
+/* --- 820px: Everything else (Hero, More About, Skills, Projects, Contact) --- */
+@media screen and (max-width: 820px) {
+
   .content-wrapper {
     padding: 0 1.5rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Reserves real clearance from the floating .linkedinup widget on the right, instead */
+  /* of relying on the widget staying small enough (which wasn't reliably enough on its */
+  /* own). Equal padding on both sides keeps the centered text visually balanced rather */
+  /* than shifting it off-center.                                                       */
+  /* .title-base was removed here: it's a shared class also used by About Me, Recent    */
+  /* Experience, and Technical Skills, none of which ever had the overlap problem, and  */
+  /* including it squeezed them unnecessarily. .projects-title and .contact h2 already  */
+  /* precisely cover all three headings that actually needed this.                      */
+  .projects-title,
+  .contact h2 {
+    padding: 0 2rem;
   }
 
   .card {
@@ -669,6 +1050,9 @@ nav {
   .hero-img-mask {
     width: 90%;
     margin: 0 auto;
+    height: 350px; /* was locked at the base 500px on mobile too; this trims the tall,   */
+                   /* narrow portrait look without going fully square, which can crop a  */
+                   /* headshot oddly depending on framing                                */
   }
 
   .bio {
@@ -709,14 +1093,8 @@ nav {
     flex-basis: auto; /* Prevents flex-basis: 0 from squishing the card */
   }
 
-  .project-card a.project-link {
-    height: auto; /* Let the content dictate the height */
-    display: block; /* Simpler than flex for stacked mobile content */
-  }
-
   /* ------ MOBILE CONTACT FORM SECTION ------ */
   .contact-form-container {
     width: 90%;
   }
-} 
-/* ------ End Mobile Media Query for 820px -------------------------------------------------------- */
+}
