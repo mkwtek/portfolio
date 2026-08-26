@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
+/* Roboto font is loaded via a <link> tag in index.html's <head> (not an @import here) -- */
+/* @import is render-blocking in a worse way than a <link>, see index.html for details.  */
 
 /* VARIABLES */
 :root {
