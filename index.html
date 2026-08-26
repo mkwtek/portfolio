@@ -6,6 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Preconnect: establishes DNS/TLS early for the CDNs below, before the actual -->
+  <!-- resource requests happen, shaving round-trip time off each one.            -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+  <!-- Roboto font stylesheet: moved here from an @import at the top of styles.css. -->
+  <!-- @import is render-blocking in a different, worse way than a <link> tag: the  -->
+  <!-- browser must download and parse the whole CSS file before it even discovers -->
+  <!-- the import, then fetch a second stylesheet, all serially. A <link> here gets -->
+  <!-- discovered immediately while the HTML itself is still being parsed.         -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap" rel="stylesheet" />
+
   <!-- Font Preloads -->
    <!-- (Used to prevent the common issue known as Flash of Unstyled Text (FOUT) or Flash of Unloaded Text (FOUT). Note that it happens because the web browser renders the text on the page before a custom font, which is loaded from an external source (like Google Fonts or a CDN), is fully downloaded and applied.)  -->
   <link rel="preload" as="font" crossorigin 
