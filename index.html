@@ -19,15 +19,6 @@
   <!-- discovered immediately while the HTML itself is still being parsed.         -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap" rel="stylesheet" />
 
-  <!-- Font Preloads -->
-   <!-- (Used to prevent the common issue known as Flash of Unstyled Text (FOUT) or Flash of Unloaded Text (FOUT). Note that it happens because the web browser renders the text on the page before a custom font, which is loaded from an external source (like Google Fonts or a CDN), is fully downloaded and applied.)  -->
-  <link rel="preload" as="font" crossorigin 
-    href="https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2">
-  <link rel="preload" as="font" crossorigin 
-    href="https://fonts.gstatic.com/s/roboto/v49/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2">
-  <link rel="preload" as="font" crossorigin 
-    href="https://fonts.gstatic.com/s/roboto/v49/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLmbXuAj-k3Yi128m0g.woff2">
-
   <!-- Bootstrap for Icons -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
@@ -51,7 +42,7 @@
   <nav>
     <div class="nav-inner">
       <div class="nav-title">
-        <h1><a href="#">MATT WHITCOMB</a></h1>
+        <h1><a href="#">MATT <span class="nav-lastname">WHITCOMB</span></a></h1>
         <p class="nav-tagline">Web Developer</p>
       </div><!-- ./nav-title -->
       <ul class="main-nav">
@@ -502,7 +493,9 @@
               <textarea id="message" cols="60" rows="10" placeholder="Enter Your Message" name="message"
                 class="input-field" required></textarea>
             </div><!-- ./form-control -->
-            <div class="g-recaptcha" data-sitekey="6LfD6JYtAAAAACVDMz9LVFdBKl3HriHPaYloBMIY"></div>
+            <div class="recaptcha-wrapper">
+              <div class="g-recaptcha" data-sitekey="6LfD6JYtAAAAACVDMz9LVFdBKl3HriHPaYloBMIY"></div>
+            </div>
             <div id="recaptcha-error" class="recaptcha-error" hidden>Please check the box above to verify you're not a robot.</div>
             <input type="submit" value="Submit" id="submit-btn" class="submit-btn" />
           </form>
@@ -533,8 +526,8 @@
     <a href="https://github.com/mkwtek/portfolio" target="_blank" class="social-link"><img src="assets/icons/icons8-github.gif" alt="Github"
         class="socicon" /></a>
 
-    <a href="https://tek8367.wixsite.com/matts-portfolio" target="_blank" class="social-link"><img
-        src="assets/icons/icons8-wix-yellowidot.png" alt="Wix" class="socicon" /></a>
+    <a href="https://tek8367.wixsite.com/matts-portfolio" target="_blank" class="social-link"><span class="wix-badge"><img
+        src="assets/icons/icons8-wix-yellowidot.png" alt="Wix" class="socicon" /></span></a>
 
     <!-- Scroll to top -->
     <i class="scroll-up" id="scroll-up"><img src="assets/icons/arrow_circle_up_icon_colorfill.png"
