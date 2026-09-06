@@ -275,18 +275,6 @@ nav.navbar {
     text-decoration-color: #b02a37;
 }
 
-/* Phone numbers keep the fixed format "(xxx) xxx-xxxx" - the hyphen
-   inside "xxx-xxxx" is a valid line-break opportunity to browsers, the
-   same as a hyphenated word, so a narrow screen (like the hero section
-   on phones) can wrap the last four digits onto their own line. This
-   keeps each phone link as one atomic unit that only wraps as a whole,
-   the same way a single word would. Address and email links intentionally
-   keep normal wrapping (they carry text-break), so this targets only
-   tel: links specifically. */
-a[href^="tel:"] {
-    white-space: nowrap;
-}
-
 /* Nav Animations */
 #nav_car_in {
     animation-delay: 0ms;
