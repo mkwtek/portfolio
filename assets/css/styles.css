@@ -1183,7 +1183,8 @@ nav a:hover,
     display: grid;
     grid-template-rows: 0fr;
     position: fixed;
-    top: calc(4.5rem + 2px); /* flush under the nav bar: .nav-inner min-height + its 2px border */
+    top: calc(5rem + 2px); /* fallback only - app.js sets this to the nav's measured */
+                           /* bottom edge, which varies with the title font-size      */
     left: 0;
     width: 100%;
     max-width: 100%;
@@ -1191,7 +1192,9 @@ nav a:hover,
                             /* would let the flowers' colour bleed behind the link text  */
     box-shadow:
       inset 0 -2px 0 0 var(--color-primary-accent), /* accent line, painted not reserved */
-      0 14px 24px -10px rgba(0, 0, 0, 0.28);
+      0 8px 12px -6px rgba(0, 0, 0, 0.2); /* tight, low-blur: a big blurred shadow near */
+                                          /* the nav's own shadow flickered while the    */
+                                          /* panel resized frame by frame                */
     z-index: 1010; /* above .linkedinup (1000) */
     visibility: hidden;
     transition:
@@ -1329,9 +1332,8 @@ nav a:hover,
     min-height: 6.5rem;
   }
 
-  .main-nav-wrap {
-    top: calc(6.5rem + 2px); /* +2px for nav's border-bottom, as in the 1150px rule */
-  }
+  /* app.js keeps .main-nav-wrap's top pinned to the nav's measured bottom edge, */
+  /* including when the name wraps to two lines here - no CSS override needed.    */
 }
 
 /* --- 820px: Everything else (Hero, More About, Skills, Projects, Contact) --- */

@@ -19,11 +19,24 @@ scrollUp.addEventListener("click", () => {
 // Nav hamburger selections
 const burger = document.querySelector("#burger-menu");
 const navWrap = document.querySelector(".main-nav-wrap");
+const navEl = document.querySelector("nav");
+
+// The dropdown hangs off the bottom edge of the sticky nav. The nav's height
+// isn't fixed - the title font-size scales with viewport width - so measure it
+// rather than hardcoding a top offset. Even a few px off makes the panel's top
+// edge (and its accent line) visibly jump the moment the menu opens.
+function positionNavWrap() {
+  if (navEl && navWrap) {
+    navWrap.style.top = navEl.getBoundingClientRect().bottom + "px";
+  }
+}
+positionNavWrap();
 
 // --- Mobile dropdown ---
 // The open/close height animation is pure CSS (.main-nav-wrap is a 1-row grid
 // going 0fr <-> 1fr, see styles.css). JS only toggles the .show class.
 function setNav(open) {
+  if (open) positionNavWrap(); // make sure the panel sits flush under the nav
   navWrap.classList.toggle("show", open);
   burger.classList.toggle("active", open);
 }
@@ -40,6 +53,15 @@ navLink.forEach((link) =>
   link.addEventListener("click", () => setNav(false))
 );
 
+// Keep the panel aligned if the nav height changes (viewport width crossing a
+// font-size threshold, or the name wrapping to two lines under 350px). rAF-
+// coalesced so URL-bar resize spam on mobile doesn't thrash layout.
+let navPosRaf;
+window.addEventListener("resize", () => {
+  cancelAnimationFrame(navPosRaf);
+  navPosRaf = requestAnimationFrame(positionNavWrap);
+});
+
 // --- Keep the open/close animation for real burger taps only ---
 // It otherwise also fires on first paint and when the viewport crosses the
 // 1150px breakpoint (Chrome DevTools' device toolbar, or resizing a desktop
@@ -48,7 +70,6 @@ navLink.forEach((link) =>
 // styles.css) for the first frame, and briefly whenever that breakpoint is
 // crossed - matchMedia, not a plain resize listener, since mobile browsers fire
 // resize constantly as the URL bar shows/hides on scroll.
-const navEl = document.querySelector("nav");
 if (navEl) {
   const clearNavSuppress = () => navEl.classList.remove("nav-suppress-anim");
   navEl.classList.add("nav-suppress-anim");
