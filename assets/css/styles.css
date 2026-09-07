@@ -112,6 +112,10 @@ nav {
   left: 0;
   z-index: 999;
   background-color: var(--bg-color);
+  border-bottom: 3px solid var(--color-primary-accent); /* accent bar under the nav; the */
+                                                        /* mobile dropdown continues it   */
+                                                        /* with a matching line at its    */
+                                                        /* own bottom edge                */
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -1156,7 +1160,7 @@ nav a:hover,
     flex-direction: column; /* Overrides the desktop flex row */
     gap: 0;
     position: fixed;
-    top: calc(4.5rem + 2px); /* bottom edge of the nav bar; matches .nav-inner's min-height */
+    top: calc(4.5rem + 3px); /* flush under the nav bar: .nav-inner min-height + its 3px border-bottom */
     left: 0;
     width: 100%;
     max-width: 100%;
@@ -1290,7 +1294,7 @@ nav a:hover,
   }
 
   .main-nav {
-    top: calc(6.5rem + 2px);
+    top: calc(6.5rem + 3px); /* +3px for nav's border-bottom, as in the 1150px rule */
   }
 }
 
