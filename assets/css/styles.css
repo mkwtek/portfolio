@@ -84,7 +84,10 @@ p {
                           /* tested widths, so this removes mid-word breaking entirely,  */
                           /* combined with a lower floor below, shrinking the text is    */
                           /* the acceptable trade, cutting a word in half is not.        */
-  margin-bottom: 2rem;
+  margin-bottom: 1rem; /* small gap to the card below - each section heading should sit  */
+                       /* clearly closer to its own card than to the card above it, so   */
+                       /* there's no doubt which card the heading belongs to. The larger */
+                       /* gap above comes from .section-padding.                          */
   display: inline-block; /* Prevents the margin from collapsing/disappearing */
   width: 100%; /* Ensures the title still spans the full width */
   text-align: center;
@@ -101,8 +104,9 @@ p {
 }
 
 .section-padding {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1.5rem;    /* with the previous section's 1.5rem bottom, ~3rem sits above */
+  padding-bottom: 1.5rem; /* each heading - 3x the 1rem gap below it, so the heading      */
+                          /* visibly groups with its own card, evenly on every section   */
 }
 
 /* NAVIGATION MENU */
@@ -218,8 +222,18 @@ nav a:hover,
   position: relative;
   top: -2px;
   font-size: .85em;  /* to match icon with text sizing  */
-  display: inline-block;  
+  display: inline-block;
   color: inherit; /* ensures it matches link text color */
+}
+
+/* "Opens in a new tab / another site" marker, placed after the link text on   */
+/* links that leave the portfolio for an external website. Same icon as the    */
+/* nav's Resume link; sized in em so it tracks whatever text it sits beside.   */
+.ext-icon {
+  font-size: 0.78em;
+  margin-left: 0.3em;
+  vertical-align: 0.04em;
+  color: inherit; /* follows the link's colour, including its hover state */
 }
 
 /* Desktop Nav Menu  */
@@ -545,7 +559,8 @@ nav a:hover,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-top: 2rem;
+  /* no margin-top: the heading's own 1rem margin-bottom is the whole gap, same as   */
+  /* every other section (this used to add a second 2rem, making Skills the odd one) */
 }
 
 .skill-category {
@@ -626,8 +641,8 @@ nav a:hover,
   text-align: center;
   font-size: 0.85rem;
   color: var(--color-primary-accent);
-  margin-top: -1rem; /* tighten toward the heading, which carries margin-bottom: 2rem */
-  margin-bottom: 2.5rem;
+  margin: 0 0 1rem; /* 1rem under the heading, 1rem above the cards - keeps the cards */
+                    /* the same ~1rem from the heading block as every other section  */
 }
 
 .project-container {
@@ -1149,58 +1164,45 @@ nav a:hover,
     margin-left: auto;
   }
 
-/* Mobile menu: a full-width panel flush under the nav bar that overlays the    */
-/* page (nothing below it moves). It "pulls down" on open - the panel stays put */
-/* while a clip-path reveals it top-to-bottom, like a shade being drawn down,   */
-/* with a small downward slide + fade layered on so the leading edge has some   */
-/* movement. The links then settle in from the right (.main-nav.show li). Rolls */
-/* back up in reverse on close. position:fixed (not absolute) so nav's own      */
-/* overflow:hidden can't clip it; hidden state stays out of the tab order.      */
+/* Mobile menu: a full-width panel under the nav bar that unrolls its own HEIGHT */
+/* open and closed - the panel's box genuinely grows downward from 0, the same   */
+/* mechanism Bootstrap's collapse uses on the Liberti site, which is what makes   */
+/* it read as a smooth drop rather than an on/off wipe. app.js drives the height */
+/* (max-height in px) because only JS knows the panel's natural height; the CSS  */
+/* here is the from/to plus a fallback. Overlays the page, nothing below moves.  */
+/* position:fixed so nav's overflow:hidden can't clip it. The accent line is a   */
+/* box-shadow, not a border, so it never puts a floor under the collapse.        */
   .main-nav {
     display: flex;
     flex-direction: column; /* Overrides the desktop flex row */
     gap: 0;
     position: fixed;
-    top: calc(4.5rem + 2px); /* flush under the nav bar: .nav-inner min-height + its 2px border-bottom */
+    top: calc(4.5rem + 2px); /* flush under the nav bar: .nav-inner min-height + its 2px border */
     left: 0;
     width: 100%;
     max-width: 100%;
-    max-height: calc(100vh - 4.5rem);  /* never taller than the screen... */
-    max-height: calc(100dvh - 4.5rem);
-    overflow-y: auto;   /* ...scroll inside if it somehow is (e.g. short landscape screens) */
-    overflow-x: hidden; /* contain each link's slide-in so it can't widen the page */
+    overflow: hidden;   /* clip the content while the panel height animates */
     text-align: center;
-    padding: 0 0 1rem; /* top spacing comes from the first link's own padding */
-    background-color: #fff; /* solid: this panel sits over the hero photo, so any        */
-                            /* translucency let the flowers' colour bleed behind the    */
-                            /* link text. A nav menu earns rock-solid legibility.        */
-    border-bottom: 2px solid var(--color-primary-accent); /* accent line, matches the bar above */
-    box-shadow: 0 14px 24px -10px rgba(0, 0, 0, 0.28);
+    padding: 0;         /* bottom breathing room lives on the last <li>, not here, so it */
+                        /* can't stop the collapse from reaching a true 0 height        */
+    background-color: #fff; /* solid: the panel sits over the hero photo, so translucency */
+                            /* would let the flowers' colour bleed behind the link text  */
+    box-shadow:
+      inset 0 -2px 0 0 var(--color-primary-accent), /* accent line, painted not reserved */
+      0 14px 24px -10px rgba(0, 0, 0, 0.28);
     z-index: 1010; /* above .linkedinup (1000) */
-    /* hidden: clipped to nothing from the bottom up, nudged up, transparent */
-    opacity: 0;
-    transform: translateY(-8px);
-    clip-path: inset(0 0 100% 0); /* clipped to nothing, measured from the bottom up */
+    max-height: 0;
     visibility: hidden;
-    /* clip-path drives the reveal; ease-out so it decelerates into place. The   */
-    /* visibility flip is delayed on close so the panel doesn't vanish mid-roll. */
     transition:
-      clip-path 0.34s cubic-bezier(0.33, 1, 0.68, 1),
-      transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
-      opacity 0.18s ease,
-      visibility 0s linear 0.34s;
+      max-height 0.4s cubic-bezier(0.33, 1, 0.68, 1), /* ease-out: decelerates and settles */
+      visibility 0s linear 0.4s;
   }
 
   .main-nav.show {
-    opacity: 1;
-    transform: translateY(0);
-    clip-path: inset(0 0 0% 0); /* fully revealed; 0% (not bare 0) keeps it the same unit */
-                                /* as the hidden state so the transition interpolates      */
+    max-height: 100dvh; /* fallback only - app.js overrides with the exact pixel height */
     visibility: visible;
     transition:
-      clip-path 0.34s cubic-bezier(0.33, 1, 0.68, 1),
-      transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
-      opacity 0.18s ease,
+      max-height 0.4s cubic-bezier(0.33, 1, 0.68, 1),
       visibility 0s;
   }
 
@@ -1212,6 +1214,7 @@ nav a:hover,
 
   .main-nav li:last-child {
     border-bottom: none;
+    padding-bottom: 1rem; /* breathing room below the last link, inside the panel */
   }
 
   /* Each item fades + slides in, staggered ~60ms apart, every time the dropdown opens. */
@@ -1370,13 +1373,16 @@ nav a:hover,
   }
 
   .bio-block {
-   margin-top: 3rem; /* hero gap is 0 on mobile; this keeps the "About Me" heading off the photo */
+   margin-top: 2.5rem; /* hero gap is 0 on mobile; separates the "About Me" heading from */
+                       /* the photo (photo isn't a card, so a touch more room than 1rem) */
    width: 90%;
   }
 
   /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */
   .more-about {
-    margin-top: 2rem;
+    /* no margin-top here: the section-padding already puts the standard ~3rem above  */
+    /* the heading. The extra 2rem this used to add is exactly what made the gap above */
+    /* "Recent Experience" look oversized and ambiguous on mobile.                     */
     width: 90%;
   }
 
