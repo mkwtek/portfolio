@@ -112,7 +112,7 @@ nav {
   left: 0;
   z-index: 999;
   background-color: var(--bg-color);
-  border-bottom: 3px solid var(--color-primary-accent); /* accent bar under the nav; the */
+  border-bottom: 2px solid var(--color-primary-accent); /* accent bar under the nav; the */
                                                         /* mobile dropdown continues it   */
                                                         /* with a matching line at its    */
                                                         /* own bottom edge                */
@@ -1149,18 +1149,19 @@ nav a:hover,
     margin-left: auto;
   }
 
-/* Mobile menu: a full-width panel that drops straight down flush under the nav */
-/* bar and overlays the page (nothing below it moves). The panel itself just    */
-/* fades in with a small downward nudge; the individual links do the visible    */
-/* motion, sliding in from the right one after another (.main-nav.show li,      */
-/* below). position:fixed rather than absolute so nav's own overflow:hidden     */
-/* can't clip it. Hidden state keeps it out of the tab order via visibility.    */
+/* Mobile menu: a full-width panel flush under the nav bar that overlays the    */
+/* page (nothing below it moves). It "pulls down" on open - the panel stays put */
+/* while a clip-path reveals it top-to-bottom, like a shade being drawn down,   */
+/* with a small downward slide + fade layered on so the leading edge has some   */
+/* movement. The links then settle in from the right (.main-nav.show li). Rolls */
+/* back up in reverse on close. position:fixed (not absolute) so nav's own      */
+/* overflow:hidden can't clip it; hidden state stays out of the tab order.      */
   .main-nav {
     display: flex;
     flex-direction: column; /* Overrides the desktop flex row */
     gap: 0;
     position: fixed;
-    top: calc(4.5rem + 3px); /* flush under the nav bar: .nav-inner min-height + its 3px border-bottom */
+    top: calc(4.5rem + 2px); /* flush under the nav bar: .nav-inner min-height + its 2px border-bottom */
     left: 0;
     width: 100%;
     max-width: 100%;
@@ -1173,22 +1174,34 @@ nav a:hover,
     background-color: #fff; /* solid: this panel sits over the hero photo, so any        */
                             /* translucency let the flowers' colour bleed behind the    */
                             /* link text. A nav menu earns rock-solid legibility.        */
-    border-bottom: 3px solid var(--color-primary-accent); /* accent echo of the bar above */
+    border-bottom: 2px solid var(--color-primary-accent); /* accent line, matches the bar above */
     box-shadow: 0 14px 24px -10px rgba(0, 0, 0, 0.28);
     z-index: 1010; /* above .linkedinup (1000) */
+    /* hidden: clipped to nothing from the bottom up, nudged up, transparent */
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
+    clip-path: inset(0 0 100% 0); /* clipped to nothing, measured from the bottom up */
     visibility: hidden;
-    /* visibility flips instantly on open (so links can animate) but waits out  */
-    /* the fade on close, so the panel doesn't just vanish mid-transition.      */
-    transition: opacity 0.25s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    /* clip-path drives the reveal; ease-out so it decelerates into place. The   */
+    /* visibility flip is delayed on close so the panel doesn't vanish mid-roll. */
+    transition:
+      clip-path 0.34s cubic-bezier(0.33, 1, 0.68, 1),
+      transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.18s ease,
+      visibility 0s linear 0.34s;
   }
 
   .main-nav.show {
     opacity: 1;
     transform: translateY(0);
+    clip-path: inset(0 0 0% 0); /* fully revealed; 0% (not bare 0) keeps it the same unit */
+                                /* as the hidden state so the transition interpolates      */
     visibility: visible;
-    transition: opacity 0.25s ease, transform 0.3s ease, visibility 0s;
+    transition:
+      clip-path 0.34s cubic-bezier(0.33, 1, 0.68, 1),
+      transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.18s ease,
+      visibility 0s;
   }
 
   .main-nav li {
@@ -1253,10 +1266,16 @@ nav a:hover,
   }
 }
 
-/* Reduced-motion guard for the mobile dropdown item stagger (defined in the 1150px    */
-/* block above). Separate top-level block because @media can't nest; placed after that */
-/* block so it wins the equal-specificity cascade tie and shows all items at once.     */
+/* Reduced-motion guard for the mobile dropdown (panel reveal + item stagger,          */
+/* both defined in the 1150px block above). Separate top-level block because @media     */
+/* can't nest; placed after that block so it wins the equal-specificity cascade tie     */
+/* and just snaps the menu open/closed with no motion.                                  */
 @media (prefers-reduced-motion: reduce) {
+  .main-nav,
+  .main-nav.show {
+    transition: none;
+  }
+
   .main-nav.show li {
     animation: none;
     opacity: 1;
@@ -1294,7 +1313,7 @@ nav a:hover,
   }
 
   .main-nav {
-    top: calc(6.5rem + 3px); /* +3px for nav's border-bottom, as in the 1150px rule */
+    top: calc(6.5rem + 2px); /* +2px for nav's border-bottom, as in the 1150px rule */
   }
 }
 

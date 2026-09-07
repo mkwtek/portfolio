@@ -39,28 +39,28 @@ navLink.forEach((link) =>
   })
 );
 
-// --- Mobile nav: only play the drop-in/out transition for a real burger tap ---
-// It otherwise also fires on first paint and whenever the viewport crosses the
-// 1150px breakpoint (toggling Chrome DevTools' device toolbar, or dragging a
-// desktop window narrower), because both move the menu between its shown and
-// hidden states - so you see it flash open then slide away. Fix: keep the
-// transition off (.nav-suppress-anim on <nav>, see styles.css), switch it on
-// only after the first frame has painted, then off again for a beat around any
-// resize.
+// --- Mobile nav: keep the open/close animation for real burger taps only ---
+// The dropdown's transition otherwise also fires on first paint and when the
+// viewport crosses the 1150px breakpoint (toggling Chrome DevTools' device
+// toolbar, or resizing a desktop window past it) - both move the menu between
+// its shown and hidden states, so you'd see it flash. Fix: suppress the
+// transition (.nav-suppress-anim on <nav>, see styles.css) for the first frame,
+// and briefly whenever that one breakpoint is actually crossed. matchMedia,
+// NOT a plain resize listener - mobile browsers fire resize constantly as the
+// URL bar shows/hides on scroll, and that was swallowing the open animation
+// almost every time.
 const navEl = document.querySelector("nav");
 if (navEl) {
+  const clearNavSuppress = () => navEl.classList.remove("nav-suppress-anim");
   navEl.classList.add("nav-suppress-anim");
-  requestAnimationFrame(() =>
-    requestAnimationFrame(() => navEl.classList.remove("nav-suppress-anim"))
-  );
-  let navResizeTimer;
-  window.addEventListener("resize", () => {
+  requestAnimationFrame(() => requestAnimationFrame(clearNavSuppress));
+  setTimeout(clearNavSuppress, 200); // fallback if rAF is throttled (e.g. loaded in a background tab)
+
+  let navMqTimer;
+  window.matchMedia("(min-width: 1151px)").addEventListener("change", () => {
     navEl.classList.add("nav-suppress-anim");
-    clearTimeout(navResizeTimer);
-    navResizeTimer = setTimeout(
-      () => navEl.classList.remove("nav-suppress-anim"),
-      300
-    );
+    clearTimeout(navMqTimer);
+    navMqTimer = setTimeout(clearNavSuppress, 250);
   });
 }
 
