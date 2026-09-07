@@ -116,6 +116,16 @@ nav {
   overflow: hidden;
 }
 
+/* app.js sets .nav-suppress-anim on <nav> for the first paint and briefly     */
+/* around every viewport resize, so the mobile menu's drop/fade transition     */
+/* only plays for a real burger tap - not on load, and not when the viewport   */
+/* crosses the 1150px breakpoint (e.g. toggling Chrome DevTools' device        */
+/* toolbar, or dragging a desktop window narrower), both of which otherwise    */
+/* animate the menu between its shown and hidden states and read as a flash.   */
+nav.nav-suppress-anim .main-nav {
+  transition: none !important;
+}
+
 .nav-inner {
   max-width: 68.75rem;
   margin: 0 auto;
@@ -327,15 +337,16 @@ nav a:hover,
   }
 }
 
-/* Mobile dropdown items: fade + small downward slide as the menu opens */
+/* Mobile dropdown items: fade in while sliding in from the right, staggered as
+   the menu opens. Matches the site's calm slide style, no bounce. */
 @keyframes navDropdownItemIn {
   0% {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateX(28px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
@@ -1134,39 +1145,46 @@ nav a:hover,
     margin-left: auto;
   }
 
-/* STEP 1: HIDE the desktop layout properties when screen is small (prevents flash) */
+/* Mobile menu: a full-width panel that drops straight down flush under the nav */
+/* bar and overlays the page (nothing below it moves). The panel itself just    */
+/* fades in with a small downward nudge; the individual links do the visible    */
+/* motion, sliding in from the right one after another (.main-nav.show li,      */
+/* below). position:fixed rather than absolute so nav's own overflow:hidden     */
+/* can't clip it. Hidden state keeps it out of the tab order via visibility.    */
   .main-nav {
     display: flex;
-    visibility: hidden;
-    flex-direction: column; /* Overrides the desktop flex */
-    gap: 0rem;
-    position: fixed; /* Allows mobile positioning */
-    top: calc(4.5rem + 2px); /* matches nav-inner's reduced min-height above */
-    left: 50%;
-    transform: translateX(200%); /* Off-screen hide to the right */
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
-    width: 75%; /* was 80%: at ~360px wide, 80% (288px) put the dropdown's right edge past */
-                /* the social widget's left edge by about 2px, causing the corner overlap. */
-                /* 75% (270px) creates real clearance at that width.                       */
-    max-width: 300px;
+    flex-direction: column; /* Overrides the desktop flex row */
+    gap: 0;
+    position: fixed;
+    top: calc(4.5rem + 2px); /* bottom edge of the nav bar; matches .nav-inner's min-height */
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - 4.5rem);  /* never taller than the screen... */
+    max-height: calc(100dvh - 4.5rem);
+    overflow-y: auto;   /* ...scroll inside if it somehow is (e.g. short landscape screens) */
+    overflow-x: hidden; /* contain each link's slide-in so it can't widen the page */
     text-align: center;
-    border-radius: 8px;
-    padding: 1.5rem 0;
-    box-shadow: 0 3px 10px var(--primary-shadow); /* matched to .card's shadow so it's visually consistent now that the dropdown is a similar width to the page's content boxes */
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
-    z-index: 1010; /* kept higher z index than .linkedinup which is 1000 */
+    padding: 0 0 1rem; /* top spacing comes from the first link's own padding */
+    background-color: #fff; /* solid: this panel sits over the hero photo, so any        */
+                            /* translucency let the flowers' colour bleed behind the    */
+                            /* link text. A nav menu earns rock-solid legibility.        */
+    border-bottom: 3px solid var(--color-primary-accent); /* accent echo of the bar above */
+    box-shadow: 0 14px 24px -10px rgba(0, 0, 0, 0.28);
+    z-index: 1010; /* above .linkedinup (1000) */
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    /* visibility flips instantly on open (so links can animate) but waits out  */
+    /* the fade on close, so the panel doesn't just vanish mid-transition.      */
+    transition: opacity 0.25s ease, transform 0.3s ease, visibility 0s linear 0.3s;
   }
 
-/* STEP 2: SHOW the mobile menu when the burger is clicked (by re-applying display:flex via .show) */
   .main-nav.show {
-    visibility: visible;
-    display: flex; /* Make it visible for the slide-in effect */
-    transform: translateX(-50%); /* Slide menu to center when .show is added */
     opacity: 1;
+    transform: translateY(0);
     visibility: visible;
+    transition: opacity 0.25s ease, transform 0.3s ease, visibility 0s;
   }
 
   .main-nav li {

@@ -39,6 +39,31 @@ navLink.forEach((link) =>
   })
 );
 
+// --- Mobile nav: only play the drop-in/out transition for a real burger tap ---
+// It otherwise also fires on first paint and whenever the viewport crosses the
+// 1150px breakpoint (toggling Chrome DevTools' device toolbar, or dragging a
+// desktop window narrower), because both move the menu between its shown and
+// hidden states - so you see it flash open then slide away. Fix: keep the
+// transition off (.nav-suppress-anim on <nav>, see styles.css), switch it on
+// only after the first frame has painted, then off again for a beat around any
+// resize.
+const navEl = document.querySelector("nav");
+if (navEl) {
+  navEl.classList.add("nav-suppress-anim");
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => navEl.classList.remove("nav-suppress-anim"))
+  );
+  let navResizeTimer;
+  window.addEventListener("resize", () => {
+    navEl.classList.add("nav-suppress-anim");
+    clearTimeout(navResizeTimer);
+    navResizeTimer = setTimeout(
+      () => navEl.classList.remove("nav-suppress-anim"),
+      300
+    );
+  });
+}
+
 // Contact form: submit via fetch so the visitor never leaves the site or sees Formspree's page
 const contactForm = document.querySelector("#contact-form");
 const formSuccess = document.querySelector("#form-success");
