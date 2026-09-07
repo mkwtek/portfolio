@@ -23,8 +23,10 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
-  <!--CSS Styles -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
+  <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
+  <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -567,8 +569,8 @@
     </p>
   </footer>
 
-  <!-- Website scripts -->
-  <script src="assets/js/app.js"></script>
+  <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
+  <script src="assets/js/app.js?v=1"></script>
 </body>
 
 </html>
