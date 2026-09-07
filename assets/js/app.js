@@ -18,58 +18,33 @@ scrollUp.addEventListener("click", () => {
 
 // Nav hamburger selections
 const burger = document.querySelector("#burger-menu");
-const ul = document.querySelector(".main-nav");
+const navWrap = document.querySelector(".main-nav-wrap");
 
-// --- Mobile dropdown: animate the panel's own height open and closed ---
-// The panel's box genuinely grows from 0 to its natural height (and back), the
-// same mechanism Bootstrap's collapse uses - that's what makes it read as a
-// smooth drop instead of an on/off wipe. Only JS knows the natural height, so
-// JS sets max-height in px; CSS transitions it. Once open, the px constraint is
-// released so a device rotation / taller viewport can't clip the menu.
-let navReleaseTimer;
-
-function openNav() {
-  ul.classList.add("show");
-  burger.classList.add("active");
-  ul.style.maxHeight = ul.scrollHeight + "px";
-  clearTimeout(navReleaseTimer);
-  navReleaseTimer = setTimeout(() => {
-    if (ul.classList.contains("show")) {
-      ul.style.maxHeight = "none";
-      ul.style.overflowY = "auto"; // let a very tall menu scroll on short screens
-    }
-  }, 450); // just past the 0.4s max-height transition
+// --- Mobile dropdown ---
+// The open/close height animation is pure CSS (.main-nav-wrap is a 1-row grid
+// going 0fr <-> 1fr, see styles.css). JS only toggles the .show class.
+function setNav(open) {
+  navWrap.classList.toggle("show", open);
+  burger.classList.toggle("active", open);
 }
 
-function closeNav() {
-  clearTimeout(navReleaseTimer);
-  // A transition from `none`/`auto` won't animate - pin the real height first.
-  ul.style.maxHeight = ul.scrollHeight + "px";
-  ul.style.overflowY = "hidden";
-  void ul.offsetHeight; // force reflow so the pinned height registers
-  ul.classList.remove("show");
-  burger.classList.remove("active");
-  ul.style.maxHeight = "0px";
-}
-
-burger.addEventListener("click", () => {
-  ul.classList.contains("show") ? closeNav() : openNav();
-});
+burger.addEventListener("click", () =>
+  setNav(!navWrap.classList.contains("show"))
+);
 
 // Select nav links
 const navLink = document.querySelectorAll(".nav-link");
 
 // Close the dropdown when a link inside it is tapped
 navLink.forEach((link) =>
-  link.addEventListener("click", () => {
-    if (ul.classList.contains("show")) closeNav();
-  })
+  link.addEventListener("click", () => setNav(false))
 );
 
 // --- Keep the open/close animation for real burger taps only ---
 // It otherwise also fires on first paint and when the viewport crosses the
 // 1150px breakpoint (Chrome DevTools' device toolbar, or resizing a desktop
-// window past it). Suppress the transition (.nav-suppress-anim on <nav>, see
+// window past it) - both move the menu between its shown and hidden states, so
+// you'd see it flash. Suppress the transition (.nav-suppress-anim on <nav>, see
 // styles.css) for the first frame, and briefly whenever that breakpoint is
 // crossed - matchMedia, not a plain resize listener, since mobile browsers fire
 // resize constantly as the URL bar shows/hides on scroll.
@@ -78,17 +53,11 @@ if (navEl) {
   const clearNavSuppress = () => navEl.classList.remove("nav-suppress-anim");
   navEl.classList.add("nav-suppress-anim");
   requestAnimationFrame(() => requestAnimationFrame(clearNavSuppress));
-  setTimeout(clearNavSuppress, 200); // fallback if rAF is throttled (e.g. loaded in a background tab)
+  setTimeout(clearNavSuppress, 200); // fallback if rAF is throttled (e.g. background tab on load)
 
   let navMqTimer;
   window.matchMedia("(min-width: 1151px)").addEventListener("change", (e) => {
-    if (e.matches) {
-      // back to the desktop row: drop any inline collapse styles the mobile menu left
-      ul.style.maxHeight = "";
-      ul.style.overflowY = "";
-      ul.classList.remove("show");
-      burger.classList.remove("active");
-    }
+    if (e.matches) setNav(false); // leaving mobile: make sure the menu isn't left open
     navEl.classList.add("nav-suppress-anim");
     clearTimeout(navMqTimer);
     navMqTimer = setTimeout(clearNavSuppress, 250);

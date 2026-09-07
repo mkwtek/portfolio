@@ -45,6 +45,10 @@
         <h1><a href="#">MATT <span class="nav-lastname">WHITCOMB</span></a></h1>
         <p class="nav-tagline">Web Developer</p>
       </div><!-- ./nav-title -->
+      <!-- .main-nav-wrap is the collapsing container on mobile (see styles.css); on -->
+      <!-- desktop it's display:contents, so the layout is exactly as if it weren't  -->
+      <!-- here and .main-nav is a direct flex child of .nav-inner.                  -->
+      <div class="main-nav-wrap">
       <ul class="main-nav">
         <li><a href="#about" class="nav-link"><span class="nav-link-text">About</span></a></li>
         <li><a href="#recent-experience" class="nav-link"><span class="nav-link-text">Experience</span></a></li>
@@ -54,6 +58,7 @@
         <li><a href="#contact" class="nav-link"><span class="nav-link-text">Contact</span></a></li>
         <li><a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link external-link"><span class="nav-link-text">Resume</span><i class="bi bi-box-arrow-up-right"></i></a></li>
       </ul>
+      </div><!-- ./main-nav-wrap -->
       <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation menu">
         <span class="bar"></span>
         <span class="bar"></span>

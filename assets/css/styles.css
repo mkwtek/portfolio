@@ -125,12 +125,11 @@ nav {
 }
 
 /* app.js sets .nav-suppress-anim on <nav> for the first paint and briefly     */
-/* around every viewport resize, so the mobile menu's drop/fade transition     */
-/* only plays for a real burger tap - not on load, and not when the viewport   */
-/* crosses the 1150px breakpoint (e.g. toggling Chrome DevTools' device        */
-/* toolbar, or dragging a desktop window narrower), both of which otherwise    */
-/* animate the menu between its shown and hidden states and read as a flash.   */
-nav.nav-suppress-anim .main-nav {
+/* when the viewport crosses the 1150px breakpoint (e.g. toggling Chrome        */
+/* DevTools' device toolbar), so the mobile menu's open/close transition only   */
+/* plays for a real burger tap - not on load, and not on a breakpoint cross,    */
+/* which would otherwise animate the menu between its shown and hidden states.  */
+nav.nav-suppress-anim .main-nav-wrap {
   transition: none !important;
 }
 
@@ -237,6 +236,13 @@ nav a:hover,
 }
 
 /* Desktop Nav Menu  */
+/* The wrapper is transparent to layout on desktop - .main-nav stays a direct  */
+/* flex child of .nav-inner, exactly as before. On mobile (1150px block) the    */
+/* wrapper becomes the collapsing container that animates the menu open/closed. */
+.main-nav-wrap {
+    display: contents;
+}
+
 .main-nav {
     display: flex; /* Makes the menu horizontal on desktop */
     gap: 1.9rem;
@@ -1164,46 +1170,55 @@ nav a:hover,
     margin-left: auto;
   }
 
-/* Mobile menu: a full-width panel under the nav bar that unrolls its own HEIGHT */
-/* open and closed - the panel's box genuinely grows downward from 0, the same   */
-/* mechanism Bootstrap's collapse uses on the Liberti site, which is what makes   */
-/* it read as a smooth drop rather than an on/off wipe. app.js drives the height */
-/* (max-height in px) because only JS knows the panel's natural height; the CSS  */
-/* here is the from/to plus a fallback. Overlays the page, nothing below moves.  */
-/* position:fixed so nav's overflow:hidden can't clip it. The accent line is a   */
-/* box-shadow, not a border, so it never puts a floor under the collapse.        */
-  .main-nav {
-    display: flex;
-    flex-direction: column; /* Overrides the desktop flex row */
-    gap: 0;
+/* Mobile menu: a full-width panel under the nav bar that unrolls its own HEIGHT  */
+/* open and closed. The height animation is a pure-CSS grid trick - the wrapper   */
+/* is a 1-row grid whose row goes from 0fr (collapsed) to 1fr (the menu's natural */
+/* height); the browser interpolates the real pixel heights between them, so it   */
+/* tracks the content exactly with no measured value, no target guess, and no     */
+/* dead zone (which is what made the earlier max-height version stall partway).   */
+/* .main-nav inside it just needs overflow:hidden + min-height:0 to be clippable. */
+/* position:fixed so nav's overflow:hidden can't clip it; the accent line is a    */
+/* box-shadow so it never puts a floor under the collapse.                        */
+  .main-nav-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
     position: fixed;
     top: calc(4.5rem + 2px); /* flush under the nav bar: .nav-inner min-height + its 2px border */
     left: 0;
     width: 100%;
     max-width: 100%;
-    overflow: hidden;   /* clip the content while the panel height animates */
-    text-align: center;
-    padding: 0;         /* bottom breathing room lives on the last <li>, not here, so it */
-                        /* can't stop the collapse from reaching a true 0 height        */
     background-color: #fff; /* solid: the panel sits over the hero photo, so translucency */
                             /* would let the flowers' colour bleed behind the link text  */
     box-shadow:
       inset 0 -2px 0 0 var(--color-primary-accent), /* accent line, painted not reserved */
       0 14px 24px -10px rgba(0, 0, 0, 0.28);
     z-index: 1010; /* above .linkedinup (1000) */
-    max-height: 0;
     visibility: hidden;
     transition:
-      max-height 0.4s cubic-bezier(0.33, 1, 0.68, 1), /* ease-out: decelerates and settles */
-      visibility 0s linear 0.4s;
+      grid-template-rows 0.36s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0.36s;
   }
 
-  .main-nav.show {
-    max-height: 100dvh; /* fallback only - app.js overrides with the exact pixel height */
+  .main-nav-wrap.show {
+    grid-template-rows: 1fr;
     visibility: visible;
     transition:
-      max-height 0.4s cubic-bezier(0.33, 1, 0.68, 1),
+      grid-template-rows 0.36s cubic-bezier(0.4, 0, 0.2, 1),
       visibility 0s;
+  }
+
+  .main-nav {
+    display: flex;
+    flex-direction: column; /* Overrides the desktop flex row */
+    gap: 0;
+    min-height: 0;    /* grid item: let it shrink below its content so 0fr can reach 0 */
+    overflow: hidden; /* clip the content while the row height animates */
+    text-align: center;
+    padding: 0;       /* bottom breathing room is on the last <li> */
+    background: transparent; /* the wrapper paints the panel background now */
+    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
   }
 
   .main-nav li {
@@ -1217,19 +1232,18 @@ nav a:hover,
     padding-bottom: 1rem; /* breathing room below the last link, inside the panel */
   }
 
-  /* Each item fades + slides in, staggered ~60ms apart, every time the dropdown opens. */
-  /* Uses .show so it replays on each open; `both` fill keeps items hidden until their  */
-  /* turn. Placed after the base .main-nav li:nth-child delays so it wins the tie.      */
-  .main-nav.show li {
+  /* Each item fades + slides in from the right, staggered ~60ms apart, every time */
+  /* the menu opens. `both` fill keeps each item hidden until its turn.            */
+  .main-nav-wrap.show li {
     animation: navDropdownItemIn 0.3s ease-out both;
   }
-  .main-nav.show li:nth-child(1) { animation-delay: 0.05s; }
-  .main-nav.show li:nth-child(2) { animation-delay: 0.11s; }
-  .main-nav.show li:nth-child(3) { animation-delay: 0.17s; }
-  .main-nav.show li:nth-child(4) { animation-delay: 0.23s; }
-  .main-nav.show li:nth-child(5) { animation-delay: 0.29s; }
-  .main-nav.show li:nth-child(6) { animation-delay: 0.35s; }
-  .main-nav.show li:nth-child(7) { animation-delay: 0.41s; }
+  .main-nav-wrap.show li:nth-child(1) { animation-delay: 0.05s; }
+  .main-nav-wrap.show li:nth-child(2) { animation-delay: 0.11s; }
+  .main-nav-wrap.show li:nth-child(3) { animation-delay: 0.17s; }
+  .main-nav-wrap.show li:nth-child(4) { animation-delay: 0.23s; }
+  .main-nav-wrap.show li:nth-child(5) { animation-delay: 0.29s; }
+  .main-nav-wrap.show li:nth-child(6) { animation-delay: 0.35s; }
+  .main-nav-wrap.show li:nth-child(7) { animation-delay: 0.41s; }
 
   /* Padding moved here from .main-nav li: the gray hover background is painted on the  */
   /* <li>, but the actual clickable/tappable element is the <a> inside it. If only the  */
@@ -1274,12 +1288,12 @@ nav a:hover,
 /* can't nest; placed after that block so it wins the equal-specificity cascade tie     */
 /* and just snaps the menu open/closed with no motion.                                  */
 @media (prefers-reduced-motion: reduce) {
-  .main-nav,
-  .main-nav.show {
+  .main-nav-wrap,
+  .main-nav-wrap.show {
     transition: none;
   }
 
-  .main-nav.show li {
+  .main-nav-wrap.show li {
     animation: none;
     opacity: 1;
     transform: none;
@@ -1315,7 +1329,7 @@ nav a:hover,
     min-height: 6.5rem;
   }
 
-  .main-nav {
+  .main-nav-wrap {
     top: calc(6.5rem + 2px); /* +2px for nav's border-bottom, as in the 1150px rule */
   }
 }
