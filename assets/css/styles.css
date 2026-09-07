@@ -32,6 +32,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Every in-page nav target clears the sticky nav bar when scrolled to. Without this, */
+/* clicking e.g. Skills or Web Projects lands with the heading tucked up behind the   */
+/* fixed nav. :where() keeps specificity at 0 so it never fights other rules.         */
+:where(#about, #recent-experience, #skills, #projects-websites, #independent-projects, #contact) {
+  scroll-margin-top: 7rem;
+}
+
 /* CSS RESETS */
 * {
   margin: 0;
@@ -320,6 +327,18 @@ nav a:hover,
   }
 }
 
+/* Mobile dropdown items: fade + small downward slide as the menu opens */
+@keyframes navDropdownItemIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .nav-title h1 {
   opacity: 0;
   animation: navNameFadeIn 0.4s ease-out 0.1s forwards;
@@ -342,6 +361,7 @@ nav a:hover,
 .main-nav li:nth-child(4) { animation-delay: 0.69s; }
 .main-nav li:nth-child(5) { animation-delay: 0.77s; }
 .main-nav li:nth-child(6) { animation-delay: 0.85s; }
+.main-nav li:nth-child(7) { animation-delay: 0.93s; }
 
 /* Respect the OS-level reduced motion preference: show everything instantly, no animation */
 @media (prefers-reduced-motion: reduce) {
@@ -389,6 +409,13 @@ nav a:hover,
   /* object-fit: contain; */
   object-position: center;
   border-radius: 8px;
+}
+
+/* Wrapper holding the "About Me" heading + the bio card, so the heading now sits    */
+/* outside the card (consistent with every other section) while the two still rise   */
+/* into view together as one unit. */
+.bio-block {
+  width: 100%;
 }
 
 .bio {
@@ -440,7 +467,7 @@ nav a:hover,
   animation: heroZoomIn 0.6s ease-out 0.1s forwards;
 }
 
-.bio {
+.bio-block {
   opacity: 0;
   animation: bioCardRiseIn 0.6s ease-out 0.1s forwards;
 }
@@ -462,7 +489,7 @@ nav a:hover,
 
 @media (prefers-reduced-motion: reduce) {
   .hero-img-mask,
-  .bio,
+  .bio-block,
   .bio-title,
   .bio-text {
     animation: none;
@@ -575,6 +602,17 @@ nav a:hover,
 
 .projects-title {
   text-align: center;
+}
+
+/* Small muted line under "Website Development & Client Consultation" disclosing that   */
+/* those client sites were built as an employee, not solo freelance work. Deliberately  */
+/* understated so it reads as a note, not a competing subheading.                       */
+.projects-disclosure {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-primary-accent);
+  margin-top: -1rem; /* tighten toward the heading, which carries margin-bottom: 2rem */
+  margin-bottom: 2.5rem;
 }
 
 .project-container {
@@ -986,19 +1024,20 @@ nav a:hover,
   /* wins when specificity is equal), regardless of what value was set here. Moved here   */
   /* to actually win; worth remembering if a mobile override ever seems to "not apply."   */
   .scroll-up {
-    /* This icon(35.2px at 2.2rem) + its own padding(2*2=4) = 39.2px tap target width,   */
-    /* half-width 19.6. Matching .linkedinup's new 23px center-from-edge needs right:3.4px */
-    right: 3.4px;
+    /* Align the arrow's box with the socials widget above, which sits at right: 4px. No  */
+    /* padding here so the 2.4rem artwork itself lines up edge-for-edge with the ~38px    */
+    /* white socials box, rather than sitting inset from it.                              */
+    right: 4px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 2px; /* matches .social-link's reduced padding above, for consistency */
+    padding: 0;
   }
 
   .up-arrow {
-    width: 2.2rem; /* slightly larger than the social icons, to visually match them since */
-                   /* this artwork reads a bit smaller than the others at the same size    */
-    height: 2.2rem;
+    width: 2.4rem; /* widened from 2.2rem so the circle's width matches the socials box   */
+                   /* (~38px) directly above it, instead of reading a few px narrower     */
+    height: 2.4rem;
   }
 }
 /* End Scroll to top icon */
@@ -1107,7 +1146,7 @@ nav a:hover,
     transform: translateX(200%); /* Off-screen hide to the right */
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.5s ease-in-out, opacity 0.3 ease-in-out;
+    transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
     width: 75%; /* was 80%: at ~360px wide, 80% (288px) put the dropdown's right edge past */
                 /* the social widget's left edge by about 2px, causing the corner overlap. */
                 /* 75% (270px) creates real clearance at that width.                       */
@@ -1133,7 +1172,26 @@ nav a:hover,
   .main-nav li {
     margin: 0; /* mobile nav items vertical spacing */
     transition: background-color 0.3s;
+    border-bottom: 1px solid hsla(190, 70%, 30%, 0.15); /* subtle accent divider between items */
   }
+
+  .main-nav li:last-child {
+    border-bottom: none;
+  }
+
+  /* Each item fades + slides in, staggered ~60ms apart, every time the dropdown opens. */
+  /* Uses .show so it replays on each open; `both` fill keeps items hidden until their  */
+  /* turn. Placed after the base .main-nav li:nth-child delays so it wins the tie.      */
+  .main-nav.show li {
+    animation: navDropdownItemIn 0.3s ease-out both;
+  }
+  .main-nav.show li:nth-child(1) { animation-delay: 0.05s; }
+  .main-nav.show li:nth-child(2) { animation-delay: 0.11s; }
+  .main-nav.show li:nth-child(3) { animation-delay: 0.17s; }
+  .main-nav.show li:nth-child(4) { animation-delay: 0.23s; }
+  .main-nav.show li:nth-child(5) { animation-delay: 0.29s; }
+  .main-nav.show li:nth-child(6) { animation-delay: 0.35s; }
+  .main-nav.show li:nth-child(7) { animation-delay: 0.41s; }
 
   /* Padding moved here from .main-nav li: the gray hover background is painted on the  */
   /* <li>, but the actual clickable/tappable element is the <a> inside it. If only the  */
@@ -1170,6 +1228,17 @@ nav a:hover,
 
   .burger-menu {
     display: block;
+  }
+}
+
+/* Reduced-motion guard for the mobile dropdown item stagger (defined in the 1150px    */
+/* block above). Separate top-level block because @media can't nest; placed after that */
+/* block so it wins the equal-specificity cascade tie and shows all items at once.     */
+@media (prefers-reduced-motion: reduce) {
+  .main-nav.show li {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -1236,7 +1305,7 @@ nav a:hover,
   }
 
   .hero,
-  .bio,
+  .bio-block,
   .more-about,
   .contact-form-container,
   .skills,
@@ -1259,8 +1328,8 @@ nav a:hover,
                    /* headshot oddly depending on framing                                */
   }
 
-  .bio {
-   margin-top: 3rem;
+  .bio-block {
+   margin-top: 3rem; /* hero gap is 0 on mobile; this keeps the "About Me" heading off the photo */
    width: 90%;
   }
 
@@ -1288,6 +1357,9 @@ nav a:hover,
   .projects-container {
     align-items: center;
     flex-direction: column;
+    justify-content: flex-start; /* the base rule's space-between is for the desktop row; */
+                                 /* once this is a column, lean on `gap` alone for even   */
+                                 /* vertical spacing between the stacked cards            */
     margin: 0 auto;
   }
 
