@@ -556,6 +556,17 @@ nav a:hover,
   justify-content: center;
 }
 
+/* Sub-heading inside a role entry - used by the self-employed entry, which     */
+/* covers two separate ventures (freelance web dev, and an e-commerce business) */
+/* under one time period.                                                       */
+.subrole {
+  margin-top: 1.5rem;
+}
+
+.subrole strong {
+  color: var(--color-primary-accent);
+}
+
 /* TECHNICAL SKILLS SECTION */
 .skills {
   text-align: center;
