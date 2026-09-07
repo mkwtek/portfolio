@@ -38,6 +38,21 @@
 
 <body>
 
+  <!-- Runs before any section is parsed. The nav links are plain "#section"    -->
+  <!-- anchors, so clicking one leaves e.g. "#contact" in the address bar, and  -->
+  <!-- the browser jumps to it on every later load - a plain refresh sends you  -->
+  <!-- back to whatever section you last opened, even after scrolling to top.   -->
+  <!-- Take manual control: remember any hash the page was opened with, strip   -->
+  <!-- it from the URL before the browser can act on it, then let app.js scroll -->
+  <!-- to it once (for genuine deep links) after layout settles.                -->
+  <script>
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.__initialHash = location.hash.slice(1);
+    if (window.__initialHash) {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+  </script>
+
   <!-- Navbar -->
   <nav>
     <div class="nav-inner">

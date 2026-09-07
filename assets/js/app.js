@@ -48,10 +48,45 @@ burger.addEventListener("click", () =>
 // Select nav links
 const navLink = document.querySelectorAll(".nav-link");
 
-// Close the dropdown when a link inside it is tapped
-navLink.forEach((link) =>
-  link.addEventListener("click", () => setNav(false))
-);
+// Nav-link clicks: close the mobile menu, and for the on-page section links take
+// over the scroll so no "#section" is left in the address bar (that hash is what
+// makes a later refresh jump back to that section). CSS scroll-margin-top still
+// applies to scrollIntoView, so the landing position is unchanged.
+navLink.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    setNav(false);
+    const href = link.getAttribute("href") || "";
+    if (!href.startsWith("#")) return; // external link (Resume) - leave it alone
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// Logo: scroll to the top without leaving a bare "#" in the URL
+const navLogo = document.querySelector(".nav-title a");
+if (navLogo) {
+  navLogo.addEventListener("click", (e) => {
+    e.preventDefault();
+    setNav(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+// Genuine deep link (opened with #section): the inline script in <body> stripped
+// the hash before the browser could jump to it; scroll there once here, after
+// `load` (+ a short beat so lazy images above the target have taken their space).
+// behavior:"instant" so it doesn't slow-scroll down the page under the CSS
+// scroll-behavior:smooth. A plain refresh had no meaningful hash - stays at top.
+if (window.__initialHash) {
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      const target = document.getElementById(window.__initialHash);
+      if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
+    }, 50);
+  });
+}
 
 // Keep the panel aligned if the nav height changes (viewport width crossing a
 // font-size threshold, or the name wrapping to two lines under 350px). rAF-
