@@ -509,6 +509,7 @@ nav a:hover,
 .main-nav li:nth-child(5) { animation-delay: 0.77s; }
 .main-nav li:nth-child(6) { animation-delay: 0.85s; }
 .main-nav li:nth-child(7) { animation-delay: 0.93s; }
+.main-nav li:nth-child(8) { animation-delay: 1.01s; }
 
 /* Respect the OS-level reduced motion preference: show everything instantly, no animation */
 @media (prefers-reduced-motion: reduce) {
@@ -808,12 +809,20 @@ nav a:hover,
   margin-bottom: 0.9rem;
 }
 
+/* Centered lead-in sitting directly above the scorecards box */
+.scorecards-lead {
+  text-align: center;
+  color: var(--color-primary-accent);
+  font-weight: var(--bold-font);
+  margin: 1.4rem 0 0.85rem;
+}
+
 /* Inset panel that holds the two scorecards */
 .scorecards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
-  margin: 1.5rem 0;
+  margin: 0 0 1.5rem;
   padding: 1.25rem;
   background-color: hsl(190, 30%, 97%);
   border: 1px solid hsl(190, 25%, 90%);
@@ -1753,6 +1762,7 @@ nav a:hover,
   .main-nav-wrap.show li:nth-child(5) { animation-delay: 0.29s; }
   .main-nav-wrap.show li:nth-child(6) { animation-delay: 0.35s; }
   .main-nav-wrap.show li:nth-child(7) { animation-delay: 0.41s; }
+  .main-nav-wrap.show li:nth-child(8) { animation-delay: 0.47s; }
 
   /* Padding moved here from .main-nav li: the gray hover background is painted on the  */
   /* <li>, but the actual clickable/tappable element is the <a> inside it. If only the  */
