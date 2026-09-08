@@ -82,7 +82,10 @@ function positionNavWrap() {
     navWrap.style.top = navEl.getBoundingClientRect().bottom + "px";
   }
 }
-positionNavWrap();
+// Defer the first measurement past the initial layout/paint so it doesn't force
+// a synchronous reflow while the page is still being laid out. setNav(true) and
+// the resize handler keep it accurate after that; the panel isn't visible yet.
+requestAnimationFrame(positionNavWrap);
 
 // --- Mobile dropdown ---
 // The open/close height animation is pure CSS (.main-nav-wrap is a 1-row grid

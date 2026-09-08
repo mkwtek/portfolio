@@ -12,30 +12,31 @@
   <meta property="og:title" content="Matt Whitcomb, Web Developer" />
   <meta property="og:description" content="Web developer and technology consultant focused on accessible, fast, well-tested websites for small businesses and nonprofits." />
   <meta property="og:url" content="https://mkwtek.github.io/portfolio/" />
-  <meta property="og:image" content="https://mkwtek.github.io/portfolio/assets/images/matt.jpeg" />
+  <meta property="og:image" content="https://mkwtek.github.io/portfolio/assets/images/matt-1400.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Preconnect: establishes DNS/TLS early for the CDNs below, before the actual -->
-  <!-- resource requests happen, shaving round-trip time off each one.            -->
+  <!-- Preconnect: establishes DNS/TLS early for Google Fonts, before the actual -->
+  <!-- resource requests happen, shaving round-trip time off each one.           -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
   <!-- Roboto font stylesheet: moved here from an @import at the top of styles.css. -->
   <!-- @import is render-blocking in a different, worse way than a <link> tag: the  -->
   <!-- browser must download and parse the whole CSS file before it even discovers -->
   <!-- the import, then fetch a second stylesheet, all serially. A <link> here gets -->
   <!-- discovered immediately while the HTML itself is still being parsed.         -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap" rel="stylesheet" />
+  <!-- 400 + 900 only. The CSS asks for weight 700 but nothing italic is used, so -->
+  <!-- dropping the (unused) italic file leaves the browser matching 700 to 900,  -->
+  <!-- exactly as it did before - no visual change, one less font download.       -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet" />
 
-  <!-- Bootstrap for Icons -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Icons are self-hosted as CSS masks in styles.css (see ".bi"), no icon font. -->
 
 
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=13" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=14" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -104,7 +105,11 @@
     <section class="hero section-padding" id="about">
 
       <div class="hero-img-mask">
-        <img src="assets/images/matt.jpeg" alt="Matt Whitcomb" loading="lazy" class="hero-img" />
+        <!-- Hero is the LCP element: eager, high priority, WebP with a JPEG fallback. -->
+        <picture>
+          <source srcset="assets/images/matt.webp" type="image/webp" />
+          <img src="assets/images/matt-1400.jpg" alt="Matt Whitcomb" width="1400" height="1050" fetchpriority="high" class="hero-img" />
+        </picture>
       </div><!-- ./hero-img-mask -->
       
       <div class="bio-block">
@@ -414,7 +419,7 @@
 
         <!-- Card 1 Open Adopt -->
         <div class="project-container project-card card reveal">
-          <img src="assets/images/openadopt.png" alt="Open Adoption &amp; Family Services website homepage" loading="lazy" class="project-pic" />
+          <img src="assets/images/openadopt.webp" alt="Open Adoption &amp; Family Services website homepage" width="800" height="419" loading="lazy" class="project-pic" />
           <h3 class="project-title">Open Adoption & Family Services</h3>
 
           <p class="project-details">
@@ -435,7 +440,7 @@
 
         <!-- Card 2 LCFRB -->
         <div class="project-container project-card card reveal project-card-lcfrb">
-          <img src="assets/images/lcfrb.png" alt="Lower Columbia Fish Recovery Board website homepage" loading="lazy" class="project-pic" />
+          <img src="assets/images/lcfrb.webp" alt="Lower Columbia Fish Recovery Board website homepage" width="800" height="451" loading="lazy" class="project-pic" />
           <h3 class="project-title">Lower Columbia Fish Recovery Board</h3>
 
           <p class="project-details">
@@ -455,7 +460,7 @@
 
         <!-- Card 3 atoz-staffing -->
         <div class="project-container project-card card reveal">
-          <img src="assets/images/atozstaffing.png" alt="AtoZ Staffing website homepage" loading="lazy" class="project-pic" />
+          <img src="assets/images/atozstaffing.webp" alt="AtoZ Staffing website homepage" width="800" height="414" loading="lazy" class="project-pic" />
           <h3 class="project-title">AtoZ Staffing</h3>
 
           <p class="project-details">
@@ -485,7 +490,7 @@
 
         <!-- Card 1 -->
         <div class="project-container project-card card reveal">
-          <img src="assets/images/pixel-t-rex.png" alt="Dino Game screenshot" loading="lazy" class="project-pic" />
+          <img src="assets/images/pixel-t-rex.png" alt="Dino Game screenshot" width="375" height="360" loading="lazy" class="project-pic" />
           <h3 class="project-title">Dino Game</h3>
 
           <p class="project-details">
@@ -500,7 +505,7 @@
 
         <!-- Card 2 -->
         <div class="project-container project-card card reveal">
-          <img src="assets/images/libertis_website.png" alt="Liberti's Auto Electric website homepage" loading="lazy" class="project-pic" />
+          <img src="assets/images/libertis_website.webp" alt="Liberti's Auto Electric website homepage" width="800" height="449" loading="lazy" class="project-pic" />
           <h3 class="project-title">Liberti's Auto Electric</h3>
           <p class="project-details">
             A complete, responsive website designed and built for Liberti's Auto Electric, an automotive shop I
@@ -518,7 +523,7 @@
 
         <!-- Card 3 -->
         <div class="project-container project-card card reveal">
-          <img src="assets/images/quickQuiz.png" alt="Quiz App screenshot" loading="lazy" class="project-pic" />
+          <img src="assets/images/quickQuiz.png" alt="Quiz App screenshot" width="522" height="387" loading="lazy" class="project-pic" />
           <h3 class="project-title">Quiz App</h3>
           <p class="project-details">
             This is a quick quiz app using HTML CSS and JavaScript with randomly generated questions populated from Open
@@ -610,7 +615,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=13"></script>
+  <script src="assets/js/app.js?v=14"></script>
 </body>
 
 </html>
