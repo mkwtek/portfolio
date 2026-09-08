@@ -837,11 +837,12 @@ nav a:hover,
   font-size: 0.95rem;
 }
 
+/* Fixed 4-up (or 2x2 when narrow) - never 3 + a lone orphan on the next row. */
 .score-rings {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 1rem 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  gap: 1.1rem 0.6rem;
   list-style: none;
   padding: 0;
 }
@@ -1096,9 +1097,18 @@ nav a:hover,
   }
 }
 
-@media screen and (max-width: 700px) {
+/* Stack the two scorecards before either gets too narrow to hold 4 rings in a row. */
+@media screen and (max-width: 900px) {
   .scorecards {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Full-width scorecard still too narrow for 4 rings across: go 2 x 2, centered. */
+@media screen and (max-width: 560px) {
+  .score-rings {
+    grid-template-columns: repeat(2, auto);
+    column-gap: 1.6rem;
   }
 }
 
