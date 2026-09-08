@@ -656,6 +656,13 @@ nav a:hover,
   text-align: center;
 }
 
+/* When the disclosure line follows the heading, tighten the heading's own gap so */
+/* the note reads as attached to the heading rather than floating between it and  */
+/* the cards.                                                                     */
+.projects-title:has(+ .projects-disclosure) {
+  margin-bottom: 0.65rem;
+}
+
 /* Small muted line under "Website Development & Client Consultation" disclosing that   */
 /* those client sites were built as an employee, not solo freelance work. Deliberately  */
 /* understated so it reads as a note, not a competing subheading.                       */
@@ -663,8 +670,7 @@ nav a:hover,
   text-align: center;
   font-size: 0.85rem;
   color: var(--color-primary-accent);
-  margin: 0 0 1rem; /* 1rem under the heading, 1rem above the cards - keeps the cards */
-                    /* the same ~1rem from the heading block as every other section  */
+  margin: 0 0 1rem; /* ~0.65rem under the heading (see rule above), 1rem above the cards */
 }
 
 .project-container {
