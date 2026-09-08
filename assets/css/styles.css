@@ -45,7 +45,7 @@ html {
 /* Every in-page nav target clears the sticky nav bar when scrolled to. Without this, */
 /* clicking e.g. Skills or Web Projects lands with the heading tucked up behind the   */
 /* fixed nav. :where() keeps specificity at 0 so it never fights other rules.         */
-:where(#about, #recent-experience, #skills, #projects-websites, #independent-projects, #contact) {
+:where(#about, #recent-experience, #skills, #how-i-build, #projects-websites, #independent-projects, #contact) {
   scroll-margin-top: 7rem;
 }
 
@@ -776,7 +776,218 @@ nav a:hover,
   margin-bottom: 0;
 }
 
-/* End Skills Section */ 
+/* End Skills Section */
+
+/* HOW I BUILD - engineering-standards section with rebuilt Lighthouse / WAVE gauges */
+.how-built {
+  background-color: var(--bg-color);
+}
+
+.how-built-card {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.how-built-card > p {
+  line-height: var(--line-height);
+  margin-bottom: 0.9rem;
+}
+
+/* Inset panel that holds the two scorecards */
+.scorecards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background-color: hsl(190, 30%, 97%);
+  border: 1px solid hsl(190, 25%, 90%);
+  border-radius: 10px;
+}
+
+.scorecard-tool {
+  text-align: center;
+  font-weight: var(--bold-font);
+  color: var(--color-primary-accent);
+  margin-bottom: 0.9rem;
+  font-size: 0.95rem;
+}
+
+.score-rings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.score-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5.25rem;
+}
+
+.score-ring .ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.75rem;
+  height: 4.75rem;
+}
+
+.score-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* start the arc at 12 o'clock */
+  overflow: visible;
+}
+
+.ring-track {
+  fill: none;
+  stroke: hsl(190, 22%, 87%);
+  stroke-width: 3.5;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: #0a7a42; /* green, >=3:1 on the panel (WCAG 1.4.11) */
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 100;               /* pathLength is normalised to 100 */
+  stroke-dashoffset: calc(100 - var(--val));
+}
+
+.ring-num {
+  position: absolute;
+  font-weight: var(--bold-font);
+  font-size: 1.2rem;
+  color: #0b5c30; /* dark green, ~6:1 on the panel */
+}
+
+.ring-label {
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  margin-top: 0.45rem;
+}
+
+.wave-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.wave-aim .ring-label {
+  max-width: 7rem;
+}
+
+.wave-tallies {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.wave-tallies .tally-num {
+  display: inline-block;
+  min-width: 1.4em;
+  font-weight: var(--bold-font);
+  color: #0b5c30;
+}
+
+.how-built-lead {
+  font-weight: var(--bold-font);
+  margin-bottom: 0.5rem;
+}
+
+.how-built-list {
+  list-style: disc;
+  padding-left: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.how-built-list li {
+  line-height: var(--line-height);
+  margin-bottom: 0.6rem;
+}
+
+.how-built-list li:last-child {
+  margin-bottom: 0;
+}
+
+.how-built-list strong {
+  color: var(--color-primary-accent);
+}
+
+.how-built-note {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #555;
+  border-left: 3px solid hsl(190, 22%, 85%);
+  padding-left: 0.8rem;
+}
+
+/* --- gauge + number animation, played when the card scrolls into view --- */
+/* Hidden start state only under .js-reveal, so a no-JS page shows finished gauges. */
+.js-reveal .scorecards .ring-fill {
+  stroke-dashoffset: 100; /* empty */
+}
+.js-reveal .scorecards .ring-num {
+  transform: scale(0);
+}
+.js-reveal .reveal.is-visible .ring-fill {
+  transition: stroke-dashoffset 1.15s cubic-bezier(0.33, 1, 0.68, 1);
+  transition-delay: calc(var(--i, 0) * 0.12s);
+  stroke-dashoffset: calc(100 - var(--val)); /* race to the score */
+}
+.js-reveal .reveal.is-visible .ring-num {
+  animation: score-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(0.5s + var(--i, 0) * 0.12s); /* pop in just after the arc lands */
+}
+
+/* Safety net: if focus reaches the card before the observer fires, or the        */
+/* observer never does, show the gauges filled rather than leaving them empty.    */
+.js-reveal .reveal:focus-within .ring-fill {
+  stroke-dashoffset: calc(100 - var(--val));
+}
+.js-reveal .reveal:focus-within .ring-num {
+  transform: none;
+}
+
+@keyframes score-pop {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .scorecards .ring-fill {
+    stroke-dashoffset: calc(100 - var(--val));
+    transition: none;
+  }
+  .js-reveal .scorecards .ring-num {
+    transform: none;
+    animation: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .scorecards {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* PROJECT SECTIONS - Website Development & Client Consultation AND Independent Projects */
 .projects {

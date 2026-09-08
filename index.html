@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=16" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=17" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -75,6 +75,7 @@
         <li><a href="#about" class="nav-link"><span class="nav-link-text">About</span></a></li>
         <li><a href="#recent-experience" class="nav-link"><span class="nav-link-text">Experience</span></a></li>
         <li><a href="#skills" class="nav-link"><span class="nav-link-text">Skills</span></a></li>
+        <li><a href="#how-i-build" class="nav-link"><span class="nav-link-text">How I Build</span></a></li>
         <li><a href="#projects-websites" class="nav-link"><span class="nav-link-text">Web Projects</span></a></li>
         <li><a href="#independent-projects" class="nav-link"><span class="nav-link-text">Independent Projects</span></a></li>
         <li><a href="#contact" class="nav-link"><span class="nav-link-text">Contact</span></a></li>
@@ -401,6 +402,122 @@
       </div><!-- ./skills-grid -->
     </section>
 
+    <!-- How I Build: the engineering standards behind every site -->
+    <section class="how-built section-padding" id="how-i-build">
+      <div class="reveal"><h2 class="title-base" tabindex="0">How I Build</h2></div>
+
+      <div class="how-built-card card reveal">
+        <p>
+          A website can look finished and still work against the business it represents. What a
+          visitor sees is the design. How the site is built, the code underneath, decides whether
+          it loads quickly, shows up in search, and works for someone using a keyboard, a screen
+          reader, or an older phone on a slow connection.
+        </p>
+        <p>
+          None of that shows in a screenshot, but it is where a good-looking site quietly loses
+          customers, and where an inaccessible one can expose a small business to an accessibility
+          demand letter. I treat that layer as part of the deliverable and measure it rather than
+          assume it. This site&#39;s current scores:
+        </p>
+
+        <div class="scorecards">
+          <div class="scorecard">
+            <p class="scorecard-tool">Google Lighthouse</p>
+            <ul class="score-rings">
+              <li class="score-ring" style="--val: 99; --i: 0">
+                <span class="ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle class="ring-track" cx="22" cy="22" r="19" pathLength="100"></circle>
+                    <circle class="ring-fill" cx="22" cy="22" r="19" pathLength="100"></circle>
+                  </svg>
+                  <span class="ring-num">99</span>
+                </span>
+                <span class="ring-label">Performance</span>
+              </li>
+              <li class="score-ring" style="--val: 100; --i: 1">
+                <span class="ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle class="ring-track" cx="22" cy="22" r="19" pathLength="100"></circle>
+                    <circle class="ring-fill" cx="22" cy="22" r="19" pathLength="100"></circle>
+                  </svg>
+                  <span class="ring-num">100</span>
+                </span>
+                <span class="ring-label">Accessibility</span>
+              </li>
+              <li class="score-ring" style="--val: 100; --i: 2">
+                <span class="ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle class="ring-track" cx="22" cy="22" r="19" pathLength="100"></circle>
+                    <circle class="ring-fill" cx="22" cy="22" r="19" pathLength="100"></circle>
+                  </svg>
+                  <span class="ring-num">100</span>
+                </span>
+                <span class="ring-label">Best Practices</span>
+              </li>
+              <li class="score-ring" style="--val: 100; --i: 3">
+                <span class="ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle class="ring-track" cx="22" cy="22" r="19" pathLength="100"></circle>
+                    <circle class="ring-fill" cx="22" cy="22" r="19" pathLength="100"></circle>
+                  </svg>
+                  <span class="ring-num">100</span>
+                </span>
+                <span class="ring-label">SEO</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="scorecard">
+            <p class="scorecard-tool">WebAIM WAVE</p>
+            <div class="wave-summary">
+              <div class="score-ring wave-aim" style="--val: 100; --i: 4">
+                <span class="ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle class="ring-track" cx="22" cy="22" r="19" pathLength="100"></circle>
+                    <circle class="ring-fill" cx="22" cy="22" r="19" pathLength="100"></circle>
+                  </svg>
+                  <span class="ring-num">10</span>
+                </span>
+                <span class="ring-label">AIM Score, out of 10</span>
+              </div>
+              <ul class="wave-tallies">
+                <li><span class="tally-num">0</span> errors</li>
+                <li><span class="tally-num">0</span> contrast errors</li>
+                <li><span class="tally-num">0</span> alerts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="how-built-lead">Every build includes:</p>
+        <ul class="how-built-list">
+          <li>
+            <strong>Accessibility to WCAG 2.1</strong>, checked with multiple independent tools and
+            by hand: keyboard navigation, screen-reader behavior, color contrast, focus order, and
+            tap-target sizing.
+          </li>
+          <li>
+            <strong>Performance and Core Web Vitals</strong>: compressed and correctly sized images,
+            minimal render-blocking code, third-party scripts deferred, tested on real devices.
+          </li>
+          <li>
+            <strong>Search fundamentals</strong>: semantic HTML structure, descriptive metadata and
+            link-preview tags, correct sitemap and robots configuration.
+          </li>
+          <li>
+            <strong>Standards-based, hand-verified code</strong> rather than page-builder output, so
+            the site stays fast and maintainable after launch.
+          </li>
+        </ul>
+
+        <p class="how-built-note">
+          Automated scores are a floor, not a finish line. They catch roughly a third of
+          accessibility problems; the rest is manual work. But a site that cannot clear the floor is
+          losing people before anyone notices.
+        </p>
+      </div>
+    </section>
+
     <!-- Projects Section - Website Examples (NetRaising) -->
     <section class="projects section-padding" id="projects-websites">
       <div class="reveal">
@@ -607,7 +724,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=16"></script>
+  <script src="assets/js/app.js?v=17"></script>
 </body>
 
 </html>
