@@ -65,6 +65,32 @@ body {
   background-color: var(--bg-color); /* This ensures the body background matches each of the sections background color */
 }
 
+/* Skip link: first focusable element, hidden off the top of the screen until    */
+/* it receives keyboard focus, then it drops into view. Lets keyboard and screen */
+/* reader users jump past the nav straight to the content.                       */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -3.5rem;
+  z-index: 2000;
+  padding: 0.6rem 1rem;
+  background-color: var(--color-primary-accent);
+  color: #fff;
+  font-weight: var(--bold-font);
+  border-radius: 0 0 8px 8px;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
 /* GLOBALS */
 p {
   line-height: var(--line-height);
@@ -598,6 +624,26 @@ nav a:hover,
   color: var(--color-primary-accent);
 }
 
+/* Experience bullet lists. These were manual <p>&bull; ...</p> blocks separated  */
+/* by <br> tags; they are now real <ul>/<li> so assistive tech announces them as  */
+/* a list. Spacing here is tuned to land close to what the paragraph + <br>       */
+/* version rendered - adjust freely.                                              */
+.more-about .exp-list {
+  list-style-type: disc;
+  padding-left: 1.6rem;
+  margin: 0.55rem 0 0;
+}
+
+.more-about .exp-list li {
+  line-height: var(--line-height);
+  padding: 0.15rem 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.more-about .exp-list li:last-child {
+  margin-bottom: 0;
+}
+
 /* TECHNICAL SKILLS SECTION */
 .skills {
   text-align: center;
@@ -817,9 +863,16 @@ nav a:hover,
                                               /* narrow widths, inputs can't wrap their   */
                                               /* text like the Message textarea does, so  */
                                               /* shrinking the font is the only real fix. */
-  outline: none;
+  outline: none; /* replaced by the focus style below - never removed outright */
 }
-  
+
+/* Visible focus for form fields (was missing - keyboard users had no idea which */
+/* field they were in). Border colour shift + ring, both well past 3:1 contrast. */
+.contact-form-container .input-field:focus {
+  border-color: var(--color-link-hover);
+  box-shadow: 0 0 0 3px hsla(190, 70%, 30%, 0.35);
+}
+
 .input-field::placeholder {
   padding: 0.5rem;
   color: var(--color-primary-accent);
@@ -1079,6 +1132,9 @@ nav a:hover,
 
 /* END Socials */
 /* SCROLL TO TOP ICON */
+/* Now a real <button> (was an <i>, so it was mouse-only and invisible to        */
+/* assistive tech). These reset the button chrome; it keeps its default focus    */
+/* ring plus the .up-arrow scale on :focus-visible below.                        */
 .scroll-up {
   position: fixed;
   /* right: 0.5%; */
@@ -1089,6 +1145,10 @@ nav a:hover,
   /* bottom: 3%; */
   bottom: 20px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
   cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  line-height: 0; /* strips the inline-image baseline gap the <i> didn't have */
 }
 
 .up-arrow {
@@ -1450,7 +1510,8 @@ nav a:hover,
     text-align: center;
   }
 
-  .more-about p {
+  .more-about p,
+  .more-about .exp-list li {
     text-align: left;
   }
 

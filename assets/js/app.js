@@ -91,11 +91,20 @@ function setNav(open) {
   if (open) positionNavWrap(); // make sure the panel sits flush under the nav
   navWrap.classList.toggle("show", open);
   burger.classList.toggle("active", open);
+  burger.setAttribute("aria-expanded", String(open));
 }
 
 burger.addEventListener("click", () =>
   setNav(!navWrap.classList.contains("show"))
 );
+
+// Escape closes the mobile menu and returns focus to the burger
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && navWrap.classList.contains("show")) {
+    setNav(false);
+    burger.focus();
+  }
+});
 
 // Select nav links
 const navLink = document.querySelectorAll(".nav-link");
@@ -188,7 +197,7 @@ if (contactForm) {
     // reCAPTCHA populates this hidden field only once the checkbox is checked
     const recaptchaResponse = contactForm.querySelector("#g-recaptcha-response");
     if (!recaptchaResponse || !recaptchaResponse.value) {
-      recaptchaError.hidden = false;
+      recaptchaError.hidden = false; // role="alert" announces it to screen readers
       return;
     }
 
@@ -206,12 +215,15 @@ if (contactForm) {
       if (response.ok) {
         contactForm.hidden = true;
         formSuccess.hidden = false;
+        formSuccess.focus(); // move SR + keyboard focus to the confirmation (the form it was in is now hidden)
         contactForm.reset();
       } else {
         formError.hidden = false;
+        formError.focus();
       }
     } catch (err) {
       formError.hidden = false;
+      formError.focus();
     } finally {
       submitBtn.disabled = false;
       submitBtn.value = "Submit";

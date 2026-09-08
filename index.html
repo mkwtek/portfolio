@@ -3,8 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Matt Whitcomb, web developer and technology consultant. Front-end development, web accessibility (WCAG), performance, and CMS work for small businesses and nonprofits." />
+
+  <!-- Link-preview / social share metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Matt Whitcomb, Web Developer" />
+  <meta property="og:description" content="Web developer and technology consultant focused on accessible, fast, well-tested websites for small businesses and nonprofits." />
+  <meta property="og:url" content="https://mkwtek.github.io/portfolio/" />
+  <meta property="og:image" content="https://mkwtek.github.io/portfolio/assets/images/matt.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Preconnect: establishes DNS/TLS early for the CDNs below, before the actual -->
   <!-- resource requests happen, shaving round-trip time off each one.            -->
@@ -26,7 +35,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=8" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=9" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -58,6 +67,8 @@
     document.documentElement.classList.add("js-reveal");
   </script>
 
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <!-- Navbar -->
   <nav>
     <div class="nav-inner">
@@ -68,7 +79,7 @@
       <!-- .main-nav-wrap is the collapsing container on mobile (see styles.css); on -->
       <!-- desktop it's display:contents, so the layout is exactly as if it weren't  -->
       <!-- here and .main-nav is a direct flex child of .nav-inner.                  -->
-      <div class="main-nav-wrap">
+      <div class="main-nav-wrap" id="primary-nav">
       <ul class="main-nav">
         <li><a href="#about" class="nav-link"><span class="nav-link-text">About</span></a></li>
         <li><a href="#recent-experience" class="nav-link"><span class="nav-link-text">Experience</span></a></li>
@@ -79,7 +90,7 @@
         <li><a href="https://mkwtek.github.io/resume/" target="_blank" class="nav-link external-link"><span class="nav-link-text">Resume</span><i class="bi bi-box-arrow-up-right"></i></a></li>
       </ul>
       </div><!-- ./main-nav-wrap -->
-      <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation menu">
+      <button class="burger-menu" id="burger-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -87,13 +98,13 @@
     </div><!-- ./nav-inner -->
   </nav>
 
-  <div class="content-wrapper">
+  <main class="content-wrapper" id="main-content" tabindex="-1">
 
     <!-- Hero Section and About Me -->
     <section class="hero section-padding" id="about">
 
       <div class="hero-img-mask">
-        <img src="assets/images/matt.jpeg" alt="matt" loading="lazy" class="hero-img" />
+        <img src="assets/images/matt.jpeg" alt="Matt Whitcomb" loading="lazy" class="hero-img" />
       </div><!-- ./hero-img-mask -->
       
       <div class="bio-block">
@@ -133,52 +144,47 @@
           <p>
             <strong>Founder &amp; Web Developer, Self-Employed | June 2025 - Present | &#40;Remote&#41;</strong>
           </p>
-          <br>
           <p>
             Two separate ventures under one roof: a freelance web development practice serving small-business clients, and an independently owned and operated e-commerce business.
           </p>
 
           <p class="subrole"><strong>Freelance Web Development</strong></p>
-          <p>
-            • Build custom-coded and CMS-based websites for small-business clients, recommending the platform that fits each client&#39;s goals, audience, and budget &#40;custom code, Shopify, WordPress, or another system&#41; rather than defaulting to one toolset or a personal preference.
-          </p>
-          <br>
-          <p>
-            • Design and test every build for WCAG 2.1 conformance, cross-checking across multiple independent accessibility tools rather than trusting a single automated scan, alongside manual review of color contrast, alternative text, form labeling, keyboard navigation, and mobile tap-target sizing. WebAIM&#39;s 2026 study found detectable failures of this kind on roughly 96% of home pages, and they are an increasingly common trigger for accessibility demand letters against small businesses.
-          </p>
-          <br>
-          <p>
-            • Develop mobile-first, responsive layouts and verify them on real phones, tablets, and browsers rather than a single simulator, since a device-specific bug or a slow mobile load turns real visitors away before a page finishes rendering.
-          </p>
-          <br>
-          <p>
-            • Favor clean semantic HTML, genuine performance and image-optimization testing, and correct sitemap, robots, and descriptive meta-tag configuration over page-builder bloat, so sites load quickly and are indexed correctly from day one.
-          </p>
-          <br>
-          <p>
-            • Diagnose issues to their root cause and fix the underlying problem rather than masking symptoms with accessibility overlays or one-off visual patches. It is the same diagnostic discipline I bring as an ASE-certified automotive technician: never trust one reading in isolation, and never paper over a symptom without understanding the cause.
-          </p>
+          <ul class="exp-list">
+            <li>
+              Build custom-coded and CMS-based websites for small-business clients, recommending the platform that fits each client&#39;s goals, audience, and budget &#40;custom code, Shopify, WordPress, or another system&#41; rather than defaulting to one toolset or a personal preference.
+            </li>
+            <li>
+              Design and test every build for WCAG 2.1 conformance, cross-checking across multiple independent accessibility tools rather than trusting a single automated scan, alongside manual review of color contrast, alternative text, form labeling, keyboard navigation, and mobile tap-target sizing. WebAIM&#39;s 2026 study found detectable failures of this kind on roughly 96% of home pages, and they are an increasingly common trigger for accessibility demand letters against small businesses.
+            </li>
+            <li>
+              Develop mobile-first, responsive layouts and verify them on real phones, tablets, and browsers rather than a single simulator, since a device-specific bug or a slow mobile load turns real visitors away before a page finishes rendering.
+            </li>
+            <li>
+              Favor clean semantic HTML, genuine performance and image-optimization testing, and correct sitemap, robots, and descriptive meta-tag configuration over page-builder bloat, so sites load quickly and are indexed correctly from day one.
+            </li>
+            <li>
+              Diagnose issues to their root cause and fix the underlying problem rather than masking symptoms with accessibility overlays or one-off visual patches. It is the same diagnostic discipline I bring as an ASE-certified automotive technician: never trust one reading in isolation, and never paper over a symptom without understanding the cause.
+            </li>
+          </ul>
 
           <p class="subrole"><strong>Independent E-Commerce Venture</strong></p>
-          <p>
-            • Built and customized a Shopify storefront using Liquid, custom filtering and taxonomy architecture, and metafield-driven product data structures.
-          </p>
-          <br>
-          <p>
-            • Led performance and accessibility optimization on the storefront, including Lighthouse auditing, image-compression workflows, color-contrast testing, and WCAG-compliant mobile tap-target sizing via custom Liquid edits.
-          </p>
-          <br>
-          <p>
-            • Manage multi-channel sales operations, including platform-specific pricing strategy, cross-listing workflows, shipping and fulfillment integration, and domain/DNS management.
-          </p>
-          <br>
-          <p>
-            • Manage inventory and product photography, using AI-assisted workflows and graphics-editing software to help shape final product designs, alongside creative direction for brand identity and marketing materials.
-          </p>
-          <br>
-          <p>
-            • Established and manage core business operations independently, including registered agent and privacy protection, licensing, tax compliance, and business banking.
-          </p>
+          <ul class="exp-list">
+            <li>
+              Built and customized a Shopify storefront using Liquid, custom filtering and taxonomy architecture, and metafield-driven product data structures.
+            </li>
+            <li>
+              Led performance and accessibility optimization on the storefront, including Lighthouse auditing, image-compression workflows, color-contrast testing, and WCAG-compliant mobile tap-target sizing via custom Liquid edits.
+            </li>
+            <li>
+              Manage multi-channel sales operations, including platform-specific pricing strategy, cross-listing workflows, shipping and fulfillment integration, and domain/DNS management.
+            </li>
+            <li>
+              Manage inventory and product photography, using AI-assisted workflows and graphics-editing software to help shape final product designs, alongside creative direction for brand identity and marketing materials.
+            </li>
+            <li>
+              Established and manage core business operations independently, including registered agent and privacy protection, licensing, tax compliance, and business banking.
+            </li>
+          </ul>
         </div><!-- ./role-1 -->
 
         <br><br>
@@ -187,30 +193,26 @@
           <p>
             <strong>Web Developer and Consultant at <a href="https://www.netraising.com" target="_blank" title="Open NetRaising.com in new tab">NetRaising<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></a> | March 2024 - June 2025 | &#40;Remote&#41;</strong>
           </p>
-          </br>
-          <p>
-            • Built and launched responsive websites in ExpressionEngine, an enterprise CMS, for nonprofit clients, combining CMS templating (tags, conditional logic, custom fields) with custom front-end development (HTML, CSS, JavaScript), MachForm integration, and server-side tasks such as DNS, subdomain, and TLS certificate configuration.
-          </p>
-          </br>
-          <p>
-            • Consulted with clients on project scope, features, and web-publishing best practices, translating stakeholder goals and designers&#39; artwork into build-ready specifications.
-          </p>
-          </br>
-          <p>
-            • Built web accessibility into the foundation of every project (semantic structure, color contrast, keyboard operability, and screen-reader behavior) rather than bolting it on afterward, alongside organic SEO and performance work, then validated every site through peer code review and multiple independent accessibility, markup, and speed tools before launch.
-          </p>
-          </br>
-          <p>
-            • Applied lean, low-bandwidth development practices, a lightweight CSS framework, lazy loading, image optimization, and minimal scripting, for faster mobile performance and a smaller energy footprint.
-          </p>
-          </br>
-          <p>
-            • Delivered full site builds for Open Adoption &amp; Family Services, the Lower Columbia Fish Recovery Board, and AtoZ Staffing, each responsive across phone, tablet, and desktop.
-          </p>
-          </br>
-          <p>
-            • Trained content managers and provided ongoing content editing and troubleshooting across more than a dozen active nonprofit client sites, including Returning Veterans Project, Portland Youth Philharmonic, the Coalition of Community Health Clinics, and REACH CDC, spanning healthcare, veterans services, crisis support, affordable housing, and arts.
-          </p>
+          <ul class="exp-list">
+            <li>
+              Built and launched responsive websites in ExpressionEngine, an enterprise CMS, for nonprofit clients, combining CMS templating (tags, conditional logic, custom fields) with custom front-end development (HTML, CSS, JavaScript), MachForm integration, and server-side tasks such as DNS, subdomain, and TLS certificate configuration.
+            </li>
+            <li>
+              Consulted with clients on project scope, features, and web-publishing best practices, translating stakeholder goals and designers&#39; artwork into build-ready specifications.
+            </li>
+            <li>
+              Built web accessibility into the foundation of every project (semantic structure, color contrast, keyboard operability, and screen-reader behavior) rather than bolting it on afterward, alongside organic SEO and performance work, then validated every site through peer code review and multiple independent accessibility, markup, and speed tools before launch.
+            </li>
+            <li>
+              Applied lean, low-bandwidth development practices, a lightweight CSS framework, lazy loading, image optimization, and minimal scripting, for faster mobile performance and a smaller energy footprint.
+            </li>
+            <li>
+              Delivered full site builds for Open Adoption &amp; Family Services, the Lower Columbia Fish Recovery Board, and AtoZ Staffing, each responsive across phone, tablet, and desktop.
+            </li>
+            <li>
+              Trained content managers and provided ongoing content editing and troubleshooting across more than a dozen active nonprofit client sites, including Returning Veterans Project, Portland Youth Philharmonic, the Coalition of Community Health Clinics, and REACH CDC, spanning healthcare, veterans services, crisis support, affordable housing, and arts.
+            </li>
+          </ul>
         </div><!-- ./role-2 -->
 
         <br><br>
@@ -219,26 +221,23 @@
           <p>
             <strong>Website & Technology Manager at <a href="https://www.seasidesustainability.org/" target="_blank" title="Open Seaside Sustainability website in new tab">Seaside Sustainability<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></a> | Jan 2023 - July 2023 | &#40;Remote from Seattle, WA to Gloucester, MA&#41;</strong>
           </p>
-          </br>
-          <p>
-            • Led a Web & Tech team of 5-8, overhauling and restructuring the department following approximately six months without dedicated leadership, implementing Agile and Scrum frameworks along with kanban to establish organized workflows and a consistent delivery cadence.
-          </p>
-          </br>
-          <p>
-            • Served as a Department Manager, Scrum Master, Product Owner, Front-end Web Developer, Project Manager, and a liaison between different departments in order to facilitate and support the needs of a diverse, globally remote team for a large non-profit organization.
-          </p>
-          </br>
-          <p>
-            • Rapidly and efficiently acquired proficiency in using a diverse range of software and tools, such as Trello, Wix Editor X, Zapier, Google Workspaces, Miro, Figma, Canva, MailerLite, Little Green Light, and Airtable, among other applications.
-          </p>
-          </br>
-          <p>
-            • Guided and mentored my team in implementing responsive web design best practices and effectively utilizing tools to accomplish tasks.
-          </p>
-          </br>
-          <p>
-            • Collaborated with stakeholders to perform heuristic evaluations, effectively identifying user needs and pain points, then analyzed the feedback to implement targeted improvements and innovative design solutions.
-          </p>
+          <ul class="exp-list">
+            <li>
+              Led a Web & Tech team of 5-8, overhauling and restructuring the department following approximately six months without dedicated leadership, implementing Agile and Scrum frameworks along with kanban to establish organized workflows and a consistent delivery cadence.
+            </li>
+            <li>
+              Served as a Department Manager, Scrum Master, Product Owner, Front-end Web Developer, Project Manager, and a liaison between different departments in order to facilitate and support the needs of a diverse, globally remote team for a large non-profit organization.
+            </li>
+            <li>
+              Rapidly and efficiently acquired proficiency in using a diverse range of software and tools, such as Trello, Wix Editor X, Zapier, Google Workspaces, Miro, Figma, Canva, MailerLite, Little Green Light, and Airtable, among other applications.
+            </li>
+            <li>
+              Guided and mentored my team in implementing responsive web design best practices and effectively utilizing tools to accomplish tasks.
+            </li>
+            <li>
+              Collaborated with stakeholders to perform heuristic evaluations, effectively identifying user needs and pain points, then analyzed the feedback to implement targeted improvements and innovative design solutions.
+            </li>
+          </ul>
         </div><!-- ./role-3 -->
 
         <br><br>
@@ -562,16 +561,16 @@
             <div class="recaptcha-wrapper">
               <div class="g-recaptcha" data-sitekey="6LfD6JYtAAAAACVDMz9LVFdBKl3HriHPaYloBMIY"></div>
             </div>
-            <div id="recaptcha-error" class="recaptcha-error" hidden>Please check the box above to verify you're not a robot.</div>
+            <div id="recaptcha-error" class="recaptcha-error" role="alert" hidden>Please check the box above to verify you're not a robot.</div>
             <input type="submit" value="Submit" id="submit-btn" class="submit-btn" />
           </form>
 
-          <div id="form-success" class="form-message form-success" hidden>
+          <div id="form-success" class="form-message form-success" role="status" tabindex="-1" hidden>
             <h3>Thanks!</h3>
             <p>Your message was sent successfully. I'll get back to you soon.</p>
           </div>
 
-          <div id="form-error" class="form-message form-error" hidden>
+          <div id="form-error" class="form-message form-error" role="alert" tabindex="-1" hidden>
             <h3>Something went wrong</h3>
             <p>Your message wasn't sent. Please try again, or email me directly at
               <a href="mailto:mattkwhitcomb@gmail.com">mattkwhitcomb@gmail.com</a>.</p>
@@ -580,24 +579,24 @@
       </div><!-- ./contact-form-container -->
     </section>
 
-  </div><!-- ./content-wrapper -->
+  </main><!-- ./content-wrapper -->
 
 
   <!-- Social (Linkedin and up arrow) Section -->
   <div class="linkedinup">
 
-    <a href="https://www.linkedin.com/in/mattkwhitcomb/" target="_blank" class="social-link"><img
-        src="assets/icons/icons8-linkedin-circled.gif" alt="Linkedin" loading="lazy" class="socicon" /></a>
+    <a href="https://www.linkedin.com/in/mattkwhitcomb/" target="_blank" rel="noopener" class="social-link"><img
+        src="assets/icons/icons8-linkedin-circled.gif" alt="Matt Whitcomb on LinkedIn (opens in a new tab)" loading="lazy" class="socicon" /></a>
 
-    <a href="https://github.com/mkwtek/portfolio" target="_blank" class="social-link"><img src="assets/icons/icons8-github.gif" alt="Github"
+    <a href="https://github.com/mkwtek/portfolio" target="_blank" rel="noopener" class="social-link"><img src="assets/icons/icons8-github.gif" alt="This site's source on GitHub (opens in a new tab)"
         class="socicon" /></a>
 
-    <a href="https://tek8367.wixsite.com/matts-portfolio" target="_blank" class="social-link"><span class="wix-badge"><img
-        src="assets/icons/icons8-wix-yellowidot.png" alt="Wix" class="socicon" /></span></a>
+    <a href="https://tek8367.wixsite.com/matts-portfolio" target="_blank" rel="noopener" class="social-link"><span class="wix-badge"><img
+        src="assets/icons/icons8-wix-yellowidot.png" alt="Matt Whitcomb's Wix portfolio (opens in a new tab)" class="socicon" /></span></a>
 
     <!-- Scroll to top -->
-    <i class="scroll-up" id="scroll-up"><img src="assets/icons/arrow_circle_up_icon_colorfill.png"
-        class="socicon up-arrow" alt="scroll-up" /></i>
+    <button class="scroll-up" id="scroll-up" type="button" aria-label="Scroll to top of page"><img src="assets/icons/arrow_circle_up_icon_colorfill.png"
+        class="socicon up-arrow" alt="" /></button>
 
   </div><!-- ./linkedinup -->
 
@@ -611,7 +610,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=8"></script>
+  <script src="assets/js/app.js?v=9"></script>
 </body>
 
 </html>
