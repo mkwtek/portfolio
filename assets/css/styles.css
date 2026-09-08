@@ -198,14 +198,11 @@ nav.nav-suppress-anim .main-nav-wrap {
 
 .nav-link {
   display: inline-block;
-  padding: 0.2rem 0.45rem; /* horizontal room so the inset focus ring clears the text */
-  border-radius: 4px;
+  padding: 0.2rem 0;
   transition: var(--transition);
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: bottom; /* keeps ellipsis-truncated text aligned with untruncated siblings */
+  white-space: nowrap; /* keep "Web Projects" etc. on one line */
+  vertical-align: bottom;
 }
 
 /* Underline now lives on the inner .nav-link-text span, not the outer .nav-link itself. */
@@ -263,24 +260,14 @@ nav a:hover,
   width: 100%;
 }
 
-/* Nav links sit inside stacked overflow:hidden boxes, so their focus ring has to */
-/* be inset (the .nav-link padding above gives it room to clear the text). Also   */
-/* fill the hover underline so the focused link is unmistakable.                  */
-.nav-link:focus-visible {
-  outline: 3px solid var(--color-link-hover);
-  outline-offset: -3px;
-}
-
-.nav-link:focus-visible .nav-link-text::after {
-  width: 100%;
-}
-
-/* The logo <a> is inline with no padding, so an inset ring would cut the text.   */
-/* It sits with vertical breathing room inside the bar, so an outward ring clears */
-/* on top and bottom; the sides are what matter for legibility and show fine.     */
+/* Nav links and the logo: outward ring. The nav row no longer clips it (see      */
+/* .main-nav overflow above), and <nav>'s own overflow:hidden is far enough from  */
+/* the links not to crop it. Hover keeps the growing underline; focus is the box. */
+.nav-link:focus-visible,
 .nav-title h1 a:focus-visible {
   outline: 3px solid var(--color-link-hover);
-  outline-offset: 3px;
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 
 .nav-link.external-link {
@@ -325,14 +312,14 @@ nav a:hover,
     /* justify-content: flex-end; */
     justify-content: space-between;
     /* overflow-x: auto; */
-    overflow: hidden;
+    overflow: visible; /* let the keyboard focus ring on a link show; the mobile */
+                       /* block re-clips this for the drop-down animation        */
 }
 
 .main-nav li {
     font-weight: var(--bold-font);
     flex-shrink: 1;
     min-width: 0; /* overrides flexbox's default min-width:auto floor so items can genuinely shrink below their text width */
-    overflow: hidden;
 }
 .burger-menu {
   position: relative;
