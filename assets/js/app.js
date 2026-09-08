@@ -28,17 +28,31 @@ if (revealEls.length) {
           }
         });
       },
-      { rootMargin: "0px 0px -15% 0px", threshold: 0.1 }
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
     );
     revealEls.forEach((el) => revealObserver.observe(el));
 
-    // Safety net: if something never triggers (e.g. an observer quirk), reveal
-    // everything after a few seconds so content can't stay hidden.
-    setTimeout(() => {
-      document
-        .querySelectorAll(".reveal:not(.is-visible)")
-        .forEach((el) => el.classList.add("is-visible"));
-    }, 4000);
+    // Fallback for the rare case where IntersectionObserver exists but never
+    // delivers: a throttled scroll check that reveals anything already well into
+    // view. Only touches on-screen elements, so the animation still plays for
+    // everything the user scrolls to.
+    let ticking = false;
+    const scrollFallback = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        document
+          .querySelectorAll(".reveal:not(.is-visible)")
+          .forEach((el) => {
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight * 0.85 && r.bottom > 0) {
+              el.classList.add("is-visible");
+            }
+          });
+      });
+    };
+    window.addEventListener("scroll", scrollFallback, { passive: true });
   }
 }
 
