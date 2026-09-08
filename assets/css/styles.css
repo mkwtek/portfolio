@@ -84,16 +84,29 @@ p {
                           /* tested widths, so this removes mid-word breaking entirely,  */
                           /* combined with a lower floor below, shrinking the text is    */
                           /* the acceptable trade, cutting a word in half is not.        */
-  margin-bottom: 1rem; /* small gap to the card below - each section heading should sit  */
-                       /* clearly closer to its own card than to the card above it, so   */
-                       /* there's no doubt which card the heading belongs to. The larger */
-                       /* gap above comes from .section-padding.                          */
+  margin-bottom: 0.6rem; /* trimmed from 1rem now that the ::after bar adds height below   */
+                         /* the text; the heading block still sits ~1rem off its card and */
+                         /* well clear of the section above (space comes from .section-    */
+                         /* padding). Each heading groups with its own card, not the one   */
+                         /* above it.                                                      */
   display: inline-block; /* Prevents the margin from collapsing/disappearing */
   width: 100%; /* Ensures the title still spans the full width */
   text-align: center;
   font-size: clamp(1rem, 6vw, 2rem); /* Lowered floor from 1.4rem: that still wasn't     */
                                       /* small enough at the narrowest widths for words   */
                                       /* like "Consultation" to fit on their own line.    */
+}
+
+/* Short centered accent bar under every section heading - a splash of the site */
+/* colour that also reads as a section divider.                                 */
+.title-base::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 0.55rem auto 0;
+  background-color: var(--color-primary-accent);
+  border-radius: 2px;
 }
 
 .card {
