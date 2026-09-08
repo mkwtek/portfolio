@@ -943,20 +943,29 @@ nav a:hover,
 
 /* --- gauge + number animation, played when the card scrolls into view --- */
 /* Hidden start state only under .js-reveal, so a no-JS page shows finished gauges. */
+/* All five gauges run identically (no per-ring stagger). They start --gauge-lead  */
+/* after the card's own text has faded in (the card reveal is ~0.85s). The centre  */
+/* numbers pop in as the arcs settle, with a green glow that fades as they land.   */
+.how-built {
+  --gauge-lead: 0.7s;   /* delay before the arcs begin, after the text reveal */
+  --gauge-sweep: 1.9s;  /* how long each arc takes to reach its score */
+}
+
 .js-reveal .scorecards .ring-fill {
   stroke-dashoffset: 100; /* empty */
 }
 .js-reveal .scorecards .ring-num {
   transform: scale(0);
+  opacity: 0;
 }
 .js-reveal .reveal.is-visible .ring-fill {
-  transition: stroke-dashoffset 1.9s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: calc(var(--i, 0) * 0.18s);
-  stroke-dashoffset: calc(100 - var(--val)); /* race to the score */
+  transition: stroke-dashoffset var(--gauge-sweep) cubic-bezier(0.4, 0, 0.2, 1) var(--gauge-lead);
+  stroke-dashoffset: calc(100 - var(--val)); /* sweep to the score */
 }
 .js-reveal .reveal.is-visible .ring-num {
-  animation: score-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: calc(1.35s + var(--i, 0) * 0.18s); /* pop in as the arc settles */
+  animation: score-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  /* start as the arc is on its final settle: lead + ~70% of the sweep */
+  animation-delay: calc(var(--gauge-lead) + var(--gauge-sweep) * 0.7);
 }
 
 /* Safety net: if focus reaches the card before the observer fires, or the        */
@@ -966,17 +975,24 @@ nav a:hover,
 }
 .js-reveal .reveal:focus-within .ring-num {
   transform: none;
+  opacity: 1;
 }
 
 @keyframes score-pop {
   0% {
-    transform: scale(0);
+    transform: scale(0.3);
+    opacity: 0;
+    text-shadow: 0 0 22px rgba(12, 206, 107, 0.95), 0 0 12px rgba(12, 206, 107, 0.75);
   }
-  70% {
-    transform: scale(1.18);
+  55% {
+    transform: scale(1.12);
+    opacity: 1;
+    text-shadow: 0 0 16px rgba(12, 206, 107, 0.7);
   }
   100% {
     transform: scale(1);
+    opacity: 1;
+    text-shadow: 0 0 0 rgba(12, 206, 107, 0);
   }
 }
 
@@ -987,6 +1003,7 @@ nav a:hover,
   }
   .js-reveal .scorecards .ring-num {
     transform: none;
+    opacity: 1;
     animation: none;
   }
 }
