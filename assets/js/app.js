@@ -109,12 +109,13 @@ document.addEventListener("keydown", (e) => {
 // Select nav links
 const navLink = document.querySelectorAll(".nav-link");
 
-// Move keyboard + screen-reader focus into a section after an on-page jump, so
-// the next Tab continues from there rather than from the nav, and a screen
-// reader announces the section landed on. The six sections carry tabindex="-1"
-// for this. preventScroll so focus() doesn't fight the smooth scroll.
-function focusTarget(el) {
-  el.focus({ preventScroll: true });
+// After an on-page jump, move keyboard + screen-reader focus to the section's
+// heading (each section <h2> is tabindex="0"), so the next Tab continues from
+// there rather than the nav and a screen reader announces the section landed on.
+// preventScroll so focus() doesn't fight the scroll that just ran.
+function focusTarget(section) {
+  const heading = section.querySelector("h2");
+  (heading || section).focus({ preventScroll: true });
 }
 
 // Nav-link clicks: close the mobile menu, and for the on-page section links take

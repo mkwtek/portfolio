@@ -39,14 +39,9 @@ html {
   scroll-margin-top: 7rem;
 }
 
-/* app.js moves focus onto the target section after an on-page nav jump (so the  */
-/* next Tab and the screen reader pick up from there). Suppress the outline on    */
-/* the section box itself - it would draw a ring around the whole section; the    */
-/* scroll and the screen-reader announcement are the feedback. Plain ID selectors */
-/* (not :where) so this outranks the global :focus-visible ring. Links and        */
-/* buttons inside the section still get their normal focus ring.                  */
-#about:focus, #recent-experience:focus, #skills:focus,
-#projects-websites:focus, #independent-projects:focus, #contact:focus,
+/* The skip link targets <main>; it's a big container, so no focus box on it -    */
+/* landing there and the screen-reader announcement are the feedback. Section     */
+/* headings are tabindex="0" and DO show the ring (see app.js focusTarget).       */
 #main-content:focus {
   outline: none;
 }
@@ -233,7 +228,7 @@ nav.nav-suppress-anim .main-nav-wrap {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -3px; /* sits a few px below the text baseline box, clear of the letters */
   width: 0;
   height: 2px;
   background-color: var(--color-link-hover);
@@ -613,6 +608,16 @@ nav a:hover,
 .js-reveal .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* A .reveal heading is tabindex="0"; if focus reaches it before the observer has */
+/* fired (keyboard tabbing to it off-screen), show it immediately rather than     */
+/* focusing something still at opacity 0.                                         */
+.js-reveal .reveal:focus,
+.js-reveal .reveal:focus-within {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
