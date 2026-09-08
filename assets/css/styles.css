@@ -59,6 +59,17 @@ a:hover {
   color: var(--color-link-hover);
 }
 
+/* --- Keyboard focus indicator (WCAG 2.4.7) --- */
+/* :focus-visible so the ring shows for keyboard / assistive-tech users but not  */
+/* on a plain mouse click. Outward high-contrast ring is the default; the nav    */
+/* links override this with an inset ring because the nav bar clips its overflow */
+/* (needed for the mobile drop-down animation) and would crop an outward one.    */
+:focus-visible {
+  outline: 3px solid var(--color-link-hover);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
 body {
   font-family: var(--font-family);
   overflow-x: hidden;
@@ -175,7 +186,8 @@ nav.nav-suppress-anim .main-nav-wrap {
 
 .nav-link {
   display: inline-block;
-  padding: 0.2rem 0;
+  padding: 0.2rem 0.45rem; /* horizontal room so the inset focus ring clears the text */
+  border-radius: 4px;
   transition: var(--transition);
   max-width: 100%;
   overflow: hidden;
@@ -237,6 +249,26 @@ nav a:hover,
 
 .nav-link:hover .nav-link-text::after {
   width: 100%;
+}
+
+/* Nav links sit inside stacked overflow:hidden boxes, so their focus ring has to */
+/* be inset (the .nav-link padding above gives it room to clear the text). Also   */
+/* fill the hover underline so the focused link is unmistakable.                  */
+.nav-link:focus-visible {
+  outline: 3px solid var(--color-link-hover);
+  outline-offset: -3px;
+}
+
+.nav-link:focus-visible .nav-link-text::after {
+  width: 100%;
+}
+
+/* The logo <a> is inline with no padding, so an inset ring would cut the text.   */
+/* It sits with vertical breathing room inside the bar, so an outward ring clears */
+/* on top and bottom; the sides are what matter for legibility and show fine.     */
+.nav-title h1 a:focus-visible {
+  outline: 3px solid var(--color-link-hover);
+  outline-offset: 3px;
 }
 
 .nav-link.external-link {
@@ -821,7 +853,12 @@ nav a:hover,
 .project-btn:focus-visible {
   background-color: var(--color-primary-accent);
   color: #fff;
-  outline: none;
+}
+
+/* keep the global keyboard focus ring on top of the fill swap */
+.project-btn:focus-visible {
+  outline: 3px solid var(--color-link-hover);
+  outline-offset: 2px;
 }
 
 /* End Project Section */
