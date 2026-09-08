@@ -901,6 +901,14 @@ nav a:hover,
   color: #0b5c30;
 }
 
+.scorecards-note {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #555;
+  text-align: center;
+  margin: -0.4rem 0 1.4rem;
+}
+
 .how-built-lead {
   font-weight: var(--bold-font);
   margin-bottom: 0.5rem;
@@ -942,13 +950,13 @@ nav a:hover,
   transform: scale(0);
 }
 .js-reveal .reveal.is-visible .ring-fill {
-  transition: stroke-dashoffset 1.15s cubic-bezier(0.33, 1, 0.68, 1);
-  transition-delay: calc(var(--i, 0) * 0.12s);
+  transition: stroke-dashoffset 1.9s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 0.18s);
   stroke-dashoffset: calc(100 - var(--val)); /* race to the score */
 }
 .js-reveal .reveal.is-visible .ring-num {
   animation: score-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: calc(0.5s + var(--i, 0) * 0.12s); /* pop in just after the arc lands */
+  animation-delay: calc(1.35s + var(--i, 0) * 0.18s); /* pop in as the arc settles */
 }
 
 /* Safety net: if focus reaches the card before the observer fires, or the        */
