@@ -109,6 +109,14 @@ document.addEventListener("keydown", (e) => {
 // Select nav links
 const navLink = document.querySelectorAll(".nav-link");
 
+// Move keyboard + screen-reader focus into a section after an on-page jump, so
+// the next Tab continues from there rather than from the nav, and a screen
+// reader announces the section landed on. The six sections carry tabindex="-1"
+// for this. preventScroll so focus() doesn't fight the smooth scroll.
+function focusTarget(el) {
+  el.focus({ preventScroll: true });
+}
+
 // Nav-link clicks: close the mobile menu, and for the on-page section links take
 // over the scroll so no "#section" is left in the address bar (that hash is what
 // makes a later refresh jump back to that section). CSS scroll-margin-top still
@@ -122,6 +130,7 @@ navLink.forEach((link) => {
     if (!target) return;
     e.preventDefault();
     target.scrollIntoView({ behavior: "smooth" });
+    focusTarget(target);
   });
 });
 
@@ -144,7 +153,10 @@ if (window.__initialHash) {
   window.addEventListener("load", () => {
     setTimeout(() => {
       const target = document.getElementById(window.__initialHash);
-      if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
+      if (target) {
+        target.scrollIntoView({ behavior: "instant", block: "start" });
+        focusTarget(target);
+      }
     }, 50);
   });
 }

@@ -39,6 +39,18 @@ html {
   scroll-margin-top: 7rem;
 }
 
+/* app.js moves focus onto the target section after an on-page nav jump (so the  */
+/* next Tab and the screen reader pick up from there). Suppress the outline on    */
+/* the section box itself - it would draw a ring around the whole section; the    */
+/* scroll and the screen-reader announcement are the feedback. Plain ID selectors */
+/* (not :where) so this outranks the global :focus-visible ring. Links and        */
+/* buttons inside the section still get their normal focus ring.                  */
+#about:focus, #recent-experience:focus, #skills:focus,
+#projects-websites:focus, #independent-projects:focus, #contact:focus,
+#main-content:focus {
+  outline: none;
+}
+
 /* CSS RESETS */
 * {
   margin: 0;
