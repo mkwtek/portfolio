@@ -356,6 +356,21 @@ nav a:hover,
     flex-shrink: 1;
     min-width: 0; /* overrides flexbox's default min-width:auto floor so items can genuinely shrink below their text width */
 }
+
+/* Desktop nav row: the name plus eight links have to fit one line. Protect the  */
+/* name from being squeezed (it must never wrap), and give the links a slightly  */
+/* tighter gap so the row stays a normal height.                                 */
+@media screen and (min-width: 1151px) {
+  .nav-title {
+    flex-shrink: 0;
+  }
+  .nav-title h1 {
+    white-space: nowrap;
+  }
+  .main-nav {
+    gap: 1.6rem;
+  }
+}
 .burger-menu {
   position: relative;
   width: 2rem;
@@ -861,9 +876,36 @@ nav a:hover,
 
 .ring-num {
   position: absolute;
+  z-index: 2;
   font-weight: var(--bold-font);
   font-size: 1.2rem;
   color: #0b5c30; /* dark green, ~6:1 on the panel */
+}
+
+/* RPM-gauge dressing: a ring of tick marks and a sweeping needle. Both are only  */
+/* on screen during the arc sweep, then gone - decorative, aria-hidden.           */
+.score-ring .ring::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 1;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg,
+    hsl(150, 40%, 42%) 0 1.4deg, transparent 1.4deg 18deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 66%, #000 68%, #000 80%, transparent 82%);
+          mask: radial-gradient(closest-side, transparent 66%, #000 68%, #000 80%, transparent 82%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ring-needle {
+  stroke: #0b5c30;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transform-box: view-box;
+  transform-origin: 22px 22px;
+  transform: rotate(0deg);
+  opacity: 0;
 }
 
 .ring-label {
@@ -944,11 +986,12 @@ nav a:hover,
 /* --- gauge + number animation, played when the card scrolls into view --- */
 /* Hidden start state only under .js-reveal, so a no-JS page shows finished gauges. */
 /* All five gauges run identically (no per-ring stagger). They start --gauge-lead  */
-/* after the card's own text has faded in (the card reveal is ~0.85s). The centre  */
-/* numbers pop in as the arcs settle, with a green glow that fades as they land.   */
+/* after the card's own text has faded in (the card reveal is ~0.85s): the tick    */
+/* ring flashes up, a needle revs around with the arc, and once it settles and     */
+/* fades the centre number pops in with a green glow.                              */
 .how-built {
   --gauge-lead: 0.7s;   /* delay before the arcs begin, after the text reveal */
-  --gauge-sweep: 1.9s;  /* how long each arc takes to reach its score */
+  --gauge-sweep: 1.6s;  /* how long each arc / needle sweep takes */
 }
 
 .js-reveal .scorecards .ring-fill {
@@ -962,10 +1005,15 @@ nav a:hover,
   transition: stroke-dashoffset var(--gauge-sweep) cubic-bezier(0.4, 0, 0.2, 1) var(--gauge-lead);
   stroke-dashoffset: calc(100 - var(--val)); /* sweep to the score */
 }
+.js-reveal .reveal.is-visible .ring::after {
+  animation: tick-flash var(--gauge-sweep) ease-out var(--gauge-lead) forwards;
+}
+.js-reveal .reveal.is-visible .ring-needle {
+  animation: needle-rev var(--gauge-sweep) cubic-bezier(0.3, 1.2, 0.5, 1) var(--gauge-lead) forwards;
+}
 .js-reveal .reveal.is-visible .ring-num {
-  animation: score-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  /* start as the arc is on its final settle: lead + ~70% of the sweep */
-  animation-delay: calc(var(--gauge-lead) + var(--gauge-sweep) * 0.7);
+  animation: score-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--gauge-lead) + var(--gauge-sweep)); /* pop as the needle vanishes */
 }
 
 /* Safety net: if focus reaches the card before the observer fires, or the        */
@@ -976,6 +1024,32 @@ nav a:hover,
 .js-reveal .reveal:focus-within .ring-num {
   transform: none;
   opacity: 1;
+}
+
+@keyframes tick-flash {
+  0% { opacity: 0; }
+  16% { opacity: 0.6; }
+  78% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+@keyframes needle-rev {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.85;
+  }
+  80% {
+    transform: rotate(calc(var(--val) * 3.6deg + 9deg)); /* overshoot the mark */
+    opacity: 0.85;
+  }
+  90% {
+    transform: rotate(calc(var(--val) * 3.6deg - 3deg)); /* bounce back */
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotate(calc(var(--val) * 3.6deg)); /* settle, then gone */
+    opacity: 0;
+  }
 }
 
 @keyframes score-pop {
@@ -1005,6 +1079,11 @@ nav a:hover,
     transform: none;
     opacity: 1;
     animation: none;
+  }
+  .js-reveal .scorecards .ring-needle,
+  .js-reveal .scorecards .ring::after {
+    animation: none;
+    opacity: 0;
   }
 }
 
