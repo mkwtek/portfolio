@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=21" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=22" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -408,16 +408,15 @@
 
       <div class="how-built-card card reveal">
         <p>
-          A website can look finished and still work against the business it represents. What a
-          visitor sees is the design. How the site is built, the code underneath, decides whether
-          it loads quickly, shows up in search, and works for someone using a keyboard, a screen
-          reader, or an older phone on a slow connection.
+          A website can look finished and still have problems that aren&#39;t visible in a
+          screenshot. The design is only part of the finished product. How a site is built and
+          configured affects how quickly it loads, how well it performs in search, how accessible
+          it is, and how it works across different devices and ways of using the web.
         </p>
         <p>
-          None of that shows in a screenshot, but it is where a good-looking site quietly loses
-          customers, and where an inaccessible one can expose a small business to an accessibility
-          demand letter. I treat that layer as part of the deliverable and measure it rather than
-          assume it.
+          Those things are easy to overlook because they aren&#39;t always visible to the person
+          who built the site. I don&#39;t treat them as optional extras or assume the platform has
+          taken care of them. I test them, find problems, and fix them as part of the build.
         </p>
 
         <p class="scorecards-lead">Results from the most recent audit of this portfolio website:</p>
@@ -498,15 +497,15 @@
 
         <p class="scorecards-note">
           Measured with Google Lighthouse and WebAIM WAVE. Scores vary slightly between runs and
-          shift as a site is updated; these reflect the date shown, not a fixed guarantee.
+          shift as a site is updated; these reflect the most recent check, not a fixed guarantee.
         </p>
 
         <p class="how-built-lead">Every build includes:</p>
         <ul class="how-built-list">
           <li>
-            <strong>Accessibility to WCAG 2.1</strong>, checked with multiple independent tools and
-            by hand: keyboard navigation, screen-reader behavior, color contrast, focus order, and
-            tap-target sizing.
+            <strong>Accessibility testing against WCAG 2.1</strong>, checked with multiple
+            independent tools and by hand: keyboard navigation, screen-reader behavior, color
+            contrast, focus order, and tap-target sizing.
           </li>
           <li>
             <strong>Performance and Core Web Vitals</strong>: compressed and correctly sized images,
@@ -737,7 +736,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=21"></script>
+  <script src="assets/js/app.js?v=22"></script>
 </body>
 
 </html>
