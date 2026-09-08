@@ -15,35 +15,25 @@
   <meta property="og:image" content="https://mkwtek.github.io/portfolio/assets/images/matt-1400.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Preconnect: establishes DNS/TLS early for Google Fonts, before the actual -->
-  <!-- resource requests happen, shaving round-trip time off each one.           -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Roboto font stylesheet: moved here from an @import at the top of styles.css. -->
-  <!-- @import is render-blocking in a different, worse way than a <link> tag: the  -->
-  <!-- browser must download and parse the whole CSS file before it even discovers -->
-  <!-- the import, then fetch a second stylesheet, all serially. A <link> here gets -->
-  <!-- discovered immediately while the HTML itself is still being parsed.         -->
-  <!-- 400 + 900 only. The CSS asks for weight 700 but nothing italic is used, so -->
-  <!-- dropping the (unused) italic file leaves the browser matching 700 to 900,  -->
-  <!-- exactly as it did before - no visual change, one less font download.       -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet" />
+  <!-- Roboto is self-hosted (see @font-face in styles.css). No external font   -->
+  <!-- stylesheet, no fonts.gstatic connection - it all comes from styles.css   -->
+  <!-- and one woff2 on our own origin. Preload the woff2 so it starts fetching -->
+  <!-- alongside the CSS instead of waiting for the CSS to parse first.         -->
+  <link rel="preload" href="assets/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Icons are self-hosted as CSS masks in styles.css (see ".bi"), no icon font. -->
-
 
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=14" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=15" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
 
-  <!-- Google reCAPTCHA (Custom key, used by the contact form's spam protection) -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- reCAPTCHA (contact-form spam protection) is loaded lazily by app.js when the -->
+  <!-- form nears the viewport - it's ~500 KB of JS most visitors never need.       -->
 
   <title>Matt Whitcomb - Web Dev</title>
 </head>
@@ -196,7 +186,7 @@
 
         <div class="role-2">
           <p>
-            <strong>Web Developer and Consultant at <a href="https://www.netraising.com" target="_blank" title="Open NetRaising.com in new tab">NetRaising<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></a> | March 2024 - June 2025 | &#40;Remote&#41;</strong>
+            <strong>Web Developer and Consultant at <a href="https://www.netraising.com" target="_blank" title="Open NetRaising.com in new tab"><span class="nowrap-icon">NetRaising<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></span></a> | March 2024 - June 2025 | &#40;Remote&#41;</strong>
           </p>
           <ul class="exp-list">
             <li>
@@ -224,7 +214,7 @@
 
         <div class="role-3">
           <p>
-            <strong>Website & Technology Manager at <a href="https://www.seasidesustainability.org/" target="_blank" title="Open Seaside Sustainability website in new tab">Seaside Sustainability<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></a> | Jan 2023 - July 2023 | &#40;Remote from Seattle, WA to Gloucester, MA&#41;</strong>
+            <strong>Website & Technology Manager at <a href="https://www.seasidesustainability.org/" target="_blank" title="Open Seaside Sustainability website in new tab">Seaside <span class="nowrap-icon">Sustainability<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></span></a> | Jan 2023 - July 2023 | &#40;Remote from Seattle, WA to Gloucester, MA&#41;</strong>
           </p>
           <ul class="exp-list">
             <li>
@@ -250,7 +240,7 @@
         <div class="center mimic-h4-size">
           <p>
             For additional roles and detailed responsibilities, visit my
-            <a href="https://mkwtek.github.io/resume/" target="_blank">Resume website<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></a>.
+            <a href="https://mkwtek.github.io/resume/" target="_blank">Resume <span class="nowrap-icon">website<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></span></a>.
           </p>
         </div><!-- ./center mimic-h4-size -->
       
@@ -610,12 +600,12 @@
     <p class="copy">&copy; Copyright 2023 - <span id="current-year"></span></p>
     <p class="copy">
       Built with &#x2661; by <br>
-      <a href="https://www.linkedin.com/in/mattkwhitcomb/" target="_blank">Matt Whitcomb<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></a>
+      <a href="https://www.linkedin.com/in/mattkwhitcomb/" target="_blank">Matt <span class="nowrap-icon">Whitcomb<i class="bi bi-box-arrow-up-right ext-icon" aria-hidden="true"></i></span></a>
     </p>
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=14"></script>
+  <script src="assets/js/app.js?v=15"></script>
 </body>
 
 </html>

@@ -1,5 +1,15 @@
-/* Roboto font is loaded via a <link> tag in index.html's <head> (not an @import here) -- */
-/* @import is render-blocking in a worse way than a <link>, see index.html for details.  */
+/* Roboto, self-hosted. One variable-font file (latin subset, ~37 KB) covers   */
+/* every weight the site uses, served from our own origin - no render-blocking  */
+/* request to fonts.googleapis.com and no second connection to fonts.gstatic.   */
+/* font-display: swap so text paints immediately in the fallback and swaps in.  */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/roboto-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 /* VARIABLES */
 :root {
@@ -314,6 +324,12 @@ nav a:hover,
   margin-left: 0.3em;
   vertical-align: 0.04em;
   color: inherit; /* follows the link's colour, including its hover state */
+}
+
+/* Wraps the last word of an inline link plus its .ext-icon so the icon can  */
+/* never drop to a line by itself - it stays glued to the word it follows.   */
+.nowrap-icon {
+  white-space: nowrap;
 }
 
 /* Desktop Nav Menu  */

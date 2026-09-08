@@ -203,6 +203,39 @@ const formSuccess = document.querySelector("#form-success");
 const formError = document.querySelector("#form-error");
 const recaptchaError = document.querySelector("#recaptcha-error");
 
+// Load reCAPTCHA lazily. Its api.js pulls ~500 KB of script and runs a chunk of
+// it on load, for a widget near the bottom of the page that most visitors never
+// reach. Inject it once the contact form gets close to the viewport, or the
+// moment someone touches a field - whichever comes first. api.js auto-renders
+// any .g-recaptcha element when it arrives.
+if (contactForm) {
+  let recaptchaRequested = false;
+  const loadRecaptcha = () => {
+    if (recaptchaRequested) return;
+    recaptchaRequested = true;
+    const s = document.createElement("script");
+    s.src = "https://www.google.com/recaptcha/api.js";
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  };
+  contactForm.addEventListener("focusin", loadRecaptcha, { once: true });
+  if ("IntersectionObserver" in window) {
+    const rcObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          loadRecaptcha();
+          rcObserver.disconnect();
+        }
+      },
+      { rootMargin: "800px" } // start fetching well before the form is on screen
+    );
+    rcObserver.observe(contactForm);
+  } else {
+    loadRecaptcha();
+  }
+}
+
 if (contactForm) {
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
