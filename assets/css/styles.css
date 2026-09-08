@@ -84,29 +84,21 @@ p {
                           /* tested widths, so this removes mid-word breaking entirely,  */
                           /* combined with a lower floor below, shrinking the text is    */
                           /* the acceptable trade, cutting a word in half is not.        */
-  margin-bottom: 0.6rem; /* trimmed from 1rem now that the ::after bar adds height below   */
-                         /* the text; the heading block still sits ~1rem off its card and */
-                         /* well clear of the section above (space comes from .section-    */
-                         /* padding). Each heading groups with its own card, not the one   */
-                         /* above it.                                                      */
-  display: inline-block; /* Prevents the margin from collapsing/disappearing */
-  width: 100%; /* Ensures the title still spans the full width */
+  /* block + fit-content so the element is only as wide as the heading text,     */
+  /* which lets the accent underline below span the full width of the words      */
+  /* (not a fixed stub). margin auto keeps it centred; margin-bottom is the gap   */
+  /* down to the card, larger than the padding-bottom above the line so the line  */
+  /* sits with the heading, not the card.                                         */
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 1.4rem;
+  padding-bottom: 0.28rem; /* gap between the heading text and its accent underline */
+  border-bottom: 3px solid var(--color-primary-accent);
   text-align: center;
   font-size: clamp(1rem, 6vw, 2rem); /* Lowered floor from 1.4rem: that still wasn't     */
                                       /* small enough at the narrowest widths for words   */
                                       /* like "Consultation" to fit on their own line.    */
-}
-
-/* Short centered accent bar under every section heading - a splash of the site */
-/* colour that also reads as a section divider.                                 */
-.title-base::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  margin: 0.55rem auto 0;
-  background-color: var(--color-primary-accent);
-  border-radius: 2px;
 }
 
 .card {
@@ -1371,17 +1363,13 @@ nav a:hover,
     grid-template-columns: 1fr;
   }
 
-  /* Reserves real clearance from the floating .linkedinup widget on the right, instead */
-  /* of relying on the widget staying small enough (which wasn't reliably enough on its */
-  /* own). Equal padding on both sides keeps the centered text visually balanced rather */
-  /* than shifting it off-center.                                                       */
-  /* .title-base was removed here: it's a shared class also used by About Me, Recent    */
-  /* Experience, and Technical Skills, none of which ever had the overlap problem, and  */
-  /* including it squeezed them unnecessarily. .projects-title and .contact h2 already  */
-  /* precisely cover all three headings that actually needed this.                      */
+  /* Keeps the two longest headings clear of the floating .linkedinup widget on the  */
+  /* right. Was `padding: 0 2rem`, changed to max-width so it doesn't widen the       */
+  /* accent underline (which now spans the element's box, .title-base border-bottom). */
+  /* The long headings just wrap a little sooner instead.                             */
   .projects-title,
   .contact h2 {
-    padding: 0 2rem;
+    max-width: calc(100% - 3rem);
   }
 
   .card {
