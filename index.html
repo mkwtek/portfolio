@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=5" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=6" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -53,6 +53,9 @@
     if (window.__initialHash) {
       history.replaceState(null, "", location.pathname + location.search);
     }
+    // Enables the scroll-reveal hidden state before first paint (see styles.css,
+    // ".js-reveal"). If this never runs, .reveal elements just render normally.
+    document.documentElement.classList.add("js-reveal");
   </script>
 
   <!-- Navbar -->
@@ -123,8 +126,8 @@
 
     <!-- More about me / Recent Experience -->
     <section class="more-about section-padding" id="recent-experience">
-      <h2 class="title-base">Recent Experience</h2>
-      <div class="card">
+      <h2 class="title-base reveal">Recent Experience</h2>
+      <div class="card reveal">
 
         <div class="role-1">
           <p>
@@ -252,11 +255,11 @@
 
     <!-- Technical Skills section -->
     <section class="skills section-padding" id="skills">
-      <h2 class="skill-header title-base">Technical Skills</h2>
+      <h2 class="skill-header title-base reveal">Technical Skills</h2>
 
       <div class="skills-grid">
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-code-slash" aria-hidden="true"></i>
             <h3>Web Development &amp; Platforms</h3>
@@ -275,7 +278,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-hdd-network" aria-hidden="true"></i>
             <h3>Hosting, Domains &amp; SEO</h3>
@@ -291,7 +294,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-database" aria-hidden="true"></i>
             <h3>Development &amp; Databases</h3>
@@ -306,7 +309,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-universal-access" aria-hidden="true"></i>
             <h3>Accessibility</h3>
@@ -319,7 +322,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-stars" aria-hidden="true"></i>
             <h3>AI-Assisted Workflows</h3>
@@ -333,7 +336,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-palette" aria-hidden="true"></i>
             <h3>Design &amp; Creative</h3>
@@ -348,7 +351,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-briefcase" aria-hidden="true"></i>
             <h3>Business &amp; Entrepreneurship</h3>
@@ -364,7 +367,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-kanban" aria-hidden="true"></i>
             <h3>Agile &amp; Project Management</h3>
@@ -382,7 +385,7 @@
           </ul>
         </div>
 
-        <div class="skill-category card">
+        <div class="skill-category card reveal">
           <div class="skill-heading">
             <i class="bi bi-tools" aria-hidden="true"></i>
             <h3>Additional Tools</h3>
@@ -406,12 +409,12 @@
 
     <!-- Projects Section - Website Examples (NetRaising) -->
     <section class="projects section-padding" id="projects-websites">
-      <h2 class="projects-title title-base">Website Development & Client Consultation</h2>
-      <p class="projects-disclosure">Built while employed at a nonprofit-focused web development and consultancy agency.</p>
+      <h2 class="projects-title title-base reveal">Website Development & Client Consultation</h2>
+      <p class="projects-disclosure reveal">Built while employed at a nonprofit-focused web development and consultancy agency.</p>
       <div class="projects-container">
 
         <!-- Card 1 Open Adopt -->
-        <div class="project-container project-card card">
+        <div class="project-container project-card card reveal">
           <img src="assets/images/openadopt.png" alt="Open Adoption &amp; Family Services website homepage" loading="lazy" class="project-pic" />
           <h3 class="project-title">Open Adoption & Family Services</h3>
 
@@ -432,7 +435,7 @@
         </div><!-- project-container project-card card -->
 
         <!-- Card 2 LCFRB -->
-        <div class="project-container project-card card project-card-lcfrb">
+        <div class="project-container project-card card reveal project-card-lcfrb">
           <img src="assets/images/lcfrb.png" alt="Lower Columbia Fish Recovery Board website homepage" loading="lazy" class="project-pic" />
           <h3 class="project-title">Lower Columbia Fish Recovery Board</h3>
 
@@ -452,7 +455,7 @@
         </div><!-- ./project-container project-card card project-card-lcfrb -->
 
         <!-- Card 3 atoz-staffing -->
-        <div class="project-container project-card card">
+        <div class="project-container project-card card reveal">
           <img src="assets/images/atozstaffing.png" alt="AtoZ Staffing website homepage" loading="lazy" class="project-pic" />
           <h3 class="project-title">AtoZ Staffing</h3>
 
@@ -478,11 +481,11 @@
 
     <!-- Independent Fun Projects Section -->
     <section class="projects section-padding" id="independent-projects">
-      <h2 class="projects-title title-base">Independent &amp; Freelance Projects</h2>
+      <h2 class="projects-title title-base reveal">Independent &amp; Freelance Projects</h2>
       <div class="projects-container">
 
         <!-- Card 1 -->
-        <div class="project-container project-card card">
+        <div class="project-container project-card card reveal">
           <img src="assets/images/pixel-t-rex.png" alt="Dino Game screenshot" loading="lazy" class="project-pic" />
           <h3 class="project-title">Dino Game</h3>
 
@@ -497,7 +500,7 @@
         </div><!-- ./project-container project-card card -->
 
         <!-- Card 2 -->
-        <div class="project-container project-card card">
+        <div class="project-container project-card card reveal">
           <img src="assets/images/libertis_website.png" alt="Liberti's Auto Electric website homepage" loading="lazy" class="project-pic" />
           <h3 class="project-title">Liberti's Auto Electric</h3>
           <p class="project-details">
@@ -515,7 +518,7 @@
         </div><!-- ./project-container project-card card -->
 
         <!-- Card 3 -->
-        <div class="project-container project-card card">
+        <div class="project-container project-card card reveal">
           <img src="assets/images/quickQuiz.png" alt="Quiz App screenshot" loading="lazy" class="project-pic" />
           <h3 class="project-title">Quiz App</h3>
           <p class="project-details">
@@ -537,8 +540,8 @@
 
     <!-- Contact section -->
     <section class="contact section-padding" id="contact">
-      <h2 class="title-base">Get In Touch With Me</h2>
-      <div class="contact-form-container">
+      <h2 class="title-base reveal">Get In Touch With Me</h2>
+      <div class="contact-form-container reveal">
         <div class="contact-form">
           <form action="https://formspree.io/f/mnqywwzo" method="POST" id="contact-form"> <!-- Linked to my formspree.io acct -->
             <div class="form-control">
@@ -608,7 +611,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=5"></script>
+  <script src="assets/js/app.js?v=6"></script>
 </body>
 
 </html>

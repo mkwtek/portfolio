@@ -4,6 +4,44 @@ if (yearSpan) {
   yearSpan.innerText = new Date().getFullYear();
 }
 
+// --- Scroll reveal ---
+// Elements marked .reveal in the markup fade + rise in as they enter the
+// viewport. The hidden start state is CSS (.js-reveal .reveal, set by the inline
+// script in index.html). Here we just flip .is-visible once each one is in view,
+// then stop observing it. Reduced-motion or no IntersectionObserver: reveal all
+// immediately.
+const revealEls = document.querySelectorAll(".reveal");
+if (revealEls.length) {
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    // Safety net: if something never triggers (e.g. an observer quirk), reveal
+    // everything after a few seconds so content can't stay hidden.
+    setTimeout(() => {
+      document
+        .querySelectorAll(".reveal:not(.is-visible)")
+        .forEach((el) => el.classList.add("is-visible"));
+    }, 4000);
+  }
+}
+
 // Scroll to top selection
 const scrollUp = document.querySelector("#scroll-up");
 

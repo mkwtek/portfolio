@@ -540,6 +540,32 @@ nav a:hover,
 /* End Hero Load-In Animation */
 
 /* End Hero Section */
+
+/* ---------- Scroll Reveal ---------- */
+/* Elements tagged .reveal in the markup fade + rise into place as they scroll   */
+/* into view. The hidden start state only applies when JS is running: the inline */
+/* script in <body> adds .js-reveal to <html>, and app.js's IntersectionObserver */
+/* adds .is-visible once each element enters the viewport. With JS off, or under */
+/* reduced-motion, .reveal elements just render normally.                        */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+/* End Scroll Reveal */
 /* RECENT EXPERIENCE / MORE ABOUT */
 .more-about {
   background-color: var(--bg-color);
