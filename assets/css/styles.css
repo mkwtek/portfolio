@@ -650,9 +650,11 @@ nav a:hover,
   transform: none;
 }
 
-/* A .reveal heading is tabindex="0"; if focus reaches it before the observer has */
-/* fired (keyboard tabbing to it off-screen), show it immediately rather than     */
-/* focusing something still at opacity 0.                                         */
+/* Section headings sit in a .reveal wrapper and are tabindex="0". If focus       */
+/* reaches one before the observer has fired (keyboard-tabbing to it off-screen), */
+/* show its wrapper immediately rather than focusing something still at opacity 0.*/
+/* The wrapper (not the heading) carries .reveal so WAVE-style contrast checks    */
+/* never see opacity:0 on a text element.                                         */
 .js-reveal .reveal:focus,
 .js-reveal .reveal:focus-within {
   opacity: 1;

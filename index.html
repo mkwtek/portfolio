@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=15" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=16" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -132,7 +132,7 @@
 
     <!-- More about me / Recent Experience -->
     <section class="more-about section-padding" id="recent-experience">
-      <h2 class="title-base reveal" tabindex="0">Recent Experience</h2>
+      <div class="reveal"><h2 class="title-base" tabindex="0">Recent Experience</h2></div>
       <div class="card reveal">
 
         <div class="role-1">
@@ -249,7 +249,7 @@
 
     <!-- Technical Skills section -->
     <section class="skills section-padding" id="skills">
-      <h2 class="skill-header title-base reveal" tabindex="0">Technical Skills</h2>
+      <div class="reveal"><h2 class="skill-header title-base" tabindex="0">Technical Skills</h2></div>
 
       <div class="skills-grid">
 
@@ -403,8 +403,10 @@
 
     <!-- Projects Section - Website Examples (NetRaising) -->
     <section class="projects section-padding" id="projects-websites">
-      <h2 class="projects-title title-base reveal" tabindex="0">Website Development & Client Consultation</h2>
-      <p class="projects-disclosure reveal">Built while employed at a nonprofit-focused web development and consultancy agency.</p>
+      <div class="reveal">
+        <h2 class="projects-title title-base" tabindex="0">Website Development & Client Consultation</h2>
+        <p class="projects-disclosure">Built while employed at a nonprofit-focused web development and consultancy agency.</p>
+      </div>
       <div class="projects-container">
 
         <!-- Card 1 Open Adopt -->
@@ -475,7 +477,7 @@
 
     <!-- Independent Fun Projects Section -->
     <section class="projects section-padding" id="independent-projects">
-      <h2 class="projects-title title-base reveal" tabindex="0">Independent &amp; Freelance Projects</h2>
+      <div class="reveal"><h2 class="projects-title title-base" tabindex="0">Independent &amp; Freelance Projects</h2></div>
       <div class="projects-container">
 
         <!-- Card 1 -->
@@ -534,7 +536,7 @@
 
     <!-- Contact section -->
     <section class="contact section-padding" id="contact">
-      <h2 class="title-base reveal" tabindex="0">Get In Touch With Me</h2>
+      <div class="reveal"><h2 class="title-base" tabindex="0">Get In Touch With Me</h2></div>
       <div class="contact-form-container reveal">
         <div class="contact-form">
           <form action="https://formspree.io/f/mnqywwzo" method="POST" id="contact-form"> <!-- Linked to my formspree.io acct -->
@@ -605,7 +607,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=15"></script>
+  <script src="assets/js/app.js?v=16"></script>
 </body>
 
 </html>
