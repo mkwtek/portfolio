@@ -24,8 +24,12 @@
   --bg-color: #fcfcfc;
   
   /* Primary color used for links, text, borders (WCAG AA PASS) */
-  --color-primary-accent: hsl(190, 70%, 30%); 
-  
+  --color-primary-accent: hsl(190, 70%, 30%);
+
+  /* Softened accent for the 1px card / widget hairline frames - the accent teal at  */
+  /* reduced opacity, so a crisp 1px line doesn't read as harshly as solid.          */
+  --color-accent-hairline: hsla(190, 70%, 30%, 0.6);
+
   /* Color used for link hover states (WCAG AA PASS) */
   --color-link-hover: #a10171;
   
@@ -183,10 +187,11 @@ p {
 .card {
   background-color: #fff;
   border-radius: 11px;
-  /* A real accent-teal border. 1.5px: a crisp 1px line read too sharp/wiry, a full  */
-  /* 2px too heavy. box-sizing: border-box is global, so it adds no layout width.     */
-  /* Drop shadow kept separately.                                                    */
-  border: 1.5px solid var(--color-primary-accent);
+  /* 1px accent hairline. Solid 1px read too sharp and solid 2px too heavy, so this  */
+  /* is 1px at reduced opacity (--color-accent-hairline) - a definite width, no      */
+  /* sub-pixel guesswork. box-sizing: border-box is global, so it adds no layout     */
+  /* width. Drop shadow kept separately.                                             */
+  border: 1px solid var(--color-accent-hairline);
   box-shadow: 0 3px 10px var(--primary-shadow);
   padding: 20px;
 }
@@ -589,7 +594,7 @@ nav a:hover,
   border-radius: 50%;
   /* Accent-teal ring around the circle. box-shadow, not border, so it sits outside  */
   /* the clipped photo area and adds nothing to the 16rem box.                        */
-  box-shadow: 0 0 0 1.5px var(--color-primary-accent);
+  box-shadow: 0 0 0 1px var(--color-accent-hairline);
 }
 
 .hero-slide {
@@ -1436,10 +1441,10 @@ nav a:hover,
 .contact-form-container {
   padding: 0.938rem;
   border-radius: 11px;
-  /* Same treatment as .card: a real 1.5px accent-teal border + drop shadow. Drop-   */
-  /* shadow tint switched from the terracotta --secondary-shadow (#a17a69) to the    */
-  /* accent teal (= #177082); revert by putting `var(--secondary-shadow)` back.      */
-  border: 1.5px solid var(--color-primary-accent);
+  /* Same treatment as .card: the 1px accent hairline + drop shadow. Drop-shadow     */
+  /* tint switched from the terracotta --secondary-shadow (#a17a69) to the accent    */
+  /* teal (= #177082); revert by putting `var(--secondary-shadow)` back.             */
+  border: 1px solid var(--color-accent-hairline);
   box-shadow: 0 3px 10px rgba(23, 112, 130, 1);
 }
 
@@ -1560,7 +1565,7 @@ nav a:hover,
 /* element that matches the widget. Its contents are cross-origin and untouchable,   */
 /* but the iframe's own border is ours to set.                                       */
 .g-recaptcha iframe {
-  border: 1.5px solid var(--color-primary-accent);
+  border: 1px solid var(--color-accent-hairline);
   border-radius: 4px;
 }
 
@@ -1653,11 +1658,11 @@ nav a:hover,
     bottom: 85px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
     background-color: #fff;
     border-radius: 10px;
-    /* 1.5px accent-teal border to match the cards. 2px/6px blur is tighter than the */
-    /* old 8px opaque spread, which bled onto the cards; tint switched from the      */
+    /* 1px accent hairline to match the cards. 2px/6px blur is tighter than the old  */
+    /* 8px opaque spread, which bled onto the cards; tint switched from the          */
     /* terracotta rgba(161, 122, 105, 0.6) (#a17a69 at 60%) to the accent teal       */
     /* (= #177082) - revert with that rgba if wanted.                               */
-    border: 1.5px solid var(--color-primary-accent);
+    border: 1px solid var(--color-accent-hairline);
     box-shadow: 0 2px 6px rgba(23, 112, 130, 1);
     padding: 3px;
     z-index: 1000; /* Higher than nav so it's always accessible */
