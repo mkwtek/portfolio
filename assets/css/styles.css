@@ -538,9 +538,9 @@ nav a:hover,
 }
 /* HERO SECTION */
 /* Tall enough that the next section's heading stays under the fold on load (before   */
-/* its scroll-reveal runs and while it is still opacity:0). Content sits near the top; */
-/* the leftover viewport slack falls below the card. padding-top gives the heading     */
-/* some room under the nav.                                                            */
+/* its scroll-reveal runs and while it is still opacity:0). The card is biased down    */
+/* from the top by a viewport-relative padding, so the leftover slack is split roughly */
+/* 40/60 above/below rather than all of it landing under the card.                     */
 .hero {
   text-align: center; /* centres the "About Me" heading, matching every other section */
   display: flex;
@@ -548,7 +548,7 @@ nav a:hover,
   justify-content: flex-start;
   min-height: calc(100vh - 10rem);
   min-height: calc(100svh - 10rem);
-  padding-top: 3.25rem;
+  padding-top: clamp(3rem, 12svh, 8rem);
 }
 
 /* Full-width card, same width as every other section card. Two columns on desktop:  */
@@ -2003,6 +2003,12 @@ nav a:hover,
 
   /* ------ MOBILE HERO SECTION ------ */
   /* One column: portrait on top (fixed cap, not row-height driven), bio below.        */
+  .hero {
+    /* the stacked hero content already fills the screen on a phone, so the desktop  */
+    /* viewport-relative bias would just push the bio needlessly far down            */
+    padding-top: 1.75rem;
+  }
+
   .hero-card {
     flex-direction: column;
     align-items: center;
