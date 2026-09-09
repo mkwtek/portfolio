@@ -183,7 +183,9 @@ p {
 .card {
   background-color: #fff;
   border-radius: 11px;
-  box-shadow: 0 3px 10px var(--primary-shadow);
+  /* Inset 3px accent-teal frame + the existing drop shadow. Inset box-shadow so it  */
+  /* follows the border-radius and adds no box size.                                 */
+  box-shadow: inset 0 0 0 3px var(--color-primary-accent), 0 3px 10px var(--primary-shadow);
   padding: 20px;
 }
 
@@ -1432,9 +1434,11 @@ nav a:hover,
 .contact-form-container {
   padding: 0.938rem;
   border-radius: 11px;
-  /* Shadow tint switched from the terracotta --secondary-shadow (#a17a69) to the   */
-  /* accent teal (= #177082). Revert by putting `var(--secondary-shadow)` back here. */
-  box-shadow: 0 3px 10px rgba(23, 112, 130, 1);
+  /* Same treatment as .card: inset 3px accent-teal frame + drop shadow. Drop-shadow */
+  /* tint switched from the terracotta --secondary-shadow (#a17a69) to the accent    */
+  /* teal (= #177082); revert by putting `var(--secondary-shadow)` back as the       */
+  /* second shadow.                                                                  */
+  box-shadow: inset 0 0 0 3px var(--color-primary-accent), 0 3px 10px rgba(23, 112, 130, 1);
 }
 
 .contact-form-container label {
