@@ -604,10 +604,12 @@ nav a:hover,
   object-fit: cover;
   object-position: center;
   filter: contrast(1.03) brightness(0.96) saturate(0.94);
-  /* Ken Burns: each portrait starts slightly enlarged and slowly pulls back to the  */
-  /* full frame while it is the active slide, then eases back in while hidden        */
-  /* (nobody sees the reverse). Duration is long enough to reset before the slide's  */
-  /* next turn.                                                                      */
+  /* Ken Burns: while a slide is active its photo drifts slowly between scale 1 and   */
+  /* 1.08. Default is a pull-back (starts enlarged, settles to the full frame); add   */
+  /* .hero-zoom-in to a slide to reverse it (starts full, pushes in). Both use the    */
+  /* same two values, so whichever way each slide goes, the scale always matches at   */
+  /* the hand-off and the crossfade never "pops". Nobody sees the reverse while a     */
+  /* slide is hidden; 8s is long enough to reset before its next turn.                */
   transform: scale(1.08);
   transition: transform 8s ease-out;
 }
@@ -616,13 +618,23 @@ nav a:hover,
   transform: scale(1);
 }
 
+.hero-slide.hero-zoom-in .hero-img {
+  transform: scale(1);
+}
+
+.hero-slide.hero-zoom-in.is-visible .hero-img {
+  transform: scale(1.08);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-slide,
   .hero-img {
     transition: none;
   }
   .hero-img,
-  .hero-slide.is-visible .hero-img {
+  .hero-slide.is-visible .hero-img,
+  .hero-slide.hero-zoom-in .hero-img,
+  .hero-slide.hero-zoom-in.is-visible .hero-img {
     transform: scale(1);
   }
 }
@@ -644,6 +656,43 @@ nav a:hover,
 
 .hero-bio .bio-text + .bio-text {
   margin-top: 0.9rem;
+}
+
+/* Scroll cue: a down chevron in the space under the card. margin-top: auto drops it  */
+/* to the bottom of the flex hero (near the fold); it links to the next section.      */
+.scroll-cue {
+  margin-top: auto;
+  margin-bottom: 0.75rem;
+  align-self: center;
+  display: inline-flex;
+  padding: 10px 14px; /* ~44px tap target around the small glyph */
+  color: var(--color-primary-accent);
+  line-height: 0;
+  filter: drop-shadow(0 2px 3px rgba(120, 130, 135, 0.45));
+  animation: scrollCueNudge 1.9s ease-in-out infinite;
+}
+
+.scroll-cue:hover,
+.scroll-cue:focus-visible {
+  color: var(--color-link-hover);
+}
+
+@keyframes scrollCueNudge {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  45% {
+    transform: translateY(5px) scaleY(1.18);
+  }
+  70% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue {
+    animation: none;
+  }
 }
 
 /* ---------- Hero Load-In Animation ---------- */
@@ -2041,6 +2090,11 @@ nav a:hover,
 
   .hero-bio .bio-text {
     text-align: left;
+  }
+
+  .scroll-cue {
+    /* no viewport slack to absorb on mobile, so give it a fixed gap from the card */
+    margin-top: 1.75rem;
   }
 
   /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */

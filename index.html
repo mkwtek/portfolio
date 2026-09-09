@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=52" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=53" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -105,7 +105,7 @@
             <source srcset="assets/images/matt-hero-4.webp" type="image/webp" />
             <img src="assets/images/matt-hero-4.jpg" alt="Matt Whitcomb" width="800" height="800" fetchpriority="high" class="hero-img" />
           </picture>
-          <picture class="hero-slide">
+          <picture class="hero-slide hero-zoom-in">
             <source srcset="assets/images/matt-hero.webp" type="image/webp" />
             <img src="assets/images/matt-hero.jpg" alt="" width="800" height="800" loading="lazy" class="hero-img" />
           </picture>
@@ -113,7 +113,7 @@
             <source srcset="assets/images/matt-hero-2.webp" type="image/webp" />
             <img src="assets/images/matt-hero-2.jpg" alt="" width="800" height="800" loading="lazy" class="hero-img" />
           </picture>
-          <picture class="hero-slide">
+          <picture class="hero-slide hero-zoom-in">
             <source srcset="assets/images/matt-hero-3.webp" type="image/webp" />
             <img src="assets/images/matt-hero-3.jpg" alt="" width="640" height="640" loading="lazy" class="hero-img" />
           </picture>
@@ -139,6 +139,14 @@
           </p>
         </div><!-- ./hero-bio -->
       </div><!-- ./hero-card -->
+
+      <!-- Scroll cue: sits in the space below the card, near the fold, and jumps to -->
+      <!-- the next section. Decorative bounce; static for reduced motion.           -->
+      <a class="scroll-cue" href="#recent-experience" aria-label="Scroll to the next section">
+        <svg viewBox="0 0 24 14" width="28" height="16" aria-hidden="true" focusable="false">
+          <path d="M2 2 L12 12 L22 2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
 
     </section>
 
@@ -802,7 +810,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=52"></script>
+  <script src="assets/js/app.js?v=53"></script>
 </body>
 
 </html>
