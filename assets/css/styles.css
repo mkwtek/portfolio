@@ -546,8 +546,13 @@ nav a:hover,
 }
 
 .hero-img-mask {
-  height: 500px;
+  /* The headshot is essentially square, so the frame matches its ratio and shows   */
+  /* the whole photo, centred, at a sensible size, rather than a fixed-height        */
+  /* letterbox that crops hard into the face. Tune with max-width.                    */
   width: 100%;
+  max-width: 23rem;
+  aspect-ratio: 1300 / 1325;
+  margin: 0 auto;
   overflow: hidden;
   padding: 0.625rem;
   border-radius: 11px;
@@ -1990,11 +1995,8 @@ nav a:hover,
     gap: 0;
   }
 
-  .hero-img-mask {
-    height: 350px; /* was locked at the base 500px on mobile too; this trims the tall,   */
-                   /* narrow portrait look without going fully square, which can crop a  */
-                   /* headshot oddly depending on framing                                */
-  }
+  /* .hero-img-mask now sizes from its aspect-ratio (set in the base rule), so no     */
+  /* mobile height override is needed; the shared 87% width rule above still caps it. */
 
   /* Every section spans the full content-wrapper width on mobile (matching Skills   */
   /* and How I Build), so their cards line up edge-for-edge down the page. The        */
