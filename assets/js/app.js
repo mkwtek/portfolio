@@ -132,8 +132,9 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Select nav links
-const navLink = document.querySelectorAll(".nav-link");
+// Select nav links (and the hero scroll-cue chevron, which is also an on-page
+// "#section" anchor and needs the same treatment).
+const navLink = document.querySelectorAll(".nav-link, .scroll-cue");
 
 // After an on-page jump, move keyboard + screen-reader focus to the section's
 // heading (each section <h2> is tabindex="0"), so the next Tab continues from
@@ -144,10 +145,10 @@ function focusTarget(section) {
   (heading || section).focus({ preventScroll: true });
 }
 
-// Nav-link clicks: close the mobile menu, and for the on-page section links take
-// over the scroll so no "#section" is left in the address bar (that hash is what
-// makes a later refresh jump back to that section). CSS scroll-margin-top still
-// applies to scrollIntoView, so the landing position is unchanged.
+// Nav-link (and scroll-cue) clicks: close the mobile menu, and for the on-page
+// section links take over the scroll so no "#section" is left in the address bar
+// (that hash is what makes a later refresh jump back to that section). CSS
+// scroll-margin-top still applies to scrollIntoView, so the landing is unchanged.
 navLink.forEach((link) => {
   link.addEventListener("click", (e) => {
     setNav(false);
