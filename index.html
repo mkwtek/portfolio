@@ -12,7 +12,7 @@
   <meta property="og:title" content="Matt Whitcomb, Web Developer" />
   <meta property="og:description" content="Web developer and technology consultant focused on accessible, fast, well-tested websites for small businesses and nonprofits." />
   <meta property="og:url" content="https://mkwtek.github.io/portfolio/" />
-  <meta property="og:image" content="https://mkwtek.github.io/portfolio/assets/images/matt-1400.jpg" />
+  <meta property="og:image" content="https://mkwtek.github.io/portfolio/assets/images/matt-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Roboto is self-hosted (see @font-face in styles.css). No external font   -->
@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=37" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=38" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -94,40 +94,37 @@
 
     <!-- Hero Section and About Me -->
     <section class="hero section-padding" id="about">
+      <h2 class="bio-title title-base" tabindex="0">About Me</h2>
 
-      <div class="hero-img-mask">
-        <!-- Hero is the LCP element: eager, high priority, WebP with a JPEG fallback. -->
-        <picture>
-          <source srcset="assets/images/matt-hero.webp" type="image/webp" />
-          <img src="assets/images/matt-hero.jpg" alt="Matt Whitcomb" width="1300" height="1325" fetchpriority="high" class="hero-img" />
-        </picture>
-      </div><!-- ./hero-img-mask -->
-      
-      <div class="bio-block">
-        <h2 class="bio-title title-base center" tabindex="0">About Me</h2>
-        <div class="bio card">
-          <p class="bio-text center">
-          <!-- 
-              Results-driven and detail-oriented professional with experience leading Agile web development teams along with a background in web design, front-end development, and project management. Skilled in Agile and Scrum Frameworks, team leadership, and leveraging technical expertise to drive successful outcomes. Strong facilitation, communication, and leadership skills. Committed to fostering collaboration and continuous improvement within cross-functional teams. Seeking career opportunities as a Scrum Master, Product Owner, Web Designer, or Front-end Developer to create engaging user experiences and innovative web solutions. 
-              -->
-          Web developer and digital consultant specializing in accessible,
-          high-performance websites for small businesses and nonprofits. Skilled
-          in front-end development and Agile project leadership, with a focus on
-          translating complex problems into practical solutions and delivering
-          sites that are tested to work, not just built to look finished.
-        </p>
-        <p class="bio-text center">
-          Experienced in building websites from the ground up using custom HTML
-          and CSS, along with CMS platforms including ExpressionEngine, Wix
-          Editor X, Webflow, and Shopify, and additional experience with Joomla
-          and WordPress. Focused on creating accessible, responsive websites and
-          finding practical solutions to technical and workflow challenges.
-          Experience founding and operating an independent e-commerce venture has
-          also provided firsthand insight into the practical needs and challenges
-          of running a small business.
-        </p>
-        </div><!-- ./bio card -->
-      </div><!-- ./bio-block -->
+      <div class="hero-card card">
+        <div class="hero-media">
+          <!-- Hero is the LCP element: eager, high priority, WebP with a JPEG fallback. -->
+          <picture>
+            <source srcset="assets/images/matt-hero.webp" type="image/webp" />
+            <img src="assets/images/matt-hero.jpg" alt="Matt Whitcomb" width="1300" height="1325" fetchpriority="high" class="hero-img" />
+          </picture>
+        </div><!-- ./hero-media -->
+
+        <div class="hero-bio">
+          <p class="bio-text">
+            Web developer and digital consultant specializing in accessible,
+            high-performance websites for small businesses and nonprofits. Skilled
+            in front-end development and Agile project leadership, with a focus on
+            translating complex problems into practical solutions and delivering
+            sites that are tested to work, not just built to look finished.
+          </p>
+          <p class="bio-text">
+            Experienced in building websites from the ground up using custom HTML
+            and CSS, along with CMS platforms including ExpressionEngine, Wix
+            Editor X, Webflow, and Shopify, and additional experience with Joomla
+            and WordPress. Focused on creating accessible, responsive websites and
+            finding practical solutions to technical and workflow challenges.
+            Experience founding and operating an independent e-commerce venture has
+            also provided firsthand insight into the practical needs and challenges
+            of running a small business.
+          </p>
+        </div><!-- ./hero-bio -->
+      </div><!-- ./hero-card -->
 
     </section>
 
@@ -791,7 +788,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=37"></script>
+  <script src="assets/js/app.js?v=38"></script>
 </body>
 
 </html>

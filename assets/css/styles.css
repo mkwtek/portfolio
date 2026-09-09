@@ -538,25 +538,34 @@ nav a:hover,
 }
 /* HERO SECTION */
 .hero {
-  display: flex;
-  flex-direction: column; /* Force a single column layout on all screens */
-  align-items: center; /* Center the items horizontally */
-  justify-content: center;
-  gap: 2.5rem;
+  text-align: center; /* centres the "About Me" heading, matching every other section */
 }
 
-.hero-img-mask {
-  /* The headshot is essentially square, so the frame matches its ratio and shows   */
-  /* the whole photo, centred, at a sensible size, rather than a fixed-height        */
-  /* letterbox that crops hard into the face. Tune with max-width.                    */
-  width: 100%;
-  max-width: 23rem;
-  aspect-ratio: 1300 / 1325;
-  margin: 0 auto;
+/* Full-width card, same width as every other section card. Two columns on desktop:  */
+/* the portrait on the left, the bio copy on the right, so there is no dead space     */
+/* around a lone photo. Stacks to one column on mobile (see the 820px block).         */
+.hero-card {
+  display: grid;
+  grid-template-columns: minmax(0, 34%) 1fr;
+  gap: 2rem;
+  align-items: center;
+  text-align: left;
+  opacity: 0;
+  animation: bioCardRiseIn 0.6s ease-out 0.15s forwards;
+}
+
+/* The portrait is rendered as a brand-tinted duotone rather than a literal photo:   */
+/* the image is desaturated, then the ::after overlay recolours it with the accent    */
+/* hue (mix-blend-mode: color keeps the light/dark detail, swaps the colour).         */
+/* isolation keeps the blend contained to this box. To dial the tint, change the      */
+/* ::after opacity (0 = plain black and white, 1 = full accent colour); to go back    */
+/* to an untreated photo, remove the ::after rule and the filter on .hero-img.        */
+.hero-media {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  padding: 0.625rem;
-  border-radius: 11px;
-  box-shadow: 0px 2px 15px 2px var(--primary-shadow);
+  border-radius: 50%; /* the photo already fades to a circle; a circular crop matches it */
+  aspect-ratio: 1 / 1;
 }
 
 .hero-img {
@@ -564,41 +573,31 @@ nav a:hover,
   height: 100%;
   display: block;
   object-fit: cover;
-  /* object-fit: contain; */
   object-position: center;
-  border-radius: 8px;
+  filter: grayscale(1) contrast(1.04) brightness(1.03);
 }
 
-/* Wrapper holding the "About Me" heading + the bio card, so the heading now sits    */
-/* outside the card (consistent with every other section) while the two still rise   */
-/* into view together as one unit. */
-.bio-block {
-  width: 100%;
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary-accent);
+  mix-blend-mode: color;
+  opacity: 0.72;
+  pointer-events: none;
 }
 
-.bio {
-    max-width: 100%; /* Match the width of the hero image */
-}
-  
-.bio p {
+.hero-bio .bio-text {
   line-height: var(--line-height);
-  padding: 0.3rem 0; /* 0.3 rem is equivalent to 4.8 pixels */
+}
+
+.hero-bio .bio-text + .bio-text {
+  margin-top: 0.9rem;
 }
 
 /* ---------- Hero Load-In Animation ---------- */
-/* Photo zooms gently into focus while fading in */
-@keyframes heroZoomIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Bio card: fades in and rises up from below, like it's coming up to meet the photo */
+/* Bio heading: plain fade. Card: fades and rises up into place. Both are pure CSS   */
+/* (no JS/observer) because the hero is above the fold and the LCP element.          */
 @keyframes bioCardRiseIn {
   0% {
     opacity: 0;
@@ -610,7 +609,6 @@ nav a:hover,
   }
 }
 
-/* Bio heading/paragraphs: plain fade, no movement, revealed one after another at reading pace */
 @keyframes bioFadeIn {
   0% {
     opacity: 0;
@@ -620,36 +618,14 @@ nav a:hover,
   }
 }
 
-.hero-img-mask {
-  opacity: 0;
-  animation: heroZoomIn 0.6s ease-out 0.1s forwards;
-}
-
-.bio-block {
-  opacity: 0;
-  animation: bioCardRiseIn 0.6s ease-out 0.1s forwards;
-}
-
 .bio-title {
   opacity: 0;
   animation: bioFadeIn 0.4s ease-out 0.2s forwards;
 }
 
-.bio-text:nth-of-type(1) {
-  opacity: 0;
-  animation: bioFadeIn 0.4s ease-out 0.35s forwards;
-}
-
-.bio-text:nth-of-type(2) {
-  opacity: 0;
-  animation: bioFadeIn 0.4s ease-out 0.55s forwards;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-img-mask,
-  .bio-block,
-  .bio-title,
-  .bio-text {
+  .hero-card,
+  .bio-title {
     animation: none;
     opacity: 1;
     transform: none;
@@ -1977,33 +1953,32 @@ nav a:hover,
   /* socials widget on the right. This is the single source of truth for card width */
   /* on mobile - every card on the site is inside one of these. .hero itself stays  */
   /* full width; it only centres its two children.                                  */
-  .bio-block,
+  .hero-card,
   .more-about,
   .testimonials,
   .how-built,
   .contact-form-container,
   .skills,
-  .projects,
-  .hero-img-mask {
+  .projects {
     width: 87%;
     margin: 0 auto;
   }
 
   /* ------ MOBILE HERO SECTION ------ */
-  .hero {
-    flex-direction: column;
-    gap: 0;
+  /* One column: portrait on top (capped so it isn't a huge square), bio below.       */
+  .hero-card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    justify-items: center;
   }
 
-  /* .hero-img-mask now sizes from its aspect-ratio (set in the base rule), so no     */
-  /* mobile height override is needed; the shared 87% width rule above still caps it. */
+  .hero-media {
+    width: 100%;
+    max-width: 14rem;
+  }
 
-  /* Every section spans the full content-wrapper width on mobile (matching Skills   */
-  /* and How I Build), so their cards line up edge-for-edge down the page. The        */
-  /* content-wrapper's own 1.5rem side padding is the only gutter.                    */
-  .bio-block {
-   margin-top: 2.5rem; /* hero gap is 0 on mobile; separates the "About Me" heading from */
-                       /* the photo (photo isn't a card, so a touch more room than 1rem) */
+  .hero-bio .bio-text {
+    text-align: left;
   }
 
   /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */
