@@ -183,10 +183,10 @@ p {
 .card {
   background-color: #fff;
   border-radius: 11px;
-  /* A real 2px accent-teal border (renders as the true colour, unlike a thin inset  */
+  /* A real 1px accent-teal border (renders as the true colour, unlike a thin inset  */
   /* box-shadow which antialiases lighter). box-sizing: border-box is global, so it   */
   /* adds no layout width. Drop shadow kept separately.                              */
-  border: 2px solid var(--color-primary-accent);
+  border: 1px solid var(--color-primary-accent);
   box-shadow: 0 3px 10px var(--primary-shadow);
   padding: 20px;
 }
@@ -589,7 +589,7 @@ nav a:hover,
   border-radius: 50%;
   /* Accent-teal ring around the circle. box-shadow, not border, so it sits outside  */
   /* the clipped photo area and adds nothing to the 16rem box.                        */
-  box-shadow: 0 0 0 2px var(--color-primary-accent);
+  box-shadow: 0 0 0 1px var(--color-primary-accent);
 }
 
 .hero-slide {
@@ -1436,10 +1436,10 @@ nav a:hover,
 .contact-form-container {
   padding: 0.938rem;
   border-radius: 11px;
-  /* Same treatment as .card: a real 2px accent-teal border + drop shadow. Drop-     */
+  /* Same treatment as .card: a real 1px accent-teal border + drop shadow. Drop-     */
   /* shadow tint switched from the terracotta --secondary-shadow (#a17a69) to the    */
   /* accent teal (= #177082); revert by putting `var(--secondary-shadow)` back.      */
-  border: 2px solid var(--color-primary-accent);
+  border: 1px solid var(--color-primary-accent);
   box-shadow: 0 3px 10px rgba(23, 112, 130, 1);
 }
 
@@ -1560,7 +1560,7 @@ nav a:hover,
 /* element that matches the widget. Its contents are cross-origin and untouchable,   */
 /* but the iframe's own border is ours to set.                                       */
 .g-recaptcha iframe {
-  border: 2px solid var(--color-primary-accent);
+  border: 1px solid var(--color-primary-accent);
   border-radius: 4px;
 }
 
@@ -1653,9 +1653,11 @@ nav a:hover,
     bottom: 85px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
     background-color: #fff;
     border-radius: 10px;
-    /* 2px/6px blur is tighter than the old 8px opaque spread, which bled onto the   */
-    /* cards. Tint switched from the terracotta rgba(161, 122, 105, 0.6) (#a17a69 at */
-    /* 60%) to the accent teal (= #177082) - revert with that rgba if wanted.        */
+    /* 1px accent-teal border to match the cards. 2px/6px blur is tighter than the   */
+    /* old 8px opaque spread, which bled onto the cards; tint switched from the      */
+    /* terracotta rgba(161, 122, 105, 0.6) (#a17a69 at 60%) to the accent teal       */
+    /* (= #177082) - revert with that rgba if wanted.                               */
+    border: 1px solid var(--color-primary-accent);
     box-shadow: 0 2px 6px rgba(23, 112, 130, 1);
     padding: 3px;
     z-index: 1000; /* Higher than nav so it's always accessible */
