@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=49" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=50" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -98,9 +98,9 @@
 
       <div class="hero-card card">
         <div class="hero-media">
-          <!-- Two portraits that crossfade on a timer (app.js). The first is the LCP  -->
-          <!-- element: eager + high priority. The second is lazy - it isn't shown     -->
-          <!-- first - and decorative (alt="") since it's the same person.            -->
+          <!-- Portraits that crossfade on a timer (app.js). The first is the LCP     -->
+          <!-- element: eager + high priority. The rest are lazy - not shown first -  -->
+          <!-- and decorative (alt="") since they're all the same person.            -->
           <picture class="hero-slide is-visible">
             <source srcset="assets/images/matt-hero.webp" type="image/webp" />
             <img src="assets/images/matt-hero.jpg" alt="Matt Whitcomb" width="800" height="800" fetchpriority="high" class="hero-img" />
@@ -108,6 +108,10 @@
           <picture class="hero-slide">
             <source srcset="assets/images/matt-hero-2.webp" type="image/webp" />
             <img src="assets/images/matt-hero-2.jpg" alt="" width="800" height="800" loading="lazy" class="hero-img" />
+          </picture>
+          <picture class="hero-slide">
+            <source srcset="assets/images/matt-hero-3.webp" type="image/webp" />
+            <img src="assets/images/matt-hero-3.jpg" alt="" width="640" height="640" loading="lazy" class="hero-img" />
           </picture>
         </div><!-- ./hero-media -->
 
@@ -794,7 +798,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=49"></script>
+  <script src="assets/js/app.js?v=50"></script>
 </body>
 
 </html>
