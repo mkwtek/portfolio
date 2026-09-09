@@ -207,7 +207,7 @@ nav {
   position: sticky;
   top: 0;
   left: 0;
-  /* Above .linkedinup (z 1000). <nav> creates its own stacking context here     */
+  /* Above .social-rail (z 1000). <nav> creates its own stacking context here     */
   /* (sticky + z-index), so the mobile dropdown's own z-index can't lift it past */
   /* the widget unless <nav> itself outranks it. This keeps the open mobile menu */
   /* on top of the floating socials widget.                                      */
@@ -1648,7 +1648,7 @@ nav a:hover,
 
 /* End Contact Section */
 /* SOCIALS */
-.linkedinup {
+.social-rail {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -1675,7 +1675,7 @@ nav a:hover,
 /* Wix badge: LinkedIn and GitHub's icons are already circular, animated GIFs baked into  */
 /* the image files themselves, this gives the Wix icon (a plain static image) a matching  */
 /* circular frame via CSS instead, plus a soft pulsing ring for a similar "alive" feel.    */
-/* Sized to exactly match .socicon (not larger) so it doesn't change .linkedinup's own      */
+/* Sized to exactly match .socicon (not larger) so it doesn't change .social-rail's own      */
 /* width, that container has no explicit width and sizes itself to its widest child, and    */
 /* the precise right-alignment math elsewhere in this file was computed against that width. */
 /* The pulse ring is pure box-shadow, which paints outside the box without affecting        */
@@ -1726,11 +1726,11 @@ nav a:hover,
   }
 
   .wix-badge {
-    width: 2rem; /* keep the badge frame matched to .socicon so it doesn't widen .linkedinup */
+    width: 2rem; /* keep the badge frame matched to .socicon so it doesn't widen .social-rail */
     height: 2rem;
   }
 
-  .linkedinup {
+  .social-rail {
     right: 4px;
     padding: 1px;
     bottom: 70px; /* tightened from the base 85px, mobile-only this time (see comment on */
@@ -1747,7 +1747,7 @@ nav a:hover,
     padding: 4px;
   }
 
-  /* Box math: icon 32 + link padding 8 + container padding 2 = 42px wide .linkedinup.   */
+  /* Box math: icon 32 + link padding 8 + container padding 2 = 42px wide .social-rail.   */
   /* .up-arrow's mobile size is set in the Scroll to Top section below (2.625rem = 42px) */
   /* to match, and both sit at right: 4px so they share a centre line.                   */
 
@@ -1761,7 +1761,7 @@ nav a:hover,
 .scroll-up {
   position: fixed;
   /* right: 0.5%; */
-  /* Same box width and right offset as .linkedinup (38px wide, right: 8px), so the two   */
+  /* Same box width and right offset as .social-rail (38px wide, right: 8px), so the two   */
   /* share an exact centre line - no per-element centre math, and no sub-pixel drift.     */
   right: 8px;
   /* bottom: 3%; */
@@ -1774,7 +1774,7 @@ nav a:hover,
 }
 
 .up-arrow {
-  /* 2.375rem = 38px, matching .linkedinup's box width exactly. The arrow art has ~8%   */
+  /* 2.375rem = 38px, matching .social-rail's box width exactly. The arrow art has ~8%   */
   /* transparent margin baked in, so the visible teal circle lands at ~32px - the same  */
   /* size as the social icons above it.                                                 */
   width: 2.375rem;
@@ -1793,7 +1793,7 @@ nav a:hover,
   /* wins when specificity is equal), regardless of what value was set here. Moved here   */
   /* to actually win; worth remembering if a mobile override ever seems to "not apply."   */
   .scroll-up {
-    /* Mobile .linkedinup is 42px wide at right: 4px, so the arrow keeps the exact     */
+    /* Mobile .social-rail is 42px wide at right: 4px, so the arrow keeps the exact     */
     /* same box and offset here too - shared centre line, no drift. The whole button   */
     /* is the tap target, so 42px is a comfortable hit area.                           */
     right: 4px;
@@ -1928,7 +1928,7 @@ nav a:hover,
                                           /* the nav's own shadow flickered while the    */
                                           /* panel resized frame by frame                */
     z-index: 1010; /* inside <nav>'s stacking context; <nav> itself (z 1001) is what */
-                   /* actually sits above .linkedinup                                 */
+                   /* actually sits above .social-rail                                 */
     visibility: hidden;
     transition:
       grid-template-rows 0.36s cubic-bezier(0.4, 0, 0.2, 1),
@@ -2085,7 +2085,7 @@ nav a:hover,
     columns: 1; /* the wide soft-skills list is a single column on a phone */
   }
 
-  /* Keeps the two longest headings clear of the floating .linkedinup widget on the  */
+  /* Keeps the two longest headings clear of the floating .social-rail widget on the  */
   /* right. Was `padding: 0 2rem`, changed to max-width so it doesn't widen the       */
   /* accent underline (which now spans the element's box, .title-base border-bottom). */
   /* The long headings just wrap a little sooner instead.                             */
