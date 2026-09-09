@@ -570,10 +570,11 @@ nav a:hover,
   min-width: 0;
 }
 
-/* The portrait is a colour photo with a light unifying grade: a small `filter`      */
-/* tweak on the image, plus a soft edge vignette (::after) to settle it against a     */
-/* busy background and keep the eye on the face. Knobs: .hero-img brightness =         */
-/* overall exposure; ::after gradient stops = how strong / how far in the vignette.    */
+/* Two colour portraits (.hero-slide) stacked in the circle; app.js crossfades       */
+/* between them on a timer (frozen for reduced-motion, first stays shown). Each gets  */
+/* a light unifying grade via `filter`, plus a soft edge vignette (::after) to settle */
+/* the photos against their backgrounds. Knobs: .hero-img brightness = exposure;      */
+/* ::after gradient stops = vignette strength/reach; the timing is HOLD in app.js.    */
 .hero-media {
   flex: 0 0 auto;
   width: 16rem; /* ~matches the height of the bio text; the single knob for photo size */
@@ -584,9 +585,25 @@ nav a:hover,
   border-radius: 50%;
 }
 
-.hero-img {
+.hero-slide {
   position: absolute;
   inset: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.hero-slide.is-visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: none;
+  }
+}
+
+.hero-img {
   width: 100%;
   height: 100%;
   display: block;

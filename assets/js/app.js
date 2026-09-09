@@ -56,6 +56,29 @@ if (revealEls.length) {
   }
 }
 
+// --- Hero portrait crossfade ---
+// Two <picture class="hero-slide"> stacked in .hero-media fade between each other on
+// a timer. Skipped entirely for reduced-motion (the first stays shown) and paused
+// while the tab is backgrounded so it doesn't jump on return.
+const heroSlides = document.querySelectorAll(".hero-media .hero-slide");
+if (
+  heroSlides.length > 1 &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  const HOLD = 5000;
+  let current = 0;
+  const advance = () => {
+    heroSlides[current].classList.remove("is-visible");
+    current = (current + 1) % heroSlides.length;
+    heroSlides[current].classList.add("is-visible");
+  };
+  let timer = setInterval(advance, HOLD);
+  document.addEventListener("visibilitychange", () => {
+    clearInterval(timer);
+    if (!document.hidden) timer = setInterval(advance, HOLD);
+  });
+}
+
 // Scroll to top selection
 const scrollUp = document.querySelector("#scroll-up");
 
