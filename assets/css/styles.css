@@ -743,6 +743,57 @@ nav a:hover,
   margin-bottom: 0;
 }
 
+/* RECOMMENDATIONS / TESTIMONIALS */
+.testimonials {
+  background-color: var(--bg-color);
+  text-align: center;
+}
+
+.testimonial-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.testimonial {
+  margin: 0; /* strip the browser's default blockquote margin */
+  text-align: left;
+}
+
+.testimonial-quote {
+  margin: 0 0 1rem;
+  line-height: var(--line-height);
+  font-size: 1.05rem;
+}
+
+.testimonial-quote::before {
+  content: "\201C"; /* decorative opening quote, no closing pair by design */
+  margin-right: 0.1rem;
+  color: var(--color-primary-accent);
+  font-size: 2rem;
+  line-height: 0;
+  vertical-align: -0.35rem;
+}
+
+.testimonial-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.testimonial-name {
+  font-weight: var(--bold-font);
+  color: var(--color-primary-accent);
+}
+
+.testimonial-role {
+  font-size: 0.95rem;
+}
+
+.testimonial-cite a {
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+}
+
 /* TECHNICAL SKILLS SECTION */
 .skills {
   text-align: center;
@@ -1908,6 +1959,7 @@ nav a:hover,
   /* full width; it only centres its two children.                                  */
   .bio-block,
   .more-about,
+  .testimonials,
   .how-built,
   .contact-form-container,
   .skills,
