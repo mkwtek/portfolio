@@ -759,8 +759,21 @@ nav a:hover,
   text-align: left;
 }
 
+/* The card spans the full section width (matching the Experience, How I Build,   */
+/* and Skills cards above it), but the text inside is capped near 40rem and       */
+/* centred, so a quote never runs to a hard-to-read ~120-character line on a wide  */
+/* desktop. A max-width, not a clamp: fill the space on narrow screens, stop       */
+/* growing past a readable measure on wide ones.                                   */
+.testimonial-quote,
+.testimonial-cite {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .testimonial-quote {
-  margin: 0 0 1rem;
+  margin-top: 0;
+  margin-bottom: 1.1rem;
   line-height: var(--line-height);
   font-size: 1.05rem;
 }
@@ -778,6 +791,8 @@ nav a:hover,
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid hsl(190, 25%, 90%);
 }
 
 .testimonial-name {
