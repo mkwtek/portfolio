@@ -537,15 +537,18 @@ nav a:hover,
   padding: 0 1.5rem; /* This creates the "gutters" as I like to call them on the left and right */
 }
 /* HERO SECTION */
-/* Fill (roughly) the first screen so the next section's heading isn't half-visible   */
-/* under the fold before its scroll-reveal has run. Content is centred in that space. */
+/* Tall enough that the next section's heading stays under the fold on load (before   */
+/* its scroll-reveal runs and while it is still opacity:0). Content sits near the top; */
+/* the leftover viewport slack falls below the card. padding-top gives the heading     */
+/* some room under the nav.                                                            */
 .hero {
   text-align: center; /* centres the "About Me" heading, matching every other section */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* content near the top; the slack sits below the card */
-  min-height: calc(100vh - 5rem);
-  min-height: calc(100svh - 5rem);
+  justify-content: flex-start;
+  min-height: calc(100vh - 10rem);
+  min-height: calc(100svh - 10rem);
+  padding-top: 3.25rem;
 }
 
 /* Full-width card, same width as every other section card. Two columns on desktop:  */
@@ -595,7 +598,7 @@ nav a:hover,
   display: block;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1) contrast(1.05) brightness(0.83);
+  filter: grayscale(1) contrast(1.04) brightness(0.88);
 }
 
 .hero-media::before {
@@ -615,9 +618,9 @@ nav a:hover,
   inset: 0;
   z-index: 2;
   background: radial-gradient(circle at 50% 42%,
-    rgba(0, 0, 0, 0.05) 0%,
-    rgba(0, 0, 0, 0.26) 50%,
-    rgba(0, 0, 0, 0.64) 100%);
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 0, 0, 0.2) 52%,
+    rgba(0, 0, 0, 0.54) 100%);
   pointer-events: none;
 }
 
