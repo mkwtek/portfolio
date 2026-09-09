@@ -198,7 +198,11 @@ nav {
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 999;
+  /* Above .linkedinup (z 1000). <nav> creates its own stacking context here     */
+  /* (sticky + z-index), so the mobile dropdown's own z-index can't lift it past */
+  /* the widget unless <nav> itself outranks it. This keeps the open mobile menu */
+  /* on top of the floating socials widget.                                      */
+  z-index: 1001;
   background-color: var(--bg-color);
   border-bottom: 2px solid var(--color-primary-accent); /* accent bar under the nav; the */
                                                         /* mobile dropdown continues it   */
@@ -1726,7 +1730,8 @@ nav a:hover,
       0 8px 12px -6px rgba(0, 0, 0, 0.2); /* tight, low-blur: a big blurred shadow near */
                                           /* the nav's own shadow flickered while the    */
                                           /* panel resized frame by frame                */
-    z-index: 1010; /* above .linkedinup (1000) */
+    z-index: 1010; /* inside <nav>'s stacking context; <nav> itself (z 1001) is what */
+                   /* actually sits above .linkedinup                                 */
     visibility: hidden;
     transition:
       grid-template-rows 0.36s cubic-bezier(0.4, 0, 0.2, 1),
@@ -1896,7 +1901,7 @@ nav a:hover,
     padding: 1rem;
   }
 
-  /* Every content block (and the hero image) spans 88% of the content-wrapper on   */
+  /* Every content block (and the hero image) spans 87% of the content-wrapper on   */
   /* mobile, centred, so they all line up down the page and clear the floating      */
   /* socials widget on the right. This is the single source of truth for card width */
   /* on mobile - every card on the site is inside one of these. .hero itself stays  */
@@ -1908,7 +1913,7 @@ nav a:hover,
   .skills,
   .projects,
   .hero-img-mask {
-    width: 88%;
+    width: 87%;
     margin: 0 auto;
   }
 
