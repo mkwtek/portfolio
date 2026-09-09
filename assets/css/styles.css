@@ -608,7 +608,7 @@ nav a:hover,
   /* full frame while it is the active slide, then eases back in while hidden        */
   /* (nobody sees the reverse). Duration is long enough to reset before the slide's  */
   /* next turn.                                                                      */
-  transform: scale(1.12);
+  transform: scale(1.08);
   transition: transform 8s ease-out;
 }
 
