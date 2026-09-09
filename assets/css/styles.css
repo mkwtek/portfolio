@@ -604,15 +604,16 @@ nav a:hover,
   object-fit: cover;
   object-position: center;
   filter: contrast(1.03) brightness(0.96) saturate(0.94);
-  /* Ken Burns: each portrait drifts slowly in from a slight zoom while it is the   */
-  /* active slide, then eases back out of frame while hidden (nobody sees the       */
-  /* reverse). Duration is long enough to reset before the slide's next turn.       */
-  transform: scale(1.03);
+  /* Ken Burns: a constant slight zoom (scale 1.1) gives overscan room, and each     */
+  /* portrait drifts slowly toward its lower-right while it is the active slide,     */
+  /* then eases back while hidden (nobody sees the reverse). Duration is long        */
+  /* enough to reset before the slide's next turn.                                   */
+  transform: scale(1.1) translate(2.5%, 2.5%);
   transition: transform 8s ease-out;
 }
 
 .hero-slide.is-visible .hero-img {
-  transform: scale(1.11);
+  transform: scale(1.1) translate(-2.5%, -2.5%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -620,8 +621,9 @@ nav a:hover,
   .hero-img {
     transition: none;
   }
+  .hero-img,
   .hero-slide.is-visible .hero-img {
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
 }
 
