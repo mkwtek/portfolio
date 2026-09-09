@@ -990,12 +990,15 @@ nav a:hover,
 
 /* --- gauge + number animation, played when the card scrolls into view --- */
 /* Hidden start state only under .js-reveal, so a no-JS page shows finished gauges. */
-/* All five gauges run identically (no per-ring stagger). They start --gauge-lead  */
-/* after the card's own text has faded in (the card reveal is ~0.85s): the tick    */
-/* ring flashes up, a needle revs around with the arc, and once it settles and     */
-/* fades the centre number pops in with a green glow.                              */
+/* The scorecards panel is its OWN .reveal (separate from the card), so the gauge  */
+/* animation fires when the panel scrolls into view - not when the card's top      */
+/* does. Without this, on a tall mobile card the whole thing has already played    */
+/* by the time you reach the gauges. All five gauges run identically (no stagger); */
+/* they start --gauge-lead after the panel begins revealing: the tick ring flashes */
+/* up, a needle revs around with the arc, and once it settles the centre number    */
+/* pops in with a green glow.                                                      */
 .how-built {
-  --gauge-lead: 0.7s;   /* delay before the arcs begin, after the text reveal */
+  --gauge-lead: 0.7s;   /* delay before the arcs begin, after the panel reveal starts */
   --gauge-sweep: 1.6s;  /* how long each arc / needle sweep takes */
 }
 
@@ -1006,29 +1009,19 @@ nav a:hover,
   transform: scale(0);
   opacity: 0;
 }
-.js-reveal .reveal.is-visible .ring-fill {
+.js-reveal .scorecards.is-visible .ring-fill {
   transition: stroke-dashoffset var(--gauge-sweep) cubic-bezier(0.4, 0, 0.2, 1) var(--gauge-lead);
   stroke-dashoffset: calc(100 - var(--val)); /* sweep to the score */
 }
-.js-reveal .reveal.is-visible .ring::after {
+.js-reveal .scorecards.is-visible .ring::after {
   animation: tick-flash var(--gauge-sweep) ease-out var(--gauge-lead) forwards;
 }
-.js-reveal .reveal.is-visible .ring-needle {
+.js-reveal .scorecards.is-visible .ring-needle {
   animation: needle-rev var(--gauge-sweep) cubic-bezier(0.3, 1.2, 0.5, 1) var(--gauge-lead) forwards;
 }
-.js-reveal .reveal.is-visible .ring-num {
+.js-reveal .scorecards.is-visible .ring-num {
   animation: score-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   animation-delay: calc(var(--gauge-lead) + var(--gauge-sweep)); /* pop as the needle vanishes */
-}
-
-/* Safety net: if focus reaches the card before the observer fires, or the        */
-/* observer never does, show the gauges filled rather than leaving them empty.    */
-.js-reveal .reveal:focus-within .ring-fill {
-  stroke-dashoffset: calc(100 - var(--val));
-}
-.js-reveal .reveal:focus-within .ring-num {
-  transform: none;
-  opacity: 1;
 }
 
 @keyframes tick-flash {
@@ -1880,10 +1873,10 @@ nav a:hover,
     padding: 1rem;
   }
 
-  /* Every content block (and the hero image) spans 95% of the content-wrapper on   */
-  /* mobile, centred, so they line up down the page with a small even gutter and    */
-  /* sit slightly clear of the floating socials widget. .hero itself stays full     */
-  /* width - it only centres its two children.                                      */
+  /* Every content block (and the hero image) spans 90% of the content-wrapper on   */
+  /* mobile, centred, so they line up down the page and their right edge clears the */
+  /* floating socials widget. .hero itself stays full width - it only centres its   */
+  /* two children.                                                                  */
   .bio-block,
   .more-about,
   .how-built,
@@ -1891,7 +1884,7 @@ nav a:hover,
   .skills,
   .projects,
   .hero-img-mask {
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
   }
 
