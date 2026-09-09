@@ -1946,4 +1946,54 @@ nav a:hover,
     height: auto; /* Force it to expand with content */
     flex-basis: auto; /* Prevents flex-basis: 0 from squishing the card */
   }
+
+  /* Phone readability: the small supporting text (captions, notes, labels, list  */
+  /* items) was 12.5-14px, a bit tight on a handset. Bump each up roughly one step */
+  /* on mobile. Body copy and headings are already fine and untouched.            */
+  .ring-label {
+    font-size: 0.85rem;
+  }
+
+  .score-ring {
+    width: 5.5rem; /* a touch wider so the longer bumped-up labels don't wrap oddly */
+  }
+
+  .scorecard-tool {
+    font-size: 1.05rem;
+  }
+
+  .wave-tallies {
+    font-size: 1rem;
+  }
+
+  .scorecards-note {
+    font-size: 0.9rem;
+  }
+
+  .how-built-note {
+    font-size: 1rem;
+  }
+
+  .projects-disclosure {
+    font-size: 0.95rem;
+  }
+
+  .recaptcha-error {
+    font-size: 0.95rem;
+  }
+
+  .skill-list {
+    font-size: 0.95em;
+  }
+
+  .mimic-h4-size {
+    font-size: 100%;
+  }
+
+  /* 16px on every form field so iOS Safari doesn't auto-zoom the page on focus, */
+  /* and the typed text is comfortable to read. Placeholders are short enough to */
+  /* fit at this size (see the HTML).                                            */
+  .contact-form-container .input-field {
+    font-size: 16px;
+  }
 }
