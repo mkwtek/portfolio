@@ -1873,10 +1873,11 @@ nav a:hover,
     padding: 1rem;
   }
 
-  /* Every content block (and the hero image) spans 90% of the content-wrapper on   */
-  /* mobile, centred, so they line up down the page and their right edge clears the */
-  /* floating socials widget. .hero itself stays full width - it only centres its   */
-  /* two children.                                                                  */
+  /* Every content block (and the hero image) spans 88% of the content-wrapper on   */
+  /* mobile, centred, so they all line up down the page and clear the floating      */
+  /* socials widget on the right. This is the single source of truth for card width */
+  /* on mobile - every card on the site is inside one of these. .hero itself stays  */
+  /* full width; it only centres its two children.                                  */
   .bio-block,
   .more-about,
   .how-built,
@@ -1884,7 +1885,7 @@ nav a:hover,
   .skills,
   .projects,
   .hero-img-mask {
-    width: 90%;
+    width: 88%;
     margin: 0 auto;
   }
 
@@ -1941,7 +1942,7 @@ nav a:hover,
   }
 
   .project-container {
-    width: 100%; /* fills .projects-container, which is already the shared 95% */
+    width: 100%; /* fills .projects-container, which is already at the shared 88% */
     height: auto; /* Force it to expand with content */
     flex-basis: auto; /* Prevents flex-basis: 0 from squishing the card */
   }
