@@ -583,6 +583,9 @@ nav a:hover,
   isolation: isolate;
   overflow: hidden;
   border-radius: 50%;
+  /* Accent-teal ring around the circle. box-shadow, not border, so it sits outside  */
+  /* the clipped photo area and adds nothing to the 16rem box.                        */
+  box-shadow: 0 0 0 3px rgb(23, 112, 130);
 }
 
 .hero-slide {
