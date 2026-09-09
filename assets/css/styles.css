@@ -183,9 +183,11 @@ p {
 .card {
   background-color: #fff;
   border-radius: 11px;
-  /* Inset 3px accent-teal frame + the existing drop shadow. Inset box-shadow so it  */
-  /* follows the border-radius and adds no box size.                                 */
-  box-shadow: inset 0 0 0 3px var(--color-primary-accent), 0 3px 10px var(--primary-shadow);
+  /* A real 2px accent-teal border (renders as the true colour, unlike a thin inset  */
+  /* box-shadow which antialiases lighter). box-sizing: border-box is global, so it   */
+  /* adds no layout width. Drop shadow kept separately.                              */
+  border: 2px solid var(--color-primary-accent);
+  box-shadow: 0 3px 10px var(--primary-shadow);
   padding: 20px;
 }
 
@@ -587,7 +589,7 @@ nav a:hover,
   border-radius: 50%;
   /* Accent-teal ring around the circle. box-shadow, not border, so it sits outside  */
   /* the clipped photo area and adds nothing to the 16rem box.                        */
-  box-shadow: 0 0 0 3px rgb(23, 112, 130);
+  box-shadow: 0 0 0 2px var(--color-primary-accent);
 }
 
 .hero-slide {
@@ -1434,11 +1436,11 @@ nav a:hover,
 .contact-form-container {
   padding: 0.938rem;
   border-radius: 11px;
-  /* Same treatment as .card: inset 3px accent-teal frame + drop shadow. Drop-shadow */
-  /* tint switched from the terracotta --secondary-shadow (#a17a69) to the accent    */
-  /* teal (= #177082); revert by putting `var(--secondary-shadow)` back as the       */
-  /* second shadow.                                                                  */
-  box-shadow: inset 0 0 0 3px var(--color-primary-accent), 0 3px 10px rgba(23, 112, 130, 1);
+  /* Same treatment as .card: a real 2px accent-teal border + drop shadow. Drop-     */
+  /* shadow tint switched from the terracotta --secondary-shadow (#a17a69) to the    */
+  /* accent teal (= #177082); revert by putting `var(--secondary-shadow)` back.      */
+  border: 2px solid var(--color-primary-accent);
+  box-shadow: 0 3px 10px rgba(23, 112, 130, 1);
 }
 
 .contact-form-container label {
@@ -1551,10 +1553,15 @@ nav a:hover,
 /* .g-recaptcha's own flex row.                                                          */
 .recaptcha-wrapper {
   transform-origin: 0 0;
-  /* Accent-teal frame around Google's widget. box-shadow (not border) so it adds no */
-  /* box size and doesn't disturb the scale + negative-margin math above.            */
+}
+
+/* Accent-teal frame on the reCAPTCHA. The wrapper is full form width, so the border */
+/* goes on the checkbox <iframe> itself (a fixed 304x78 box) - that's the only       */
+/* element that matches the widget. Its contents are cross-origin and untouchable,   */
+/* but the iframe's own border is ours to set.                                       */
+.g-recaptcha iframe {
+  border: 2px solid var(--color-primary-accent);
   border-radius: 4px;
-  box-shadow: 0 0 0 2px rgb(23, 112, 130);
 }
 
 /* Input fields and the submit button are width:100% of the form, which has its own      */
