@@ -670,6 +670,15 @@ nav a:hover,
   margin-top: 0.9rem;
 }
 
+/* Location / availability line under the bio - a compact accent-coloured tag so a  */
+/* hiring reader can place you at a glance.                                          */
+.bio-location {
+  margin-top: 1rem;
+  color: var(--color-primary-accent);
+  font-weight: var(--bold-font);
+  font-size: 0.9rem;
+}
+
 /* Scroll cue: a down chevron in the space under the card. margin-top: auto drops it  */
 /* to the bottom of the flex hero (near the fold); it links to the next section.      */
 .scroll-cue {
@@ -1436,6 +1445,14 @@ nav a:hover,
 /* CONTACT SECTION */
 .contact h2 {
   text-align: center;
+}
+
+.contact-meta {
+  max-width: 34rem;
+  margin: 0 auto 1.35rem;
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
 }
 
 .contact-form-container {
