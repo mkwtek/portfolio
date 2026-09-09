@@ -543,7 +543,7 @@ nav a:hover,
   text-align: center; /* centres the "About Me" heading, matching every other section */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* content near the top; the slack sits below the card */
   min-height: calc(100vh - 5rem);
   min-height: calc(100svh - 5rem);
 }
@@ -595,7 +595,7 @@ nav a:hover,
   display: block;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1) contrast(1.06) brightness(0.74);
+  filter: grayscale(1) contrast(1.05) brightness(0.83);
 }
 
 .hero-media::before {
@@ -615,9 +615,9 @@ nav a:hover,
   inset: 0;
   z-index: 2;
   background: radial-gradient(circle at 50% 42%,
-    rgba(0, 0, 0, 0.12) 0%,
-    rgba(0, 0, 0, 0.34) 48%,
-    rgba(0, 0, 0, 0.76) 100%);
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.26) 50%,
+    rgba(0, 0, 0, 0.64) 100%);
   pointer-events: none;
 }
 
