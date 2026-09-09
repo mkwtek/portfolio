@@ -1555,10 +1555,9 @@ nav a:hover,
 .scroll-up {
   position: fixed;
   /* right: 0.5%; */
-  /* .linkedinup sits at right:8px with 3px padding around its 2rem (32px) icons, so its  */
-  /* true center is 8 + (32+6)/2 = 27px from the edge. This icon is 2.5rem (40px) with no  */
-  /* padding of its own, so matching that same 27px center needs right: 27 - 20 = 7px.     */
-  right: 7px;
+  /* Same box width and right offset as .linkedinup (38px wide, right: 8px), so the two   */
+  /* share an exact centre line - no per-element centre math, and no sub-pixel drift.     */
+  right: 8px;
   /* bottom: 3%; */
   bottom: 20px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
   cursor: pointer;
@@ -1569,8 +1568,11 @@ nav a:hover,
 }
 
 .up-arrow {
-  width: 2.5rem;
-  height: 2.5rem;
+  /* 2.375rem = 38px, matching .linkedinup's box width exactly. The arrow art has ~8%   */
+  /* transparent margin baked in, so the visible teal circle lands at ~32px - the same  */
+  /* size as the social icons above it.                                                 */
+  width: 2.375rem;
+  height: 2.375rem;
   transition: var(--transition);
 }
 
@@ -1585,9 +1587,8 @@ nav a:hover,
   /* wins when specificity is equal), regardless of what value was set here. Moved here   */
   /* to actually win; worth remembering if a mobile override ever seems to "not apply."   */
   .scroll-up {
-    /* Align the arrow's box with the socials widget above, which sits at right: 4px. No  */
-    /* padding here so the 2.4rem artwork itself lines up edge-for-edge with the ~38px    */
-    /* white socials box, rather than sitting inset from it.                              */
+    /* Mobile .linkedinup is also 38px wide at right: 4px, so the arrow keeps the exact   */
+    /* same box and offset here too - shared centre line, no drift.                       */
     right: 4px;
     display: inline-flex;
     align-items: center;
@@ -1596,9 +1597,8 @@ nav a:hover,
   }
 
   .up-arrow {
-    width: 2.4rem; /* widened from 2.2rem so the circle's width matches the socials box   */
-                   /* (~38px) directly above it, instead of reading a few px narrower     */
-    height: 2.4rem;
+    width: 2.375rem; /* = 38px, matches the mobile socials box width exactly */
+    height: 2.375rem;
   }
 }
 /* End Scroll to top icon */
