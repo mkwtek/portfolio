@@ -1441,11 +1441,11 @@ nav a:hover,
 .contact-form-container {
   padding: 0.938rem;
   border-radius: 11px;
-  /* Same treatment as .card: the 1px accent hairline + drop shadow. Drop-shadow     */
-  /* tint switched from the terracotta --secondary-shadow (#a17a69) to the accent    */
-  /* teal (= #177082); revert by putting `var(--secondary-shadow)` back.             */
+  /* Same treatment as .card: the 1px accent hairline + the shared --primary-shadow  */
+  /* drop shadow (was a teal-tinted shadow to stand out, but that read more as an    */
+  /* inconsistency than as emphasis - the section's heading and button carry that).  */
   border: 1px solid var(--color-accent-hairline);
-  box-shadow: 0 3px 10px rgba(23, 112, 130, 1);
+  box-shadow: 0 3px 10px var(--primary-shadow);
 }
 
 .contact-form-container label {
@@ -1658,12 +1658,11 @@ nav a:hover,
     bottom: 85px; /* switching from % to fixed px ensures regardless of device screen height changes no overlap occurs with neighbors */
     background-color: #fff;
     border-radius: 10px;
-    /* 1px accent hairline to match the cards. 2px/6px blur is tighter than the old  */
-    /* 8px opaque spread, which bled onto the cards; tint switched from the          */
-    /* terracotta rgba(161, 122, 105, 0.6) (#a17a69 at 60%) to the accent teal       */
-    /* (= #177082) - revert with that rgba if wanted.                               */
+    /* 1px accent hairline to match the cards, plus the shared --primary-shadow drop */
+    /* shadow (like every card). 2px/6px blur is kept tighter than the cards' 3/10 -  */
+    /* the widget floats over the cards, so a wider spread bled onto them.            */
     border: 1px solid var(--color-accent-hairline);
-    box-shadow: 0 2px 6px rgba(23, 112, 130, 1);
+    box-shadow: 0 2px 6px var(--primary-shadow);
     padding: 3px;
     z-index: 1000; /* Higher than nav so it's always accessible */
 }
