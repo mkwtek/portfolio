@@ -65,7 +65,7 @@ if (
   heroSlides.length > 1 &&
   !window.matchMedia("(prefers-reduced-motion: reduce)").matches
 ) {
-  const HOLD = 5000;
+  const HOLD = 6500;
   let current = 0;
   const advance = () => {
     heroSlides[current].classList.remove("is-visible");
