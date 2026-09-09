@@ -1501,17 +1501,20 @@ nav a:hover,
   }
 }
 
-/* On mobile, .content-wrapper only has 1.5rem of side padding, so centered heading */
-/* text can extend close enough to the screen edge to land under this fixed widget. */
-/* Real-world testing on an actual phone found the icons themselves too small to    */
-/* comfortably tap, sized here to keep real distance from the ~44px minimum tap     */
-/* target guideline (Apple HIG / Material Design), rather than shrinking below      */
-/* desktop size purely for visual spacing as before, mobile is exactly where tap    */
-/* precision matters most, so it should never be smaller than desktop here.         */
+/* Mobile widget: icons a touch smaller than desktop (30px vs 32px) to keep the    */
+/* floating stack from crowding the page content, which is now 95% width. The tap  */
+/* target lands ~34px square (icon + link padding) - under the 44px Apple/Material */
+/* ideal, but a deliberate trade for a widget that stays out of the way. Don't go  */
+/* smaller without re-checking it on a real phone.                                 */
 @media screen and (max-width: 820px) {
   .socicon {
-    width: 2rem; /* unchanged from desktop, was previously shrunk to 1.5rem */
-    height: 2rem;
+    width: 1.875rem; /* 30px: 2px down from desktop's 32px, trimming the widget's */
+    height: 1.875rem; /* footprint a little without dropping the tap target too far */
+  }
+
+  .wix-badge {
+    width: 1.875rem; /* keep the badge frame matched to .socicon so it doesn't */
+    height: 1.875rem; /* widen .linkedinup's box                                */
   }
 
   .linkedinup {
@@ -1525,20 +1528,15 @@ nav a:hover,
                   /* padding below was making the whole stack feel too spread out.       */
   }
 
-  /* Each link's own padding, combined with the 2rem (32px) icon above, brings the real  */
-  /* tappable area to ~36px square. Still noticeably larger than the original 24px icons */
-  /* with zero padding, but a further reduction from the ~40-44px range, since the       */
-  /* widget was still overlapping page content at that size, a real layout problem takes */
-  /* priority over holding onto the last few px of the ideal 44px tap-target guideline.  */
+  /* 2px padding around the 30px icon gives a ~34px tappable square.                     */
   .social-link {
     display: inline-block;
     padding: 2px;
   }
 
-  /* .linkedinup: icon(32) + link padding(2*2=4) = 36px link box, + container padding    */
-  /* (1*2=2) = 38px container width, half-width 19, right:4 + 19 = 23px center-from-edge. */
-  /* .up-arrow's actual mobile size lives in the Scroll to Top section further down,     */
-  /* not here, since that later rule wins the cascade tie regardless of what's set here.  */
+  /* Box math: icon 30 + link padding 4 + container padding 2 = 36px wide .linkedinup.   */
+  /* .up-arrow's mobile size is set in the Scroll to Top section below (2.25rem = 36px), */
+  /* matching this, and both sit at right: 4px so they share a centre line.              */
 
 }
 
@@ -1582,8 +1580,8 @@ nav a:hover,
   /* wins when specificity is equal), regardless of what value was set here. Moved here   */
   /* to actually win; worth remembering if a mobile override ever seems to "not apply."   */
   .scroll-up {
-    /* Mobile .linkedinup is also 38px wide at right: 4px, so the arrow keeps the exact   */
-    /* same box and offset here too - shared centre line, no drift.                       */
+    /* Mobile .linkedinup is ~36px wide at right: 4px, so the arrow keeps the exact   */
+    /* same box and offset here too - shared centre line, no drift.                   */
     right: 4px;
     display: inline-flex;
     align-items: center;
@@ -1592,8 +1590,8 @@ nav a:hover,
   }
 
   .up-arrow {
-    width: 2.375rem; /* = 38px, matches the mobile socials box width exactly */
-    height: 2.375rem;
+    width: 2.25rem; /* = 36px, matches the trimmed mobile socials box width */
+    height: 2.25rem;
   }
 }
 /* End Scroll to top icon */
@@ -1881,13 +1879,18 @@ nav a:hover,
     padding: 1rem;
   }
 
-  .hero,
+  /* Every content block (and the hero image) spans 95% of the content-wrapper on   */
+  /* mobile, centred, so they line up down the page with a small even gutter and    */
+  /* sit slightly clear of the floating socials widget. .hero itself stays full     */
+  /* width - it only centres its two children.                                      */
   .bio-block,
   .more-about,
+  .how-built,
   .contact-form-container,
   .skills,
-  .projects {
-    width: 100%;
+  .projects,
+  .hero-img-mask {
+    width: 95%;
     margin: 0 auto;
   }
 
@@ -1898,8 +1901,6 @@ nav a:hover,
   }
 
   .hero-img-mask {
-    width: 90%;
-    margin: 0 auto;
     height: 350px; /* was locked at the base 500px on mobile too; this trims the tall,   */
                    /* narrow portrait look without going fully square, which can crop a  */
                    /* headshot oddly depending on framing                                */
@@ -1946,13 +1947,8 @@ nav a:hover,
   }
 
   .project-container {
-    width: 100%; /* full width on mobile, matching every other section */
+    width: 100%; /* fills .projects-container, which is already the shared 95% */
     height: auto; /* Force it to expand with content */
     flex-basis: auto; /* Prevents flex-basis: 0 from squishing the card */
-  }
-
-  /* ------ MOBILE CONTACT FORM SECTION ------ */
-  .contact-form-container {
-    width: 100%;
   }
 }
