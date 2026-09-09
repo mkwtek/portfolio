@@ -799,11 +799,6 @@ nav a:hover,
   background-color: var(--bg-color);
 }
 
-.how-built-card {
-  max-width: 60rem;
-  margin: 0 auto;
-}
-
 .how-built-card > p {
   line-height: var(--line-height);
   margin-bottom: 0.9rem;
@@ -1910,10 +1905,12 @@ nav a:hover,
                    /* headshot oddly depending on framing                                */
   }
 
+  /* Every section spans the full content-wrapper width on mobile (matching Skills   */
+  /* and How I Build), so their cards line up edge-for-edge down the page. The        */
+  /* content-wrapper's own 1.5rem side padding is the only gutter.                    */
   .bio-block {
    margin-top: 2.5rem; /* hero gap is 0 on mobile; separates the "About Me" heading from */
                        /* the photo (photo isn't a card, so a touch more room than 1rem) */
-   width: 90%;
   }
 
   /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */
@@ -1921,7 +1918,6 @@ nav a:hover,
     /* no margin-top here: the section-padding already puts the standard ~3rem above  */
     /* the heading. The extra 2rem this used to add is exactly what made the gap above */
     /* "Recent Experience" look oversized and ambiguous on mobile.                     */
-    width: 90%;
   }
 
   .more-about h2 {
@@ -1950,13 +1946,13 @@ nav a:hover,
   }
 
   .project-container {
-    width: 90%; /* overrided the 20rem desktop rule for mobile */
+    width: 100%; /* full width on mobile, matching every other section */
     height: auto; /* Force it to expand with content */
     flex-basis: auto; /* Prevents flex-basis: 0 from squishing the card */
   }
 
   /* ------ MOBILE CONTACT FORM SECTION ------ */
   .contact-form-container {
-    width: 90%;
+    width: 100%;
   }
 }
