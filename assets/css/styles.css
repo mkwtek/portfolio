@@ -1544,6 +1544,10 @@ nav a:hover,
 /* .g-recaptcha's own flex row.                                                          */
 .recaptcha-wrapper {
   transform-origin: 0 0;
+  /* Accent-teal frame around Google's widget. box-shadow (not border) so it adds no */
+  /* box size and doesn't disturb the scale + negative-margin math above.            */
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgb(23, 112, 130);
 }
 
 /* Input fields and the submit button are width:100% of the form, which has its own      */
