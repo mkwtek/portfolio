@@ -560,12 +560,15 @@ nav a:hover,
   min-width: 0;
 }
 
-/* The portrait is rendered as a brand-tinted duotone rather than a literal photo:   */
-/* the image is desaturated, then the ::after overlay recolours it with the accent    */
-/* hue (mix-blend-mode: color keeps the light/dark detail, swaps the colour).         */
-/* isolation keeps the blend contained to this box. To dial the tint, change the      */
-/* ::after opacity (0 = plain black and white, 1 = full accent colour); to go back    */
-/* to an untreated photo, remove the ::after rule and the filter on .hero-img.        */
+/* The portrait is a treated image, not a literal snapshot. Three layers, painted    */
+/* bottom to top inside this isolated box:                                            */
+/*   .hero-img       - the photo, desaturated and slightly darkened by `filter`        */
+/*   .hero-media::before - accent-colour wash (mix-blend-mode: color) -> teal duotone  */
+/*   .hero-media::after  - dark radial vignette, strongest at the rim, softening the   */
+/*                         edges of the frame so the face reads less head-on           */
+/* Knobs: ::before opacity = tint strength (0 plain B&W, 1 full accent); ::after      */
+/* gradient stops = how dark / how far in the vignette reaches; .hero-img brightness   */
+/* = overall darkness. Remove ::before + ::after + the filter for an untreated photo.  */
 .hero-media {
   flex: 0 0 auto;
   width: 16rem; /* ~matches the height of the bio text; the single knob for photo size */
@@ -577,25 +580,37 @@ nav a:hover,
 }
 
 .hero-img {
-  /* Absolutely positioned so the image's intrinsic 1300px width does not feed into  */
-  /* the flex sizing; .hero-media's width comes purely from its height x aspect-ratio. */
   position: absolute;
   inset: 0;
+  z-index: 0; /* bottom layer; the two overlays below sit above it */
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1) contrast(1.04) brightness(1.03);
+  filter: grayscale(1) contrast(1.05) brightness(0.92);
+}
+
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-primary-accent);
+  mix-blend-mode: color; /* recolours the photo below it -> teal duotone */
+  opacity: 0.72;
+  pointer-events: none;
 }
 
 .hero-media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--color-primary-accent);
-  mix-blend-mode: color;
-  opacity: 0.72;
+  z-index: 2;
+  background: radial-gradient(circle at 50% 44%,
+    rgba(0, 0, 0, 0) 32%,
+    rgba(0, 0, 0, 0.18) 58%,
+    rgba(0, 0, 0, 0.68) 100%);
   pointer-events: none;
 }
 
