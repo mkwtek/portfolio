@@ -1501,20 +1501,20 @@ nav a:hover,
   }
 }
 
-/* Mobile widget: icons a touch smaller than desktop (30px vs 32px) to keep the    */
-/* floating stack from crowding the page content, which is now 95% width. The tap  */
-/* target lands ~34px square (icon + link padding) - under the 44px Apple/Material */
-/* ideal, but a deliberate trade for a widget that stays out of the way. Don't go  */
-/* smaller without re-checking it on a real phone.                                 */
+/* Mobile widget sizing. Verified on a real iPhone: DevTools device mode makes    */
+/* these read noticeably larger than the phone does, so err generous. Icons stay  */
+/* at the 32px desktop size and each link carries 4px padding, giving a ~40px     */
+/* tappable square (close to the 44px Apple/Material target). Don't shrink these  */
+/* without checking on an actual handset.                                         */
 @media screen and (max-width: 820px) {
   .socicon {
-    width: 1.875rem; /* 30px: 2px down from desktop's 32px, trimming the widget's */
-    height: 1.875rem; /* footprint a little without dropping the tap target too far */
+    width: 2rem;
+    height: 2rem;
   }
 
   .wix-badge {
-    width: 1.875rem; /* keep the badge frame matched to .socicon so it doesn't */
-    height: 1.875rem; /* widen .linkedinup's box                                */
+    width: 2rem; /* keep the badge frame matched to .socicon so it doesn't widen .linkedinup */
+    height: 2rem;
   }
 
   .linkedinup {
@@ -1528,15 +1528,15 @@ nav a:hover,
                   /* padding below was making the whole stack feel too spread out.       */
   }
 
-  /* 2px padding around the 30px icon gives a ~34px tappable square.                     */
+  /* 4px around the 32px icon = ~40px tappable square. */
   .social-link {
     display: inline-block;
-    padding: 2px;
+    padding: 4px;
   }
 
-  /* Box math: icon 30 + link padding 4 + container padding 2 = 36px wide .linkedinup.   */
-  /* .up-arrow's mobile size is set in the Scroll to Top section below (2.25rem = 36px), */
-  /* matching this, and both sit at right: 4px so they share a centre line.              */
+  /* Box math: icon 32 + link padding 8 + container padding 2 = 42px wide .linkedinup.   */
+  /* .up-arrow's mobile size is set in the Scroll to Top section below (2.625rem = 42px) */
+  /* to match, and both sit at right: 4px so they share a centre line.                   */
 
 }
 
@@ -1580,8 +1580,9 @@ nav a:hover,
   /* wins when specificity is equal), regardless of what value was set here. Moved here   */
   /* to actually win; worth remembering if a mobile override ever seems to "not apply."   */
   .scroll-up {
-    /* Mobile .linkedinup is ~36px wide at right: 4px, so the arrow keeps the exact   */
-    /* same box and offset here too - shared centre line, no drift.                   */
+    /* Mobile .linkedinup is 42px wide at right: 4px, so the arrow keeps the exact     */
+    /* same box and offset here too - shared centre line, no drift. The whole button   */
+    /* is the tap target, so 42px is a comfortable hit area.                           */
     right: 4px;
     display: inline-flex;
     align-items: center;
@@ -1590,8 +1591,8 @@ nav a:hover,
   }
 
   .up-arrow {
-    width: 2.25rem; /* = 36px, matches the trimmed mobile socials box width */
-    height: 2.25rem;
+    width: 2.625rem; /* = 42px, matches the mobile socials box width */
+    height: 2.625rem;
   }
 }
 /* End Scroll to top icon */
