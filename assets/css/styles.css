@@ -670,6 +670,13 @@ nav a:hover,
   margin-top: 0.9rem;
 }
 
+/* The role phrase that opens the bio: accent teal (bold comes from <strong>), so it */
+/* matches the .bio-location tag at the foot of the card and the two bracket the     */
+/* text. No underline, so it doesn't read as a link.                                 */
+.hero-bio .bio-text .bio-role {
+  color: var(--color-primary-accent);
+}
+
 /* Location / availability line under the bio - a compact accent-coloured tag so a  */
 /* hiring reader can place you at a glance.                                          */
 .bio-location {
