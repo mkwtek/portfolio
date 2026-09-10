@@ -448,6 +448,13 @@ nav a:hover,
   margin-top: 0.15rem;
 }
 
+/* Each half stays whole; the only break point is the space between them, so a  */
+/* narrow phone wraps to "Web Developer /" over "Digital Consultant" rather than */
+/* splitting a word or orphaning "Consultant".                                   */
+.nav-tagline span {
+  white-space: nowrap;
+}
+
 /* ---------- Nav Load-In Animations ---------- */
 /* Name: quick fade + slight upward slide into place, no bounce */
 @keyframes navNameFadeIn {
@@ -675,6 +682,12 @@ nav a:hover,
 /* text. No underline, so it doesn't read as a link.                                 */
 .hero-bio .bio-text .bio-role {
   color: var(--color-primary-accent);
+}
+
+/* Keep each role term whole so the phrase wraps as "Web developer and" over    */
+/* "digital consultant", never orphaning "consultant" on its own line.          */
+.hero-bio .bio-text .bio-role span {
+  white-space: nowrap;
 }
 
 /* Location / availability line under the bio - a compact accent-coloured tag so a  */
@@ -1894,6 +1907,8 @@ nav a:hover,
   /* two), rather than needing separately hand-tuned min-height values per breakpoint.   */
   .nav-title {
     flex: 1;
+    padding-right: 1.25rem; /* guaranteed gap so the name / tagline never butt against */
+                            /* the burger, even at the longest tagline + narrowest width */
     text-align: left; /* Left-aligned rather than centered: centering next to a fixed-  */
                        /* width burger button on the right meant the available box was  */
                        /* never quite wide enough to look genuinely centered without     */
