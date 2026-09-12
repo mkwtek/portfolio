@@ -1001,6 +1001,28 @@ nav a:hover,
   break-inside: avoid;
 }
 
+/* Certification digital badges: linked to the issuing org's verification page */
+.cert-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.cert-badge {
+  display: inline-block;
+  line-height: 0;
+}
+.cert-badge img {
+  width: 6rem;
+  height: 6rem;
+  display: block;
+  transition: transform var(--transition);
+}
+.cert-badge:hover img,
+.cert-badge:has(:focus-visible) img {
+  transform: translateY(-4px) scale(1.06);
+}
+
 /* End Skills Section */
 
 /* HOW I BUILD - engineering-standards section with rebuilt Lighthouse / WAVE gauges */
