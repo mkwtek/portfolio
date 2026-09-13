@@ -2137,6 +2137,24 @@ nav a:hover,
 }
 
 /* --- 820px: Everything else (Hero, More About, Skills, Projects, Contact) --- */
+/* Tablet / small-desktop gap: below the 68.75rem max-width, .content-wrapper falls   */
+/* back to a flat 1.5rem gutter and its right edge lands inside .social-rail's fixed  */
+/* footprint (the rail sits ~48px in from the viewport edge). Above 820px the mobile   */
+/* 87%-width card rule below hasn't kicked in yet, so there was no clearance at all in */
+/* this range. Same fix, gentler percentage since there's more room to work with.      */
+@media screen and (min-width: 821px) and (max-width: 1450px) {
+  .hero-card,
+  .more-about,
+  .testimonials,
+  .how-built,
+  .contact-form-container,
+  .skills,
+  .projects {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
 @media screen and (max-width: 820px) {
 
   .content-wrapper {
