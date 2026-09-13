@@ -2137,21 +2137,18 @@ nav a:hover,
 }
 
 /* --- 820px: Everything else (Hero, More About, Skills, Projects, Contact) --- */
-/* Tablet / small-desktop gap: below the 68.75rem max-width, .content-wrapper falls   */
-/* back to a flat 1.5rem gutter and its right edge lands inside .social-rail's fixed  */
-/* footprint (the rail sits ~48px in from the viewport edge). Above 820px the mobile   */
-/* 87%-width card rule below hasn't kicked in yet, so there was no clearance at all in */
-/* this range. Same fix, gentler percentage since there's more room to work with.      */
-@media screen and (min-width: 821px) and (max-width: 1450px) {
-  .hero-card,
-  .more-about,
-  .testimonials,
-  .how-built,
-  .contact-form-container,
-  .skills,
-  .projects {
-    width: 90%;
-    margin: 0 auto;
+/* Tablet / small-desktop gap: below the 68.75rem max-width, .content-wrapper falls  */
+/* back to a flat 1.5rem gutter and its right edge lands inside .social-rail's fixed */
+/* footprint (the rail sits ~48px in from the viewport edge). A flat percentage      */
+/* shrink here (an earlier attempt) over- or under-corrects depending on the exact   */
+/* width, since the gap it leaves scales with viewport while the rail's footprint    */
+/* doesn't. min() makes the relationship exact instead of guessed: .content-wrapper  */
+/* only ever gets as narrow as it needs to be to keep the rail clear, at every width, */
+/* and falls back to the normal 68.75rem cap the moment there's room to spare - no    */
+/* breakpoint required, so there's no width where it's "too far" or "too close".      */
+@media screen and (min-width: 821px) {
+  .content-wrapper {
+    max-width: min(68.75rem, calc(100vw - 8.75rem));
   }
 }
 
