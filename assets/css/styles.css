@@ -81,7 +81,7 @@ a:hover {
 }
 
 /* --- Icons (self-hosted) --- */
-/* The 11 Bootstrap Icons the site uses, inlined as CSS masks so currentColor  */
+/* The 13 Bootstrap Icons the site uses, inlined as CSS masks so currentColor  */
 /* still tints them. Replaces the CDN bootstrap-icons stylesheet + ~130 KB     */
 /* icon font, which were render-blocking. Markup stays <i class="bi bi-NAME">. */
 .bi {
@@ -104,6 +104,8 @@ a:hover {
 .bi-kanban { --bi: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%22M13.5%201a1%201%200%200%201%201%201v12a1%201%200%200%201-1%201h-11a1%201%200%200%201-1-1V2a1%201%200%200%201%201-1zm-11-1a2%202%200%200%200-2%202v12a2%202%200%200%200%202%202h11a2%202%200%200%200%202-2V2a2%202%200%200%200-2-2z%22%2F%3E%3Cpath%20d%3D%22M6.5%203a1%201%200%200%201%201-1h1a1%201%200%200%201%201%201v3a1%201%200%200%201-1%201h-1a1%201%200%200%201-1-1zm-4%200a1%201%200%200%201%201-1h1a1%201%200%200%201%201%201v7a1%201%200%200%201-1%201h-1a1%201%200%200%201-1-1zm8%200a1%201%200%200%201%201-1h1a1%201%200%200%201%201%201v10a1%201%200%200%201-1%201h-1a1%201%200%200%201-1-1z%22%2F%3E%3C%2Fsvg%3E"); }
 .bi-tools { --bi: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%22M1%200%200%201l2.2%203.081a1%201%200%200%200%20.815.419h.07a1%201%200%200%201%20.708.293l2.675%202.675-2.617%202.654A3.003%203.003%200%200%200%200%2013a3%203%200%201%200%205.878-.851l2.654-2.617.968.968-.305.914a1%201%200%200%200%20.242%201.023l3.27%203.27a.997.997%200%200%200%201.414%200l1.586-1.586a.997.997%200%200%200%200-1.414l-3.27-3.27a1%201%200%200%200-1.023-.242L10.5%209.5l-.96-.96%202.68-2.643A3.005%203.005%200%200%200%2016%203q0-.405-.102-.777l-2.14%202.141L12%204l-.364-1.757L13.777.102a3%203%200%200%200-3.675%203.68L7.462%206.46%204.793%203.793a1%201%200%200%201-.293-.707v-.071a1%201%200%200%200-.419-.814zm9.646%2010.646a.5.5%200%200%201%20.708%200l2.914%202.915a.5.5%200%200%201-.707.707l-2.915-2.914a.5.5%200%200%201%200-.708M3%2011l.471.242.529.026.287.445.445.287.026.529L5%2013l-.242.471-.026.529-.445.287-.287.445-.529.026L3%2015l-.471-.242L2%2014.732l-.287-.445L1.268%2014l-.026-.529L1%2013l.242-.471.026-.529.445-.287.287-.445.529-.026z%22%2F%3E%3C%2Fsvg%3E"); }
 .bi-people { --bi: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%22M15%2014s1%200%201-1-1-4-5-4-5%203-5%204%201%201%201%201zm-7.978-1L7%2012.996c.001-.264.167-1.03.76-1.72C8.312%2010.629%209.282%2010%2011%2010c1.717%200%202.687.63%203.24%201.276.593.69.758%201.457.76%201.72l-.008.002-.014.002zM11%207a2%202%200%201%200%200-4%202%202%200%200%200%200%204m3-2a3%203%200%201%201-6%200%203%203%200%200%201%206%200M6.936%209.28a6%206%200%200%200-1.23-.247A7%207%200%200%200%205%209c-4%200-5%203-5%204q0%201%201%201h4.216A2.24%202.24%200%200%201%205%2013c0-1.01.377-2.042%201.09-2.904.243-.294.526-.569.846-.816M4.92%2010A5.5%205.5%200%200%200%204%2013H1c0-.26.164-1.03.76-1.724.545-.636%201.492-1.256%203.16-1.275ZM1.5%205.5a3%203%200%201%201%206%200%203%203%200%200%201-6%200m3-2a2%202%200%201%200%200%204%202%202%200%200%200%200-4%22%2F%3E%3C%2Fsvg%3E"); }
+.bi-person-workspace { --bi: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%22M4%2016s-1%200-1-1%201-4%205-4%205%203%205%204-1%201-1%201zm4-5.95a2.5%202.5%200%201%200%200-5%202.5%202.5%200%200%200%200%205%22%2F%3E%3Cpath%20d%3D%22M2%201a2%202%200%200%200-2%202v9.5A1.5%201.5%200%200%200%201.5%2014h.653a5.4%205.4%200%200%201%201.066-2H1V3a1%201%200%200%201%201-1h12a1%201%200%200%201%201%201v9h-2.219c.554.654.89%201.373%201.066%202h.653a1.5%201.5%200%200%200%201.5-1.5V3a2%202%200%200%200-2-2z%22%2F%3E%3C%2Fsvg%3E"); }
+.bi-bag { --bi: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%22M8%201a2.5%202.5%200%200%201%202.5%202.5V4h-5v-.5A2.5%202.5%200%200%201%208%201m3.5%203v-.5a3.5%203.5%200%201%200-7%200V4H1v10a2%202%200%200%200%202%202h10a2%202%200%200%200%202-2V4zM2%205h12v9a1%201%200%200%201-1%201H3a1%201%200%200%201-1-1z%22%2F%3E%3C%2Fsvg%3E"); }
 /* --- Keyboard focus indicator (WCAG 2.4.7) --- */
 /* :focus-visible so the ring shows for keyboard / assistive-tech users but not  */
 /* on a plain mouse click. Outward high-contrast ring is the default; the nav    */
@@ -833,11 +835,42 @@ nav a:hover,
   justify-content: center;
 }
 
+/* Role heading row: a leading icon or company logo, then the bolded title    */
+/* text. Same left-aligned "icon before heading" pattern already used by the  */
+/* Skills card titles, so it doesn't introduce a new convention.              */
+.role-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.role-icon {
+  flex-shrink: 0;
+  font-size: 1.75rem;
+  color: var(--color-primary-accent);
+}
+.role-logo {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 /* Sub-heading inside a role entry - used by the self-employed entry, which     */
 /* covers two separate ventures (freelance web dev, and an e-commerce business) */
-/* under one time period.                                                       */
+/* under one time period. Same leading-icon pattern as .role-heading above,    */
+/* just smaller, so the icon size echoes the text hierarchy (this sits one     */
+/* level below the role heading).                                              */
 .subrole {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 1.5rem;
+}
+.subrole-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: var(--color-primary-accent);
 }
 
 .subrole strong {
