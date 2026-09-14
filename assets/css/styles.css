@@ -2038,6 +2038,12 @@ nav a:hover,
     position: fixed;
     top: calc(5rem + 2px); /* fallback only - app.js sets this to the nav's measured */
                            /* bottom edge, which varies with the title font-size      */
+    /* Fallback only, same as top above - app.js sets this to the exact space left  */
+    /* below the nav. Without a cap, a short viewport (a phone in landscape, mainly) */
+    /* lets the panel - position:fixed, so outside the page's own scrolling - run    */
+    /* taller than the screen with no way to reach whatever's cut off. Paired with   */
+    /* overflow-y: auto on .main-nav below, so once capped it scrolls internally.    */
+    max-height: calc(100dvh - 5rem - 2px);
     left: 0;
     width: 100%;
     max-width: 100%;
@@ -2068,8 +2074,10 @@ nav a:hover,
     display: flex;
     flex-direction: column; /* Overrides the desktop flex row */
     gap: 0;
-    min-height: 0;    /* grid item: let it shrink below its content so 0fr can reach 0 */
-    overflow: hidden; /* clip the content while the row height animates */
+    min-height: 0;      /* grid item: let it shrink below its content so 0fr can reach 0 */
+    overflow-y: auto;   /* clips the same as hidden did while the row height animates, but */
+    overflow-x: hidden; /* also lets a panel taller than .main-nav-wrap's max-height (above) */
+                        /* scroll internally, rather than just losing its bottom links      */
     text-align: center;
     padding: 0;       /* bottom breathing room is on the last <li> */
     background: transparent; /* the wrapper paints the panel background now */

@@ -100,9 +100,19 @@ const navEl = document.querySelector("nav");
 // isn't fixed - the title font-size scales with viewport width - so measure it
 // rather than hardcoding a top offset. Even a few px off makes the panel's top
 // edge (and its accent line) visibly jump the moment the menu opens.
+//
+// Also caps the panel's own height to whatever space is actually left below
+// that edge. It's position:fixed with nine links in it - with no cap, a short
+// viewport (a phone in landscape, mainly) lets the panel run taller than the
+// screen with no way to scroll to what's cut off, since a fixed element sits
+// outside the page's normal scroll. styles.css pairs this with overflow-y:
+// auto on .main-nav, so once it's actually capped, it scrolls internally
+// instead of just disappearing off the bottom edge.
 function positionNavWrap() {
   if (navEl && navWrap) {
-    navWrap.style.top = navEl.getBoundingClientRect().bottom + "px";
+    const bottom = navEl.getBoundingClientRect().bottom;
+    navWrap.style.top = bottom + "px";
+    navWrap.style.maxHeight = window.innerHeight - bottom + "px";
   }
 }
 // Defer the first measurement past the initial layout/paint so it doesn't force
