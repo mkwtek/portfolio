@@ -576,11 +576,12 @@ nav a:hover,
 /* the portrait on the left, the bio copy on the right, so there is no dead space     */
 /* around a lone photo. The portrait is sized (~16rem) to sit at about the height of  */
 /* the two-paragraph bio and is vertically centred against it. Stacks to one column   */
-/* on mobile (see the 820px block).                                                   */
+/* at 1150px (see that block below). Gap matches .card's own 20px padding, so the     */
+/* photo-to-card-edge and photo-to-text gaps read as the same width.                  */
 .hero-card {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   text-align: left;
   opacity: 0;
   animation: bioCardRiseIn 0.6s ease-out 0.15s forwards;
@@ -704,10 +705,15 @@ nav a:hover,
   font-size: 0.9rem;
 }
 
-/* Scroll cue: a down chevron in the space under the card. margin-top: auto drops it  */
-/* to the bottom of the flex hero (near the fold); it links to the next section.      */
+/* Scroll cue: a down chevron below the card; links to the next section. Was          */
+/* margin-top: auto (drops it to the bottom of the viewport-height-driven .hero, near */
+/* the fold), but that meant its gap from the card - and its position on the page -   */
+/* swung with viewport height and jumped sharply at the 1150px stacking breakpoint    */
+/* (whatever leftover space min-height had would suddenly shrink as the card grew     */
+/* taller). A fixed gap keeps it a consistent, predictable distance below the card no */
+/* matter the viewport size.                                                          */
 .scroll-cue {
-  margin-top: auto;
+  margin-top: 1.75rem;
   margin-bottom: 0.75rem;
   align-self: center;
   display: inline-flex;
@@ -844,6 +850,15 @@ nav a:hover,
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+/* Marks where a role heading's "title | dates | location" text can break. On desktop */
+/* the pipe stays as a plain inline separator and this <br> is switched off. On       */
+/* mobile (below) the pipe is hidden and the break switched on instead, so the same   */
+/* text reflows onto three clean, deliberate lines instead of wrapping wherever it     */
+/* happens to run out of room.                                                        */
+.role-break {
+  display: none;
 }
 .role-icon {
   flex-shrink: 0;
@@ -2148,11 +2163,6 @@ nav a:hover,
   .hero-bio .bio-text {
     text-align: left;
   }
-
-  .scroll-cue {
-    /* no viewport slack to absorb once stacked, so give it a fixed gap from the card */
-    margin-top: 1.75rem;
-  }
 }
 
 /* Reduced-motion guard for the mobile dropdown (panel reveal + item stagger,          */
@@ -2248,6 +2258,13 @@ nav a:hover,
     padding: 1rem;
   }
 
+  /* .card's padding drops to 1rem (16px) here, so .hero-card's own gap (set to match */
+  /* the 20px desktop padding) needs to drop with it, or the photo ends up with a     */
+  /* wider gap below it than above it once the two are stacked.                       */
+  .hero-card {
+    gap: 1rem;
+  }
+
   /* Every content block (and the hero image) spans 87% of the content-wrapper on   */
   /* mobile, centred, so they all line up down the page and clear the floating      */
   /* socials widget on the right. This is the single source of truth for card width */
@@ -2286,8 +2303,11 @@ nav a:hover,
   /* stranded; stacked and centered above, the text gets the full card width to wrap   */
   /* into and the icon reads as a title graphic instead. Sized up a bit too, since it  */
   /* no longer has to share a line with the text.                                      */
-  .role-heading,
-  .subrole {
+  /* Scoped to .more-about so this beats .more-about p's text-align: left above -    */
+  /* .role-heading/.subrole are themselves <p> elements, and a bare .role-heading     */
+  /* selector is lower specificity than the class+type .more-about p one.             */
+  .more-about .role-heading,
+  .more-about .subrole {
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -2305,6 +2325,17 @@ nav a:hover,
   .role-logo {
     width: 3rem;
     height: 3rem;
+  }
+
+  /* Break at the pipes instead of wherever the text happens to wrap: the pipe itself */
+  /* is hidden and the <br> after it switched on, turning "Title | Dates | Location"  */
+  /* into three centered lines (title, dates, location) instead of one ragged block.  */
+  .role-sep {
+    display: none;
+  }
+
+  .role-break {
+    display: inline;
   }
 
   /* ------ MOBILE TECHNICAL SKILLS ------ */
