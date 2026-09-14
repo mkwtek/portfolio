@@ -469,17 +469,21 @@ nav a:hover,
   }
 }
 
-/* Tagline: same fade/slide, paired with a letter-spacing "settle" for a subtle reveal feel */
+/* Tagline: same fade/slide as the name above. Used to also animate letter-spacing  */
+/* for a "settle" effect, but letter-spacing isn't a compositor property - animating */
+/* it forces the browser to re-lay-out the text on every frame, and since the        */
+/* tagline can wrap between its two halves, the wrap point itself could flip         */
+/* partway through as the available width changed, snapping the sticky nav's height  */
+/* (and everything below it) up and down. That's very likely a real contributor to   */
+/* a stutter/jolt some visitors reported on load, worst on mobile Safari.            */
 @keyframes navTaglineFadeIn {
   0% {
     opacity: 0;
     transform: translateY(10px);
-    letter-spacing: 0.15em;
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    letter-spacing: normal;
   }
 }
 
@@ -629,6 +633,12 @@ nav a:hover,
   object-fit: cover;
   object-position: center;
   filter: contrast(1.03) brightness(0.96) saturate(0.94);
+  /* Hints the browser to promote this to its own GPU layer up front rather than    */
+  /* discovering mid-transition that it needs to. filter + an animated transform     */
+  /* together is a known weak spot for Safari's compositor especially - this runs    */
+  /* continuously (the Ken Burns drift repeats every slide), so the persistent layer */
+  /* is worth it here, unlike a one-shot animation.                                  */
+  will-change: transform;
   /* Ken Burns: while a slide is active its photo drifts slowly between scale 1 and   */
   /* 1.08. Default is a pull-back (starts enlarged, settles to the full frame); add   */
   /* .hero-zoom-in to a slide to reverse it (starts full, pushes in). Both use the    */
