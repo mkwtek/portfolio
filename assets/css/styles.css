@@ -2231,6 +2231,49 @@ nav a:hover,
   }
 }
 
+/* --- 900px: Experience role/subrole headings stack and center --- */
+/* Ahead of the rest of the 820px mobile layout below: the card is still full-width   */
+/* here, but "Title | Dates | Location" is long enough that beside a role icon or     */
+/* company logo it was already wrapping onto several lines, with the icon just        */
+/* sitting centered across all of them instead of reading as a title graphic.         */
+@media screen and (max-width: 900px) {
+  /* Scoped to .more-about so this beats .more-about p's text-align: left (in the   */
+  /* 820px block below) - .role-heading/.subrole are themselves <p> elements, and a   */
+  /* bare .role-heading selector is lower specificity than the class+type .more-about */
+  /* p one.                                                                            */
+  .more-about .role-heading,
+  .more-about .subrole {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+  }
+
+  .role-icon {
+    font-size: 2.5rem;
+  }
+
+  .subrole-icon {
+    font-size: 2rem;
+  }
+
+  .role-logo {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  /* Break at the pipes instead of wherever the text happens to wrap: the pipe itself */
+  /* is hidden and the <br> after it switched on, turning "Title | Dates | Location"  */
+  /* into three centered lines (title, dates, location) instead of one ragged block.  */
+  .role-sep {
+    display: none;
+  }
+
+  .role-break {
+    display: inline;
+  }
+}
+
 @media screen and (max-width: 820px) {
 
   .content-wrapper {
@@ -2295,47 +2338,6 @@ nav a:hover,
   .more-about p,
   .more-about .exp-list li {
     text-align: left;
-  }
-
-  /* Role/subrole icons and logos move above their heading text instead of beside it. */
-  /* Beside it, a narrow phone column forces the heading text to wrap onto several     */
-  /* lines while the icon just sits vertically centered across all of them, looking    */
-  /* stranded; stacked and centered above, the text gets the full card width to wrap   */
-  /* into and the icon reads as a title graphic instead. Sized up a bit too, since it  */
-  /* no longer has to share a line with the text.                                      */
-  /* Scoped to .more-about so this beats .more-about p's text-align: left above -    */
-  /* .role-heading/.subrole are themselves <p> elements, and a bare .role-heading     */
-  /* selector is lower specificity than the class+type .more-about p one.             */
-  .more-about .role-heading,
-  .more-about .subrole {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.4rem;
-  }
-
-  .role-icon {
-    font-size: 2.5rem;
-  }
-
-  .subrole-icon {
-    font-size: 2rem;
-  }
-
-  .role-logo {
-    width: 3rem;
-    height: 3rem;
-  }
-
-  /* Break at the pipes instead of wherever the text happens to wrap: the pipe itself */
-  /* is hidden and the <br> after it switched on, turning "Title | Dates | Location"  */
-  /* into three centered lines (title, dates, location) instead of one ragged block.  */
-  .role-sep {
-    display: none;
-  }
-
-  .role-break {
-    display: inline;
   }
 
   /* ------ MOBILE TECHNICAL SKILLS ------ */
