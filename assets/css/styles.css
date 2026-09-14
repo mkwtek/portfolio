@@ -831,8 +831,6 @@ nav a:hover,
                            /* The HTML structure (separate <p> + manual <br> per bullet) */
                            /* stays exactly as-is; this just tightens the rendered space */
                            /* around each one instead of restructuring the markup.       */
-  align-items: center;
-  justify-content: center;
 }
 
 /* Role heading row: a leading icon or company logo, then the bolded title    */
