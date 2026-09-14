@@ -49,7 +49,7 @@ html {
 /* Every in-page nav target clears the sticky nav bar when scrolled to. Without this, */
 /* clicking e.g. Skills or Web Projects lands with the heading tucked up behind the   */
 /* fixed nav. :where() keeps specificity at 0 so it never fights other rules.         */
-:where(#about, #recent-experience, #skills, #how-i-build, #projects-websites, #independent-projects, #contact) {
+:where(#about, #recent-experience, #recommendations, #skills, #how-i-build, #projects-websites, #independent-projects, #contact) {
   scroll-margin-top: 7rem;
 }
 
@@ -383,7 +383,7 @@ nav a:hover,
     white-space: nowrap;
   }
   .main-nav {
-    gap: 1.3rem;
+    gap: 1rem;
   }
 }
 .burger-menu {
