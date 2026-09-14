@@ -563,8 +563,12 @@ nav a:hover,
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: calc(100vh - 10rem);
-  min-height: calc(100svh - 10rem);
+  /* Capped with min() so the scroll-cue's margin-top: auto (below) can still pin it  */
+  /* near the fold on ordinary screens, but doesn't strand it far below the card - a  */
+  /* huge gap between them - on a tall viewport (a big monitor, or DevTools resized   */
+  /* tall) where 100vh far exceeds the hero's actual content height.                  */
+  min-height: min(calc(100vh - 10rem), 44rem);
+  min-height: min(calc(100svh - 10rem), 44rem);
   padding-top: clamp(3rem, 12svh, 8rem);
 }
 
@@ -2111,6 +2115,46 @@ nav a:hover,
   }
 }
 
+/* --- 1150px: Hero stacks to one column --- */
+/* Was tied to the 820px mobile breakpoint, but the row layout (portrait beside the  */
+/* two-paragraph bio) starts cramping well above that: as .hero-card narrows toward  */
+/* 820px the bio text stacks taller next to a fixed-size portrait, leaving the photo */
+/* looking vertically centered and disconnected from the text instead of anchored to */
+/* it. Stacking here instead, at the same width the nav drops to the hamburger menu, */
+/* keeps the portrait sized to the text the whole way down.                          */
+@media screen and (max-width: 1150px) {
+  .hero {
+    /* stacked hero content already fills the screen at this width, so the desktop   */
+    /* viewport-relative bias would just push the bio needlessly far down            */
+    padding-top: 1.75rem;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .hero-media {
+    align-self: center;
+    width: 100%;
+    max-width: 14rem;
+  }
+
+  .hero-bio {
+    width: 100%;
+  }
+
+  .hero-bio .bio-text {
+    text-align: left;
+  }
+
+  .scroll-cue {
+    /* no viewport slack to absorb once stacked, so give it a fixed gap from the card */
+    margin-top: 1.75rem;
+  }
+}
+
 /* Reduced-motion guard for the mobile dropdown (panel reveal + item stagger,          */
 /* both defined in the 1150px block above). Separate top-level block because @media     */
 /* can't nest; placed after that block so it wins the equal-specificity cascade tie     */
@@ -2220,39 +2264,6 @@ nav a:hover,
     margin: 0 auto;
   }
 
-  /* ------ MOBILE HERO SECTION ------ */
-  /* One column: portrait on top (fixed cap, not row-height driven), bio below.        */
-  .hero {
-    /* the stacked hero content already fills the screen on a phone, so the desktop  */
-    /* viewport-relative bias would just push the bio needlessly far down            */
-    padding-top: 1.75rem;
-  }
-
-  .hero-card {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  .hero-media {
-    align-self: center;
-    width: 100%;
-    max-width: 14rem;
-  }
-
-  .hero-bio {
-    width: 100%;
-  }
-
-  .hero-bio .bio-text {
-    text-align: left;
-  }
-
-  .scroll-cue {
-    /* no viewport slack to absorb on mobile, so give it a fixed gap from the card */
-    margin-top: 1.75rem;
-  }
-
   /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */
   .more-about {
     /* no margin-top here: the section-padding already puts the standard ~3rem above  */
@@ -2267,6 +2278,33 @@ nav a:hover,
   .more-about p,
   .more-about .exp-list li {
     text-align: left;
+  }
+
+  /* Role/subrole icons and logos move above their heading text instead of beside it. */
+  /* Beside it, a narrow phone column forces the heading text to wrap onto several     */
+  /* lines while the icon just sits vertically centered across all of them, looking    */
+  /* stranded; stacked and centered above, the text gets the full card width to wrap   */
+  /* into and the icon reads as a title graphic instead. Sized up a bit too, since it  */
+  /* no longer has to share a line with the text.                                      */
+  .role-heading,
+  .subrole {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+  }
+
+  .role-icon {
+    font-size: 2.5rem;
+  }
+
+  .subrole-icon {
+    font-size: 2rem;
+  }
+
+  .role-logo {
+    width: 3rem;
+    height: 3rem;
   }
 
   /* ------ MOBILE TECHNICAL SKILLS ------ */
