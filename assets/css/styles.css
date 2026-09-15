@@ -370,6 +370,18 @@ nav a:hover,
     gap: 1.9rem;
     flex-wrap: nowrap;
     justify-content: space-between;
+    /* .main-nav is itself a flex item of .nav-inner (.main-nav-wrap sits between     */
+    /* them but is display: contents on desktop, transparent to layout). Flex items   */
+    /* default to min-width: auto - "never shrink below your natural content size" -  */
+    /* and that applied here despite every .main-nav li already having its own        */
+    /* min-width: 0 (below): that only lets the lis shrink relative to each other      */
+    /* inside .main-nav's own flex context, it says nothing about whether .main-nav    */
+    /* itself is allowed to shrink smaller than its natural width in ITS parent's      */
+    /* context. Without this, the whole row refused to shrink as a unit and sat past   */
+    /* .nav-inner's own right edge fully intact - confirmed live: scrollWidth equaled  */
+    /* clientWidth (nothing overflowing internally), while the box itself measured     */
+    /* 69px past its container at 1306px wide.                                        */
+    min-width: 0;
     /* Each .nav-link has white-space: nowrap and each li can shrink (min-width: 0,   */
     /* below) below its own text's width - if the row is ever genuinely too tight,    */
     /* the nowrap text overflows its own shrunk box rather than compressing (text     */
