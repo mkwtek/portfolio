@@ -445,14 +445,23 @@ nav a:hover,
   .nav-inner {
     gap: 2rem;
   }
-  /* A fixed gap is either too tight at the low end of this range or leaves the row */
-  /* looking cramped well before it needs to at the high end - the exact bug this    */
-  /* whole nav saga kept running into with a single guessed number. Scales instead:  */
-  /* 0.6rem right at the 1451px edge, opening up smoothly to the fuller 1.6rem by    */
-  /* ~1850px and holding there past it, rather than jumping between two fixed values */
-  /* at a breakpoint or staying stuck at one guess forever.                          */
+  /* A calc()/clamp() gap tied to 100vw (an earlier version of this rule) scales      */
+  /* smoothly in principle, but it's a formula layered on top of layout, recomputed   */
+  /* from raw viewport width on every frame of a live resize - live dragging showed   */
+  /* visible sub-pixel jitter in the spacing as a result. flex-grow is the native     */
+  /* tool for this instead: .main-nav grows to fill whatever .nav-inner has left      */
+  /* over after .nav-title, and justify-content: space-between (already set, above)   */
+  /* distributes that leftover evenly across the 8 gaps - the browser's own flex      */
+  /* distribution, computed in the same reflow pass as everything else, not a         */
+  /* second derived calculation. gap here is now just a floor: the minimum the links  */
+  /* are ever allowed to sit apart, never the actual spacing once there's room to     */
+  /* spare. It also happens to stop being viewport-dependent at all past ~1240px,     */
+  /* since that's where .nav-inner's own width (min(68.75rem, 100vw - 8.75rem), up    */
+  /* in the 821px block below) hits its flat cap and stops growing with the window -  */
+  /* so .main-nav's leftover space, and therefore the gap, goes fully constant.       */
   .main-nav {
-    gap: clamp(0.6rem, calc(0.6rem + (100vw - 1451px) * 0.04), 1.6rem);
+    flex-grow: 1;
+    gap: 0.75rem;
   }
 }
 .burger-menu {
