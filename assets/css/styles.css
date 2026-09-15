@@ -240,7 +240,9 @@ nav.nav-suppress-anim .main-nav-wrap {
 }
 
 .nav-inner {
-  max-width: 68.75rem;
+  max-width: 68.75rem; /* matches .content-wrapper's own max-width, so the nav lines up   */
+                       /* with the card edges below it - see the min() override that      */
+                       /* keeps that true at every width, further down this file.         */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -367,11 +369,25 @@ nav a:hover,
     display: flex; /* Makes the menu horizontal on desktop */
     gap: 1.9rem;
     flex-wrap: nowrap;
-    /* justify-content: flex-end; */
     justify-content: space-between;
-    /* overflow-x: auto; */
-    overflow: visible; /* let the keyboard focus ring on a link show; the mobile */
-                       /* block re-clips this for the drop-down animation        */
+    /* Each .nav-link has white-space: nowrap and each li can shrink (min-width: 0,   */
+    /* below) below its own text's width - if the row is ever genuinely too tight,    */
+    /* the nowrap text overflows its own shrunk box rather than compressing (text     */
+    /* can't compress, only wrap or not). That's the real mechanism behind a bug      */
+    /* reported live: a too-tight row didn't shrink gracefully, items just vanished,  */
+    /* because the spilling text stayed invisible until it reached <nav>'s own        */
+    /* overflow: hidden further out - and checking each link's own box bounds (which  */
+    /* this property doesn't affect either way) missed it, since the box measured     */
+    /* fine while the text spilling past it didn't.                                   */
+    /*                                                                                 */
+    /* overflow: hidden here would stop that spill at each link's own edge instead -  */
+    /* tried it, but .main-nav's box is pixel-for-pixel identical to its links' own    */
+    /* bounds (no spare padding), so it clips the keyboard focus ring's top/right/     */
+    /* bottom edges (outline-offset pushes the ring outside the link's box) for       */
+    /* whichever link currently has focus. Left as visible instead; the 1301px        */
+    /* breakpoint above is the actual fix - it keeps this row from ever being tight   */
+    /* enough to trigger the shrink-past-box spill in the first place.                */
+    overflow: visible;
 }
 
 .main-nav li {
@@ -382,8 +398,15 @@ nav a:hover,
 
 /* Desktop nav row: the name plus eight links have to fit one line. Protect the  */
 /* name from being squeezed (it must never wrap), and give the links a slightly  */
-/* tighter gap so the row stays a normal height.                                 */
-@media screen and (min-width: 1151px) {
+/* tighter gap so the row stays a normal height. Decoupled from the 1150px       */
+/* breakpoint the hero/skills sections use below - this one got tuned twice to a */
+/* razor-thin fit that measured fine here but still cut off real users' browsers */
+/* (cause unconfirmed - not reproducible in this environment, but real and       */
+/* reported twice). Rather than chase the exact discrepancy again, this pushes   */
+/* the switch-to-hamburger point out to 1300px, well past where 8 links plus the */
+/* name ever actually need the room, so there's no longer a tight edge to fall   */
+/* off of.                                                                        */
+@media screen and (min-width: 1301px) {
   .nav-title {
     flex-shrink: 0;
   }
@@ -1438,10 +1461,7 @@ nav a:hover,
   
 .project-pic {
   width: 65%;
-  /* height: 60%; */
   height: auto;
-
-
   display: block;
   margin: 0 auto;
 }
@@ -1450,7 +1470,6 @@ nav a:hover,
   display: flex;
   align-items: stretch; /* Using this makes the container boxes all the same height to align top and bottom */
   flex-wrap: wrap;
-  /* justify-content: center; */
   justify-content: space-between;
   gap: 1.25rem; /* Handles both horizontal and vertical spacing */
 }
@@ -1976,8 +1995,11 @@ nav a:hover,
   }
 }
 
-/* --- 1150px: Nav switches to mobile/hamburger layout --- */
-@media screen and (max-width: 1150px) {
+/* --- 1300px: Nav switches to mobile/hamburger layout --- */
+/* Decoupled from the 1150px breakpoint above (and from hero/skills' shared 1150px  */
+/* elsewhere) - see the matching min-width: 1301px block earlier in this file for   */
+/* why this one specifically needed more headroom.                                  */
+@media screen and (max-width: 1300px) {
 
   nav {
     /* padding: 1.5rem 1rem; padding moved to .nav-inner */
@@ -2171,8 +2193,11 @@ nav a:hover,
 /* two-paragraph bio) starts cramping well above that: as .hero-card narrows toward  */
 /* 820px the bio text stacks taller next to a fixed-size portrait, leaving the photo */
 /* looking vertically centered and disconnected from the text instead of anchored to */
-/* it. Stacking here instead, at the same width the nav drops to the hamburger menu, */
-/* keeps the portrait sized to the text the whole way down.                          */
+/* it. Stacking here keeps the portrait sized to the text the whole way down. This   */
+/* used to double as the width where the nav drops to its hamburger menu too, but    */
+/* that one needed to move independently (see the 1300px nav breakpoint) - this      */
+/* stays at 1150px on its own merits; the hero-card row still has plenty of room     */
+/* between here and 1300px.                                                          */
 @media screen and (max-width: 1150px) {
   .hero {
     /* stacked hero content already fills the screen at this width, so the desktop   */
@@ -2263,6 +2288,15 @@ nav a:hover,
 /* breakpoint required, so there's no width where it's "too far" or "too close".      */
 @media screen and (min-width: 821px) {
   .content-wrapper {
+    max-width: min(68.75rem, calc(100vw - 8.75rem));
+  }
+  /* .nav-inner doesn't need rail clearance itself (nav sits at the top of the page, */
+  /* .social-rail is fixed near the bottom), but it shares .content-wrapper's base   */
+  /* max-width specifically so the nav lines up with the card edges below it - so it */
+  /* needs this same override too, or that alignment silently breaks below ~1240px   */
+  /* (77.5rem), where .content-wrapper starts narrowing for the rail and .nav-inner   */
+  /* doesn't follow it.                                                               */
+  .nav-inner {
     max-width: min(68.75rem, calc(100vw - 8.75rem));
   }
 }
