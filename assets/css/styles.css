@@ -423,8 +423,14 @@ nav a:hover,
   .nav-inner {
     gap: 2rem;
   }
+  /* A fixed gap is either too tight at the low end of this range or leaves the row */
+  /* looking cramped well before it needs to at the high end - the exact bug this    */
+  /* whole nav saga kept running into with a single guessed number. Scales instead:  */
+  /* 0.6rem right at the 1301px edge (confirmed safe there), opening up smoothly to  */
+  /* the fuller 1.6rem by ~1700px and holding there past it, rather than jumping     */
+  /* between two fixed values at a breakpoint or staying stuck at one guess forever. */
   .main-nav {
-    gap: 1.6rem;
+    gap: clamp(0.6rem, calc(0.6rem + (100vw - 1301px) * 0.04), 1.6rem);
   }
 }
 .burger-menu {
