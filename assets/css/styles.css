@@ -380,7 +380,7 @@ nav a:hover,
     min-width: 0; /* overrides flexbox's default min-width:auto floor so items can genuinely shrink below their text width */
 }
 
-/* Desktop nav row: the name plus nine links have to fit one line. Protect the   */
+/* Desktop nav row: the name plus eight links have to fit one line. Protect the  */
 /* name from being squeezed (it must never wrap), and give the links a slightly  */
 /* tighter gap so the row stays a normal height.                                 */
 @media screen and (min-width: 1151px) {
@@ -390,8 +390,18 @@ nav a:hover,
   .nav-title h1 {
     white-space: nowrap;
   }
+  /* .nav-inner has no gap of its own - normally fine, since justify-content:      */
+  /* space-between fills the row from whatever's left over after .nav-title and   */
+  /* .main-nav take their space. But when there's no space left over (the row's    */
+  /* content is wide enough to need every inch of it), that leftover hits zero and */
+  /* the name and "About" end up touching. This sets a floor so there's always at  */
+  /* least this much room between them; space-between still adds more if there's   */
+  /* slack beyond it.                                                              */
+  .nav-inner {
+    gap: 2rem;
+  }
   .main-nav {
-    gap: 1rem;
+    gap: 1.6rem;
   }
 }
 .burger-menu {
@@ -544,7 +554,6 @@ nav a:hover,
 .main-nav li:nth-child(6) { animation-delay: 0.85s; }
 .main-nav li:nth-child(7) { animation-delay: 0.93s; }
 .main-nav li:nth-child(8) { animation-delay: 1.01s; }
-.main-nav li:nth-child(9) { animation-delay: 1.09s; }
 
 /* Respect the OS-level reduced motion preference: show everything instantly, no animation */
 @media (prefers-reduced-motion: reduce) {
@@ -2118,7 +2127,6 @@ nav a:hover,
   .main-nav-wrap.show li:nth-child(6) { animation-delay: 0.35s; }
   .main-nav-wrap.show li:nth-child(7) { animation-delay: 0.41s; }
   .main-nav-wrap.show li:nth-child(8) { animation-delay: 0.47s; }
-  .main-nav-wrap.show li:nth-child(9) { animation-delay: 0.53s; }
 
   /* Padding moved here from .main-nav li: the gray hover background is painted on the  */
   /* <li>, but the actual clickable/tappable element is the <a> inside it. If only the  */
