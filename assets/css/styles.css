@@ -396,7 +396,7 @@ nav a:hover,
     /* tried it, but .main-nav's box is pixel-for-pixel identical to its links' own    */
     /* bounds (no spare padding), so it clips the keyboard focus ring's top/right/     */
     /* bottom edges (outline-offset pushes the ring outside the link's box) for       */
-    /* whichever link currently has focus. Left as visible instead; the 1301px        */
+    /* whichever link currently has focus. Left as visible instead; the 1451px        */
     /* breakpoint above is the actual fix - it keeps this row from ever being tight   */
     /* enough to trigger the shrink-past-box spill in the first place.                */
     overflow: visible;
@@ -404,8 +404,18 @@ nav a:hover,
 
 .main-nav li {
     font-weight: var(--bold-font);
-    flex-shrink: 1;
-    min-width: 0; /* overrides flexbox's default min-width:auto floor so items can genuinely shrink below their text width */
+    /* Used flex-shrink: 1 with min-width: 0 here, to let items genuinely shrink       */
+    /* below their own text's width when the row was tight. That was the actual bug:  */
+    /* the text itself can't shrink (nowrap, fixed font-size), only the box can, so   */
+    /* letting the box go smaller than its text just moved the failure from "row      */
+    /* overflows its container" to "links visually overlap each other, full-size text */
+    /* spilling out of a near-zero-width box." Neither is a real fix. Links now keep  */
+    /* flexbox's default min-width: auto - never smaller than their own text - so if  */
+    /* the row is ever tight, the row's own container (.main-nav, which does have     */
+    /* min-width: 0) absorbs it by sitting past its own boundary, which is a visible  */
+    /* misalignment but at least every link stays legible and non-overlapping. The    */
+    /* 1450px breakpoint below is what should actually prevent that case from         */
+    /* happening at all.                                                              */
 }
 
 /* Desktop nav row: the name plus eight links have to fit one line. Protect the  */
@@ -415,10 +425,10 @@ nav a:hover,
 /* razor-thin fit that measured fine here but still cut off real users' browsers */
 /* (cause unconfirmed - not reproducible in this environment, but real and       */
 /* reported twice). Rather than chase the exact discrepancy again, this pushes   */
-/* the switch-to-hamburger point out to 1300px, well past where 8 links plus the */
+/* the switch-to-hamburger point out to 1450px, well past where 8 links plus the */
 /* name ever actually need the room, so there's no longer a tight edge to fall   */
 /* off of.                                                                        */
-@media screen and (min-width: 1301px) {
+@media screen and (min-width: 1451px) {
   .nav-title {
     flex-shrink: 0;
   }
@@ -438,11 +448,11 @@ nav a:hover,
   /* A fixed gap is either too tight at the low end of this range or leaves the row */
   /* looking cramped well before it needs to at the high end - the exact bug this    */
   /* whole nav saga kept running into with a single guessed number. Scales instead:  */
-  /* 0.6rem right at the 1301px edge (confirmed safe there), opening up smoothly to  */
-  /* the fuller 1.6rem by ~1700px and holding there past it, rather than jumping     */
-  /* between two fixed values at a breakpoint or staying stuck at one guess forever. */
+  /* 0.6rem right at the 1451px edge, opening up smoothly to the fuller 1.6rem by    */
+  /* ~1850px and holding there past it, rather than jumping between two fixed values */
+  /* at a breakpoint or staying stuck at one guess forever.                          */
   .main-nav {
-    gap: clamp(0.6rem, calc(0.6rem + (100vw - 1301px) * 0.04), 1.6rem);
+    gap: clamp(0.6rem, calc(0.6rem + (100vw - 1451px) * 0.04), 1.6rem);
   }
 }
 .burger-menu {
@@ -2013,11 +2023,11 @@ nav a:hover,
   }
 }
 
-/* --- 1300px: Nav switches to mobile/hamburger layout --- */
+/* --- 1450px: Nav switches to mobile/hamburger layout --- */
 /* Decoupled from the 1150px breakpoint above (and from hero/skills' shared 1150px  */
-/* elsewhere) - see the matching min-width: 1301px block earlier in this file for   */
+/* elsewhere) - see the matching min-width: 1451px block earlier in this file for   */
 /* why this one specifically needed more headroom.                                  */
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1450px) {
 
   nav {
     /* padding: 1.5rem 1rem; padding moved to .nav-inner */
@@ -2213,9 +2223,9 @@ nav a:hover,
 /* looking vertically centered and disconnected from the text instead of anchored to */
 /* it. Stacking here keeps the portrait sized to the text the whole way down. This   */
 /* used to double as the width where the nav drops to its hamburger menu too, but    */
-/* that one needed to move independently (see the 1300px nav breakpoint) - this      */
+/* that one needed to move independently (see the 1450px nav breakpoint) - this      */
 /* stays at 1150px on its own merits; the hero-card row still has plenty of room     */
-/* between here and 1300px.                                                          */
+/* between here and 1450px.                                                          */
 @media screen and (max-width: 1150px) {
   .hero {
     /* stacked hero content already fills the screen at this width, so the desktop   */
