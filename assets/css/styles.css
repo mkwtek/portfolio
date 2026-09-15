@@ -139,6 +139,14 @@ body {
   transition: top 0.15s ease;
 }
 
+/* The global a:hover rule (higher specificity than .skip-link's own color: #fff)  */
+/* would otherwise swap this to --color-link-hover on hover - a dark magenta that  */
+/* fails text contrast (~1.3:1, need 4.5:1) against this teal background. Pin it   */
+/* back to white here specifically; every other link's hover colour is unaffected. */
+.skip-link:hover {
+  color: #fff;
+}
+
 .skip-link:focus {
   top: 0;
 }
