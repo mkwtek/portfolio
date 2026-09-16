@@ -2433,6 +2433,13 @@ nav a:hover,
   /* socials widget on the right. This is the single source of truth for card width */
   /* on mobile - every card on the site is inside one of these. .hero itself stays  */
   /* full width; it only centres its two children.                                  */
+  /* width was a flat 87%, which shrinks proportionally with viewport width - but the   */
+  /* .social-rail it's meant to clear has a fixed pixel footprint (~46-50px in from the */
+  /* edge) that doesn't shrink with it. At common phone widths (~375-430px) 87% only     */
+  /* left ~41-49px of clearance, right at the rail's own footprint, so it clipped the   */
+  /* rail into card content on some screens and not others. min() keeps the same 87%    */
+  /* look at wider mobile widths but guarantees a flat minimum clearance once the       */
+  /* percentage alone would fall short - same fix already used for .content-wrapper.    */
   .hero-card,
   .more-about,
   .testimonials,
@@ -2440,7 +2447,7 @@ nav a:hover,
   .contact-form-container,
   .skills,
   .projects {
-    width: 87%;
+    width: min(87%, calc(100% - 4rem));
     margin: 0 auto;
   }
 
