@@ -1204,6 +1204,13 @@ nav a:hover,
   font-size: 0.95rem;
 }
 
+/* Establishes containment so .score-rings below can query the space actually available */
+/* to it (inside all the nested card/panel padding) instead of the outer viewport width - */
+/* see the container query on .score-rings for why that distinction matters here.        */
+.scorecard {
+  container-type: inline-size;
+}
+
 /* Fixed 4-up (or 2x2 when narrow) - never 3 + a lone orphan on the next row. */
 .score-rings {
   display: grid;
@@ -1487,8 +1494,18 @@ nav a:hover,
   }
 }
 
-/* Full-width scorecard still too narrow for 4 rings across: go 2 x 2, centered. */
-@media screen and (max-width: 560px) {
+/* Full-width scorecard still too narrow for 4 rings across: go 2 x 2, centered.        */
+/* A viewport media query here was fragile: whether 4 rings actually fit depends on the  */
+/* space left after every ancestor's padding (.how-built card, .scorecards panel), which */
+/* isn't a fixed fraction of the viewport - it also shrinks relative to the viewport on   */
+/* a larger root font-size (accessibility text-size settings, browser font prefs), since  */
+/* the rings themselves are sized in rem but the rail/card gutters it has to share space  */
+/* with mix rem and fixed px. A flat viewport breakpoint could pick a width where the     */
+/* rings' actual container was already too narrow, overflowing the card into the fixed   */
+/* .social-rail. A container query asks the one question that actually matters: does     */
+/* .scorecard (the direct ancestor, set to container-type: inline-size above) currently   */
+/* have room for 4 rings (4 * 5.25rem + 3 * 0.6rem gaps = 22.8rem, plus a bit of buffer)?  */
+@container (max-width: 24rem) {
   .score-rings {
     grid-template-columns: repeat(2, auto);
     column-gap: 1.6rem;
