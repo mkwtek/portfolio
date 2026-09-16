@@ -2042,11 +2042,20 @@ nav a:hover,
     /* padding: 1.5rem 1rem; padding moved to .nav-inner */
   }
 
+  /* Used to set its own width: calc(90% - 2.7rem) here - a guessed viewport          */
+  /* percentage from back when this breakpoint only went up to 1150px (true mobile).   */
+  /* Now that it runs all the way up to 1450px, that guess was 100+px off from what    */
+  /* .content-wrapper actually resolves to at these wider widths, which is exactly the */
+  /* "nav-inner doesn't line up with the cards" bug reported live. Removed it - the    */
+  /* max-width: min(68.75rem, calc(100vw - 8.75rem)) rule already shared with          */
+  /* .content-wrapper (see the min-width: 821px block further down) covers this        */
+  /* element too, so it doesn't need its own separate formula at all. Horizontal       */
+  /* padding changed from 0 to 1.5rem to match .content-wrapper's own (always 1.5rem,  */
+  /* every width) too - matching width alone isn't enough if the padding inside it     */
+  /* differs, since that's what the actual visible content aligns against.             */
   .nav-inner {
-    /* width: 83%; */
-    width: calc(90% - 2.7rem);
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: 1rem 1.5rem;
     min-height: 4.5rem; /* reduced now that height is genuinely content-driven via flex, */
                         /* rather than needing to be artificially inflated as a floor    */
                         /* against the old position:absolute approach's quirks           */
