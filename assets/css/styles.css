@@ -49,8 +49,12 @@ html {
 /* Every in-page nav target clears the sticky nav bar when scrolled to. Without this, */
 /* clicking e.g. Skills or Web Projects lands with the heading tucked up behind the   */
 /* fixed nav. :where() keeps specificity at 0 so it never fights other rules.         */
+/* --nav-height is set by app.js's positionNavWrap() from the nav's own measured      */
+/* height - it changes with viewport width (title font-size scales, the tagline can   */
+/* wrap to two lines), so a flat guessed rem value was only ever right at one width.  */
+/* The 7rem fallback covers the brief window before that JS has run on first paint.   */
 :where(#about, #recent-experience, #recommendations, #skills, #how-i-build, #projects-websites, #independent-projects, #contact) {
-  scroll-margin-top: 7rem;
+  scroll-margin-top: calc(var(--nav-height, 7rem) + 1rem);
 }
 
 /* The skip link targets <main>; it's a big container, so no focus box on it -    */

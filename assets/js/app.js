@@ -108,11 +108,20 @@ const navEl = document.querySelector("nav");
 // outside the page's normal scroll. styles.css pairs this with overflow-y:
 // auto on .main-nav, so once it's actually capped, it scrolls internally
 // instead of just disappearing off the bottom edge.
+//
+// Same measurement also drives --nav-height, which styles.css uses for every
+// section's scroll-margin-top. That used to be a flat 7rem guess, tuned for
+// one nav height - but the nav's real height changes with it (title font-size
+// scales with viewport, the tagline can wrap to two lines), so a fixed value
+// was only ever correct at the width it was tuned against. Reported live: at
+// narrower widths the nav was taller than 7rem, so an in-page jump landed a
+// heading with the previous section's card still peeking in above it.
 function positionNavWrap() {
   if (navEl && navWrap) {
     const bottom = navEl.getBoundingClientRect().bottom;
     navWrap.style.top = bottom + "px";
     navWrap.style.maxHeight = window.innerHeight - bottom + "px";
+    document.documentElement.style.setProperty("--nav-height", bottom + "px");
   }
 }
 // Defer the first measurement past the initial layout/paint so it doesn't force
