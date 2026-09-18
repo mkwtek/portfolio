@@ -2468,6 +2468,18 @@ nav a:hover,
     margin: 0 auto;
   }
 
+  /* .contact-meta's own base rule only caps it at max-width:34rem (a comfortable   */
+  /* reading line-length on desktop, where it's not meant to match the form card's  */
+  /* own width) - on mobile that cap alone did nothing (544px is wider than any     */
+  /* phone), so it spanned the full content-wrapper while the card beneath it was   */
+  /* narrowed by the rule above, making it visibly wider than the card it sits on.  */
+  .contact-meta {
+    width: min(87%, calc(100% - 4rem));
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   /* ------ MOBILE RECENT EXPERIENCE / MORE ABOUT ------ */
   .more-about {
     /* no margin-top here: the section-padding already puts the standard ~3rem above  */
