@@ -2460,6 +2460,10 @@ nav a:hover,
   /* rail into card content on some screens and not others. min() keeps the same 87%    */
   /* look at wider mobile widths but guarantees a flat minimum clearance once the       */
   /* percentage alone would fall short - same fix already used for .content-wrapper.    */
+  /* The subtracted amount was 4rem (56px clearance total per side, ~8px of that as     */
+  /* actual buffer past the rail's ~48px footprint) - more margin than needed, making   */
+  /* cards read narrower than necessary. 3.5rem keeps a slightly smaller but still safe */
+  /* ~4px buffer (~52px clearance) while giving the cards more width to work with.      */
   .hero-card,
   .more-about,
   .testimonials,
@@ -2467,7 +2471,7 @@ nav a:hover,
   .contact-form-container,
   .skills,
   .projects {
-    width: min(87%, calc(100% - 4rem));
+    width: min(87%, calc(100% - 3.5rem));
     margin: 0 auto;
   }
 
@@ -2477,7 +2481,7 @@ nav a:hover,
   /* phone), so it spanned the full content-wrapper while the card beneath it was   */
   /* narrowed by the rule above, making it visibly wider than the card it sits on.  */
   .contact-meta {
-    width: min(87%, calc(100% - 4rem));
+    width: min(87%, calc(100% - 3.5rem));
     max-width: none;
     margin-left: auto;
     margin-right: auto;
