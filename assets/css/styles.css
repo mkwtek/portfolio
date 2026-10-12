@@ -1703,11 +1703,12 @@ nav a:hover,
   color: var(--color-primary-accent);
 }
 
-/* Resting fill is the hover tint at zero opacity, not plain `transparent`: fading     */
-/* from transparent (black at 0 alpha) can pass through a grey in some browsers, which */
-/* showed up as a quick flash on this button only.                                     */
+/* Resting fill is opaque white (the card's own colour), not transparent. Text drawn   */
+/* over a see-through background is rasterised differently from text over an opaque   */
+/* one, and the switch at the end of the fade showed up as a quick flash on this      */
+/* button only; "View My Work" never flashed because its fill is opaque both ways.    */
 .hero-actions .project-btn:not(.project-btn-primary) {
-  background-color: hsla(190, 30%, 94%, 0);
+  background-color: #fff;
 }
 
 .hero-actions .project-btn:not(.project-btn-primary):hover,
