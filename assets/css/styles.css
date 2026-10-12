@@ -1656,21 +1656,6 @@ nav a:hover,
   outline-offset: 2px;
 }
 
-/* Primary variant for the hero's "View My Work" button: filled at rest, outlined on   */
-/* hover/focus (the reverse of the standard outlined button), so the pair has a clear  */
-/* main action. Same colours the standard button already uses on hover.                */
-.project-btn-primary {
-  background-color: var(--color-primary-accent);
-  color: #fff;
-}
-
-.project-btn-primary:hover,
-.project-btn-primary:focus,
-.project-btn-primary:focus-visible {
-  background-color: transparent;
-  color: var(--color-primary-accent);
-}
-
 /* Hero call-to-action pair under the availability lines */
 .hero-actions {
   display: flex;
@@ -1682,9 +1667,46 @@ nav a:hover,
 
 /* Equal-width pair; where the bio column is too narrow for both side by side they  */
 /* wrap and each fills the row, so a stacked pair never looks lopsided.             */
+/* Only the background and border animate: the text colour never changes, so there  */
+/* is no mid-fade where text and fill are the same tone.                            */
 .hero-actions .project-btn {
   flex: 1 1 9rem;
   text-align: center;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+/* Primary ("View My Work"): filled teal, deepens on hover. */
+.hero-actions .project-btn-primary,
+.hero-actions .project-btn-primary:hover,
+.hero-actions .project-btn-primary:focus,
+.hero-actions .project-btn-primary:focus-visible {
+  color: #fff;
+}
+
+.hero-actions .project-btn-primary {
+  background-color: var(--color-primary-accent);
+}
+
+.hero-actions .project-btn-primary:hover,
+.hero-actions .project-btn-primary:focus,
+.hero-actions .project-btn-primary:focus-visible {
+  background-color: hsl(190, 70%, 22%);
+  border-color: hsl(190, 70%, 22%);
+}
+
+/* Secondary ("Get in Touch"): stays outlined, picks up a faint teal tint on hover */
+/* rather than taking on the primary's fill, so the two never look swapped.        */
+.hero-actions .project-btn:not(.project-btn-primary),
+.hero-actions .project-btn:not(.project-btn-primary):hover,
+.hero-actions .project-btn:not(.project-btn-primary):focus,
+.hero-actions .project-btn:not(.project-btn-primary):focus-visible {
+  color: var(--color-primary-accent);
+}
+
+.hero-actions .project-btn:not(.project-btn-primary):hover,
+.hero-actions .project-btn:not(.project-btn-primary):focus,
+.hero-actions .project-btn:not(.project-btn-primary):focus-visible {
+  background-color: hsl(190, 30%, 94%);
 }
 
 /* "My role on every project": stated once at the top of the Agency Projects section,  */
