@@ -1565,6 +1565,17 @@ nav a:hover,
   padding: 1rem;
 }
 
+/* Independent & Freelance has four cards: in the single shared row above they came out  */
+/* ~250px wide and ~900px tall. Two per row keeps them readable and groups the client   */
+/* work on top with the smaller practice projects below. Scoped to this section only -  */
+/* Website Development & Client Consultation stays three across. 821px and up matches   */
+/* the 820px breakpoint where the cards stack into a single column.                    */
+@media screen and (min-width: 821px) {
+  #independent-projects .project-container {
+    flex: 1 1 calc(50% - 0.625rem); /* 0.625rem = half of the container's 1.25rem gap */
+  }
+}
+
 /* ---------- Individual Cards -------- */
 .project-container p {
   padding: 0;
