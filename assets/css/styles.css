@@ -1703,18 +1703,33 @@ nav a:hover,
   color: var(--color-primary-accent);
 }
 
-/* Resting fill is opaque white (the card's own colour), not transparent. Text drawn   */
-/* over a see-through background is rasterised differently from text over an opaque   */
-/* one, and the switch at the end of the fade showed up as a quick flash on this      */
-/* button only; "View My Work" never flashed because its fill is opaque both ways.    */
+/* The tint is a separate ::before layer that only fades its opacity, so the button's  */
+/* own background and text are never repainted on hover (a repaint of just this button  */
+/* was flashing for a few milliseconds on hover-in and hover-out). Opacity changes are  */
+/* handled by the compositor, so nothing underneath is redrawn. The button itself keeps */
+/* an opaque white fill (the card's colour) so its text rendering stays constant.       */
 .hero-actions .project-btn:not(.project-btn-primary) {
+  position: relative;
+  isolation: isolate; /* keeps the z-index:-1 tint behind the text, above the fill */
   background-color: #fff;
 }
 
-.hero-actions .project-btn:not(.project-btn-primary):hover,
-.hero-actions .project-btn:not(.project-btn-primary):focus,
-.hero-actions .project-btn:not(.project-btn-primary):focus-visible {
+.hero-actions .project-btn:not(.project-btn-primary)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 6px; /* the 8px button radius minus its 2px border */
   background-color: hsl(190, 30%, 94%);
+  opacity: 0;
+  transition: opacity var(--transition);
+  will-change: opacity;
+}
+
+.hero-actions .project-btn:not(.project-btn-primary):hover::before,
+.hero-actions .project-btn:not(.project-btn-primary):focus::before,
+.hero-actions .project-btn:not(.project-btn-primary):focus-visible::before {
+  opacity: 1;
 }
 
 /* "My role on every project": stated once at the top of the Agency Projects section,  */
