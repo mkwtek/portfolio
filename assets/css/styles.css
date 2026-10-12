@@ -1627,14 +1627,13 @@ nav a:hover,
   padding-bottom: 0.5rem;
 }
 
-/* Project Buttons (replaces whole-card-click and plain text links)                    */
-/* The resting fill is opaque white (every card is white), NOT transparent. These      */
-/* buttons used to start from `background-color: transparent` and fade to teal with    */
-/* `transition: all`; in current Chrome a background-color fade that begins from a      */
-/* transparent background is run on the compositor and intermittently blinked for a     */
-/* few milliseconds on hover-in and hover-out. Starting from an opaque colour, and      */
-/* listing only the two properties that change, keeps the same look without the blink. */
-/* (The contact form's .submit-btn already uses this same opaque-start pattern.)       */
+/* Project Buttons (replaces whole-card-click and plain text links)                      */
+/* No transition on purpose. These buttons used to fade their fill and text colour over   */
+/* 0.3s on hover; in Chrome that fade intermittently flashed for a few milliseconds on    */
+/* hover-in and hover-out (about 1 in 6 hovers when tested). A/B tested on the real page: */
+/* with the fade it flashed, with the same rules and no transition it did not (30 of 30   */
+/* clean), and a fade done as an opacity layer was clean but felt late. So the hover is   */
+/* an instant swap. Do not add a background-color / color transition back here.           */
 .project-btn {
   display: inline-block;
   padding: 0.5rem 1.25rem;
@@ -1644,7 +1643,6 @@ nav a:hover,
   color: var(--color-primary-accent);
   font-weight: var(--bold-font);
   text-decoration: none;
-  transition: background-color var(--transition), color var(--transition);
   white-space: nowrap;
   max-width: 100%; /* prevents the button from ever exceeding its card's width, paired */
                     /* with the narrow-width override below that lets its text wrap    */
@@ -1814,7 +1812,7 @@ nav a:hover,
   color: var(--color-primary-accent);
   font-size: 1rem;
   font-weight: var(--bold-font);
-  transition: var(--transition);
+  /* No fade, same reason as .project-btn: the fill/colour transition blinked in Chrome */
 }
 
 .submit-btn:hover {
