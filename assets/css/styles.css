@@ -1628,14 +1628,14 @@ nav a:hover,
 }
 
 /* Project Buttons (replaces whole-card-click and plain text links)                    */
-/* Hover/focus shows a faint teal tint that sits in a separate ::before layer and only */
-/* fades its opacity, so the button's own background and text are never repainted.     */
-/* The button had been blinking for a few milliseconds, intermittently, on hover-in    */
-/* and hover-out while it cross-faded a transparent fill and swapped the text colour.  */
-/* The fill is opaque white (every card is white) so text rendering never changes.     */
+/* The resting fill is opaque white (every card is white), NOT transparent. These      */
+/* buttons used to start from `background-color: transparent` and fade to teal with    */
+/* `transition: all`; in current Chrome a background-color fade that begins from a      */
+/* transparent background is run on the compositor and intermittently blinked for a     */
+/* few milliseconds on hover-in and hover-out. Starting from an opaque colour, and      */
+/* listing only the two properties that change, keeps the same look without the blink. */
+/* (The contact form's .submit-btn already uses this same opaque-start pattern.)       */
 .project-btn {
-  position: relative;
-  isolation: isolate; /* keeps the z-index:-1 tint behind the text, above the fill */
   display: inline-block;
   padding: 0.5rem 1.25rem;
   border: 2px solid var(--color-primary-accent);
@@ -1644,38 +1644,21 @@ nav a:hover,
   color: var(--color-primary-accent);
   font-weight: var(--bold-font);
   text-decoration: none;
+  transition: background-color var(--transition), color var(--transition);
   white-space: nowrap;
   max-width: 100%; /* prevents the button from ever exceeding its card's width, paired */
                     /* with the narrow-width override below that lets its text wrap    */
                     /* instead of overflowing once nowrap alone can't fit anymore      */
 }
 
-.project-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: 6px; /* the 8px button radius minus its 2px border */
-  background-color: hsl(190, 30%, 94%);
-  opacity: 0;
-  transition: opacity var(--transition);
-  will-change: opacity;
-}
-
-.project-btn:hover::before,
-.project-btn:focus::before,
-.project-btn:focus-visible::before {
-  opacity: 1;
-}
-
-/* Text stays teal in every state (overrides the global a:hover colour) */
 .project-btn:hover,
 .project-btn:focus,
 .project-btn:focus-visible {
-  color: var(--color-primary-accent);
+  background-color: var(--color-primary-accent);
+  color: #fff;
 }
 
-/* keep the global keyboard focus ring on top of the tint */
+/* keep the global keyboard focus ring on top of the fill swap */
 .project-btn:focus-visible {
   outline: 3px solid var(--color-link-hover);
   outline-offset: 2px;
@@ -1692,12 +1675,9 @@ nav a:hover,
 
 /* Equal-width pair; where the bio column is too narrow for both side by side they  */
 /* wrap and each fills the row, so a stacked pair never looks lopsided.             */
-/* Only the background and border animate: the text colour never changes, so there  */
-/* is no mid-fade where text and fill are the same tone.                            */
 .hero-actions .project-btn {
   flex: 1 1 9rem;
   text-align: center;
-  transition: background-color var(--transition), border-color var(--transition);
 }
 
 /* Primary ("View My Work"): filled teal, deepens on hover. */
@@ -1719,13 +1699,15 @@ nav a:hover,
   border-color: hsl(190, 70%, 22%);
 }
 
-/* The primary is already a solid fill, so it does not use the base button's tint layer */
-.hero-actions .project-btn-primary::before {
-  content: none;
+/* Secondary ("Get in Touch"): stays outlined and picks up a faint teal tint on hover,  */
+/* with the text staying teal, so the pair never looks swapped. Same opaque-to-opaque   */
+/* fade as the other buttons.                                                           */
+.hero-actions .project-btn:not(.project-btn-primary):hover,
+.hero-actions .project-btn:not(.project-btn-primary):focus,
+.hero-actions .project-btn:not(.project-btn-primary):focus-visible {
+  background-color: hsl(190, 30%, 94%);
+  color: var(--color-primary-accent);
 }
-
-/* Secondary ("Get in Touch") needs nothing extra: it is the base outlined button, whose */
-/* hover is the faint teal tint, so the pair never looks swapped.                        */
 
 /* "My role on every project": stated once at the top of the Agency Projects section,  */
 /* since the role was the same on each site. Two columns when there is room.           */
