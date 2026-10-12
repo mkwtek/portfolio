@@ -843,8 +843,11 @@ nav a:hover,
 }
 
 /* ---------- Hero Load-In Animation ---------- */
-/* Bio heading: plain fade. Card: fades and rises up into place. Both are pure CSS   */
-/* (no JS/observer) because the hero is above the fold and the LCP element.          */
+/* Bio heading and card both fade and rise up into place, so the hero reads as one   */
+/* entrance. Both are pure CSS (no JS/observer) because the hero is above the fold   */
+/* and the LCP element. The heading uses the same 28px / 0.85s ease-out motion as    */
+/* the scroll-revealed section headings below (.reveal) and starts just ahead of the */
+/* card; it was a short opacity-only fade, which read as no animation at all.        */
 @keyframes bioCardRiseIn {
   0% {
     opacity: 0;
@@ -856,18 +859,20 @@ nav a:hover,
   }
 }
 
-@keyframes bioFadeIn {
+@keyframes bioTitleRiseIn {
   0% {
     opacity: 0;
+    transform: translateY(28px);
   }
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .bio-title {
   opacity: 0;
-  animation: bioFadeIn 0.4s ease-out 0.2s forwards;
+  animation: bioTitleRiseIn 0.85s ease-out 0.05s forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
