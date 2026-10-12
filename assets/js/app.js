@@ -151,9 +151,9 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Select nav links (and the hero scroll-cue chevron, which is also an on-page
-// "#section" anchor and needs the same treatment).
-const navLink = document.querySelectorAll(".nav-link, .scroll-cue");
+// Select nav links (and the hero scroll-cue chevron and hero buttons, which are
+// also on-page "#section" anchors and need the same treatment).
+const navLink = document.querySelectorAll(".nav-link, .scroll-cue, .hero-actions a");
 
 // After an on-page jump, move keyboard + screen-reader focus to the section's
 // heading (each section <h2> is tabindex="0"), so the next Tab continues from

@@ -26,7 +26,7 @@
   <!-- CSS Styles. The ?v= number is a cache-buster: bump it (here AND on the      -->
   <!-- app.js tag near the bottom of this file) every time styles.css or app.js    -->
   <!-- changes, so browsers fetch the new file instead of serving a stale copy.    -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=102" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=104" />
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
@@ -135,6 +135,10 @@
           </p>
           <p class="bio-location">Greater Seattle, WA area &bull; remote preferred</p>
           <p class="bio-location">Open to full-time, part-time, and contract opportunities</p>
+          <div class="hero-actions">
+            <a href="#independent-projects" class="project-btn project-btn-primary">View My Work</a>
+            <a href="#contact" class="project-btn">Get in Touch</a>
+          </div>
         </div><!-- ./hero-bio -->
       </div><!-- ./hero-card -->
 
@@ -246,8 +250,23 @@
     <!-- Projects Section - Website Examples (NetRaising) -->
     <section class="projects section-padding" id="projects-websites">
       <div class="reveal">
-        <h2 class="projects-title title-base" tabindex="0">Website Development<br />&amp; Client Consultation Projects</h2>
-        <p class="projects-disclosure">Built while employed at a nonprofit-focused web development and consultancy agency, March 2024 - June 2025. The screenshots reflect each site as delivered at the time; the agency continues to maintain these sites, so the live version may differ slightly due to ongoing updates.</p>
+        <h2 class="projects-title title-base" tabindex="0">Agency Projects</h2>
+        <p class="projects-disclosure">Built as part of a team while employed at a nonprofit-focused web development and consulting agency, March 2024 to June 2025. Art direction and design were set by the agency, its designers and its clients. Screenshots show each site as delivered; the agency continues to maintain these sites, so live versions may differ slightly due to ongoing updates.</p>
+      </div>
+
+      <!-- Same role on every agency project, so it is stated once here, not per card -->
+      <div class="projects-role card reveal">
+        <p class="projects-role-title">My role on every project</p>
+        <ul class="projects-role-list">
+          <li>ExpressionEngine development, control panel and user permissions setup</li>
+          <li>Hand-coded HTML, CSS and JavaScript</li>
+          <li>Accessibility testing against WCAG guidelines</li>
+          <li>Mobile testing and refinement at all breakpoints and screen widths</li>
+          <li>MachForm form setup and new feature builds</li>
+          <li>Client consulting and virtual meetings, advising on best practices and audience</li>
+          <li>Client training on the editing interface, so they manage content without touching code</li>
+          <li>Updates, security, organic SEO, server files, hosting and DNS</li>
+        </ul>
       </div>
       <div class="projects-container">
 
@@ -939,7 +958,7 @@
   </footer>
 
   <!-- Website scripts. Keep the ?v= number in sync with the styles.css tag above. -->
-  <script src="assets/js/app.js?v=102"></script>
+  <script src="assets/js/app.js?v=104"></script>
 </body>
 
 </html>

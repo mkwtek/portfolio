@@ -1520,7 +1520,7 @@ nav a:hover,
   }
 }
 
-/* PROJECT SECTIONS - Website Development & Client Consultation AND Independent Projects */
+/* PROJECT SECTIONS - Agency Projects AND Independent & Freelance Projects */
 .projects {
   background-color: var(--bg-color);
 }
@@ -1551,7 +1551,7 @@ nav a:hover,
   margin-bottom: 0.65rem;
 }
 
-/* Small muted line under "Website Development & Client Consultation" disclosing that   */
+/* Small muted line under "Agency Projects" disclosing that                              */
 /* those client sites were built as an employee, not solo freelance work. Deliberately  */
 /* understated so it reads as a note, not a competing subheading.                       */
 .projects-disclosure {
@@ -1573,7 +1573,7 @@ nav a:hover,
 /* Independent & Freelance has four cards: in the single shared row above they came out  */
 /* ~250px wide and ~900px tall. Two per row keeps them readable and groups the client   */
 /* work on top with the smaller practice projects below. Scoped to this section only -  */
-/* Website Development & Client Consultation stays three across. 821px and up matches   */
+/* Agency Projects stays three across. 821px and up matches                            */
 /* the 820px breakpoint where the cards stack into a single column.                    */
 @media screen and (min-width: 821px) {
   #independent-projects .project-container {
@@ -1654,6 +1654,65 @@ nav a:hover,
 .project-btn:focus-visible {
   outline: 3px solid var(--color-link-hover);
   outline-offset: 2px;
+}
+
+/* Primary variant for the hero's "View My Work" button: filled at rest, outlined on   */
+/* hover/focus (the reverse of the standard outlined button), so the pair has a clear  */
+/* main action. Same colours the standard button already uses on hover.                */
+.project-btn-primary {
+  background-color: var(--color-primary-accent);
+  color: #fff;
+}
+
+.project-btn-primary:hover,
+.project-btn-primary:focus,
+.project-btn-primary:focus-visible {
+  background-color: transparent;
+  color: var(--color-primary-accent);
+}
+
+/* Hero call-to-action pair under the availability lines */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  max-width: 24rem;
+  margin-top: 1.1rem;
+}
+
+/* Equal-width pair; where the bio column is too narrow for both side by side they  */
+/* wrap and each fills the row, so a stacked pair never looks lopsided.             */
+.hero-actions .project-btn {
+  flex: 1 1 9rem;
+  text-align: center;
+}
+
+/* "My role on every project": stated once at the top of the Agency Projects section,  */
+/* since the role was the same on each site. Two columns when there is room.           */
+.projects-role {
+  margin: 0 0 1.25rem;
+  text-align: left;
+}
+
+.projects-role-title {
+  margin: 0 0 0.6rem;
+  text-align: center;
+  font-weight: var(--bold-font);
+  color: var(--color-primary-accent);
+}
+
+.projects-role-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  columns: 2 18rem;
+  column-gap: 2.5rem;
+}
+
+.projects-role-list li {
+  break-inside: avoid;
+  margin-bottom: 0.4rem;
+  line-height: 1.45;
+  font-size: 0.95rem;
 }
 
 /* End Project Section */
@@ -2525,7 +2584,7 @@ nav a:hover,
     height: 10rem;
   }
 
-  /* ------ MOBILE PROJECT SECTIONS - Website Development & Client Consultation AND Independent Projects ------ */
+  /* ------ MOBILE PROJECT SECTIONS - Agency Projects AND Independent & Freelance Projects ------ */
   .projects-container {
     align-items: center;
     flex-direction: column;
