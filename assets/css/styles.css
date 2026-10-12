@@ -1130,6 +1130,15 @@ nav a:hover,
   margin-bottom: 0.3rem;
 }
 
+/* One-line plain-language note under a skill list (used where the list mixes working   */
+/* knowledge with everyday tools, so the reader is not left to guess the level).        */
+.skill-note {
+  margin-top: 0.75rem;
+  font-size: 0.8em;
+  line-height: 1.4;
+  color: #555;
+}
+
 .skill-list li:last-child {
   margin-bottom: 0;
 }
